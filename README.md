@@ -11,13 +11,10 @@
 |first_name_kana|string|null: false|
 |name_kana|string|null: false|
 |birth|date|null: false|
-|address_id|references|null: false, foreign_key: true|
-|credit_cards_id|references|null: false, foreign_key: true|
-
 
 ### Association
 - has_many :items
-- has_one :credit_cards
+- has_one :credit_card
 - has_one :address
 
 ## addressテーブル
@@ -31,7 +28,7 @@
 |phone_number|integer(11)|unique|
 |user_id|references|null: false, foreign_key: true|
 ### Association
-- has_one :user
+- belongs_to :user
 
 ## Itemsテーブル
 |Column|Type|Options|
@@ -40,7 +37,6 @@
 |price|integer|null: false|
 |text|text|null: false|
 |status|integer(enum)|null: false|
-|image_id|references|null: false, foreign_key: true|
 |size_id|references|null: false, foreign_key: true|
 |brand_id|references|null: false, foreign_key: true|
 |condition_id|references|null: false, foreign_key: true|
@@ -53,16 +49,16 @@
 |buyer_id|references|foreign_key: true|
 ### Association
 - has_many :images
-- has_one :sizes
-- has_one :brands
-- has_one :conditions
-- has_one :shipping_costs
-- has_one :delivery_methods
-- has_one :delivery_areas
-- has_one :delivery_dates
-- has_many :categories
-- has_one :seller
-- has_one :buyer
+- belongs_to :size
+- belongs_to :brand
+- belongs_to :condition
+- belongs_to :shipping_cost
+- belongs_to :delivery_method
+- belongs_to :delivery_area
+- belongs_to :delivery_date
+- belongs_to :category
+- belongs_to :seller
+- belongs_to :buyer
 
 
 ## delivery_areas テーブル
@@ -93,7 +89,7 @@
 |item_id|references|null: false, foreign_key: true|
 |ancestry|||
 ### Association
-- has_many :item
+- has_many :items
 - has_many :brands, through :brands_categories
 
 ## Imagesテーブル
@@ -112,7 +108,7 @@
 |item_id|references|null: false ,foreign_key: true|
 
 ## Association
-- has_one :item
+- belongs_to :item
 
 ## Credit cardテーブル
 |Column|Type|Options|
@@ -123,7 +119,7 @@
 |security_code|integer|null: false|
 |user_id|references|null: false, foreign_key: true|
 ## Association
-- has_one :user
+- belongs_to :user
 
 
 ## shipping_costs
@@ -145,7 +141,7 @@
 ## brandsテーブル
 |Column|Type|Options|
 |------|----|-------|
-|brand-name|string|null: false|
+|name|string|null: false|
 ### Association
 - has_many :brands_categories
 - has_many :categories, through : brands_categories

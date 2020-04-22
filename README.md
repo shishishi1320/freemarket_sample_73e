@@ -141,3 +141,4 @@
 - has_many :brands_categories
 - has_many :categories, through : brands_categories
 - has_one :item
+

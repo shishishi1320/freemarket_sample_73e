@@ -14,6 +14,7 @@
 |address_id|references|null: false, foreign_key: true|
 |credit_cards_id|references|null: false, foreign_key: true|
 
+
 ### Association
 - has_many :items
 - has_one :credit_cards

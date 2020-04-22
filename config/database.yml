@@ -15,7 +15,7 @@ default: &default
   pool: <%= ENV.fetch("RAILS_MAX_THREADS") { 5 } %>
   username: root
   password:
-  socket: /tmp/mysql.sock
+  socket: /var/lib/mysql/mysql.sock 
 
 development:
   <<: *default
@@ -52,4 +52,4 @@ production:
   database: freemarket_sample_73e_production
   username: root            #rootに変更
   password: <%= ENV['DATABASE_PASSWORD'] %> #chat-spadeで使った変数
-  socket: /var/lib/mysql/mysql.sock #必須の指定 
+  socket: /var/lib/mysql/mysql.sock 

@@ -3,7 +3,7 @@ lock "~> 3.13.0"
 
 # 自身のアプリ名、リポジトリ名を記述
 set :application, 'freemarket_sample_73e'
-set :repo_url,  'taiyakin/freemarket_sample_73e'
+set :repo_url,  'git@github.com:taiyakin/freemarket_sample_73e.git'
 
 set :linked_dirs, fetch(:linked_dirs, []).push('log', 'tmp/pids', 'tmp/cache', 'tmp/sockets', 'vendor/bundle', 'public/system', 'public/uploads')
 

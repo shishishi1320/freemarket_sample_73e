@@ -11,18 +11,26 @@
 |first_name_kana|string|null: false|
 |name_kana|string|null: false|
 |birth|date|null: false|
+|address_id|references|null: false, foreign_key: true|
+|credit_cards_id|references|null: false, foreign_key: true|
+
+### Association
+- has_many :items
+- has_one :credit_cards
+- has_one :address
+
+## addressテーブル
+|Column|Type|Options|
+|------|----|-------|
 |postal_code|integer(7)|null: false|
 |pefecture|string|null: false|
 |city|string|null: false|
 |block|string|null: false|
 |buildding|string||
 |phone_number|integer(11)|unique|
-
+|user_id|references|null: false, foreign_key: true|
 ### Association
-- has_many :items
-- has_one :credit_cards
-
-
+- has_one :user
 
 ## Itemsテーブル
 |Column|Type|Options|
@@ -84,7 +92,7 @@
 |item_id|references|null: false, foreign_key: true|
 |ancestry|||
 ### Association
-- belongs_to :item
+- has_many :item
 - has_many :brands, through :brands_categories
 
 ## Imagesテーブル

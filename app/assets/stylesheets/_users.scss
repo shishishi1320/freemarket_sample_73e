@@ -1,40 +1,35 @@
-.header {
-  height: 150px;
-  width: 100%;
-  background-color: blue;
-}
 
 .main-content {
-  height: 1341px;
   width: 100%;
   margin: 40px auto 0;
   display: flex;
   justify-content: center;
   background-color: #F8F8F8;
   &__side {
-    height: 1300px;
     width: 280px;
     margin: 0 40px 0 0;
     list-style: none;
     &__nav {
-      height: 1300px;
+      height: 1000px;
       &__list {
         list-style: none;
         &__item {
           display: block;
           padding: 16px;
-          background: #fff;
+          background-color: #fff;
           font-size: 14px;         
-          border: 1px solid;
+          margin-bottom: 1px;
           a { color: #333;
             text-decoration: none;
           }
+        }
+        &__head {
+          margin-top: 40px;
         }
       }
     }
   }
   &__right {
-    height: 940px;
     width: 700px;
     list-style: none;
     &__header {
@@ -55,8 +50,9 @@
     &__tab {
       height: 72px;
       width: 100%;
-      padding: 0 16px;
-      background: #fafafa;
+      text-indent: 16px;
+      background-color: #fff;
+      margin: 1px 0;
       font-size: 16px;
       line-height: 72px;
     }
@@ -64,6 +60,7 @@
       height: 74px;
       width: 100%;
       display: flex;
+      background-color: #fff;
       justify-content: space-evenly;     
       a { color: #333; 
         text-decoration: none;
@@ -84,6 +81,7 @@
     &__content {
       height: 236px;
       width: 100%;
+      background-color: #fff;
       &__active {
         display: block;
         &__not-found {
@@ -99,11 +97,4 @@
       }
     }
   } 
-}
-
-
-.footer {
-  height: 715px;
-  width: 100%;
-  background-color: limegreen;
 }

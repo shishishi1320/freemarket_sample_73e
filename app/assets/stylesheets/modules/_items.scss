@@ -1,0 +1,255 @@
+.wrapper{
+  width: 100%;
+  height: 100%;
+  background-color: $main-background;
+}
+
+.header{
+  height: 128px;
+  @include display-flex(center);
+  a {
+    margin: auto 0;
+  }
+}
+
+#label{
+  @include label-font(black);
+}
+
+#grey-label{
+  @include label-font(grey);
+}
+
+#required{
+  @include required(red);
+}
+
+#arbitrary{
+  @include required($btn-required-grey);
+}
+
+.main{
+  background-color: #fff;
+  max-width: 700px;
+  margin: 0 auto;
+  &__content{
+    &__img-up{
+      padding: $content-padding;
+      border-bottom: $border-color $border-width solid;
+      &__text{
+        margin-top: $text-margin;
+        font-size: $text-base;
+      }
+      &__file{
+        margin-top: $text-margin;
+        &__l{
+          &__field{
+          height: 150px;
+          background-color: $main-background;
+          border: $border-color $border-width dashed;
+          padding: 0 4px;
+          @include display-flex(center);
+          flex-direction: column;
+          text-align: center;
+            &__icon{
+              font-size: 1.5em;
+              margin-bottom: 8px;
+            }
+            &__text{
+              font-size: $text-small;
+            }
+            &__file{
+              display: none;
+            }
+          }
+        }
+      }
+    }
+    &__item-name{
+      padding: $content-padding;
+      border-bottom: $border-color $border-width solid;
+      &__form{
+        @include form;
+      }
+      &__text{
+        margin-top: $content-margin;
+        &__form{
+          box-sizing: border-box;
+          border: $border-color $border-width solid;
+          border-radius: 4px;
+          margin-top: $text-margin;
+          width: 100%;
+          height: 150px;
+          padding: 10px 16px;
+        }
+      }
+      &__count{
+        margin-top: $text-margin;
+        text-align: right;
+        &__text{
+          color: #888;
+          font-size: $text-small;
+        }
+      }
+    }
+    &__item-detail{
+      padding: $content-padding;
+      border-bottom: $border-color $border-width solid;
+      &__select{
+        @include form;
+        background-color: #fff;
+      }
+      &__label{
+        margin-bottom: $label-margin;
+      }
+      &__category{
+        margin-top: $content-margin;
+      }
+      &__brand{
+        margin-top: $content-margin;
+      }
+      &__form{
+        @include form;
+      }
+      &__status{
+        margin-top: $content-margin;
+      }
+    }
+    &__item-delivery{
+      padding: $content-padding;
+      border-bottom: $border-color $border-width solid;
+      &__select{
+        @include form;
+        background-color: #fff;
+      }
+      &__label{
+        margin-bottom: $label-margin;
+      }
+      &__cost{
+        margin-top: $content-margin;
+      }
+      &__area{
+        margin-top: $content-margin;
+      }
+      &__date{
+        margin-top: $content-margin;
+      }
+    }
+    &__item-price{
+      padding: $content-padding;
+      &__label{
+        margin-bottom: $label-margin;
+      }
+      &__box{
+        @include display-flex(space-between);
+        &__text{
+          margin: auto 0;
+        }
+        &__form{
+          &__doll{
+            font-size: $text-base;
+            margin-right: 8px;
+          }
+          &__form{
+            box-sizing: border-box;
+            border: $border-color $border-width solid;
+            border-radius: 4px;
+            width: 285px;
+            height: $content-height;
+            padding: 0 16px;
+            text-align: right;
+          }
+        }
+      }
+      &__fee{
+        height: $content-height;
+        padding: 12px 0px;
+        @include display-flex(space-between);
+        border-bottom: $border-color $border-width solid;
+        &__label{
+          line-height: $content-height;
+          &__text{
+            font-size: $text-base;
+          }
+        }
+        &__price{
+          line-height: $content-height;
+        }
+      }
+      &__profit{
+        height: $content-height;
+        padding-top: 12px;
+        @include display-flex(space-between);
+        &__label{
+          line-height: $content-height;
+          &__text{
+            font-size: $text-base;
+          }
+        }
+        &__price{
+          line-height: $content-height;
+        }
+      }
+    }
+    &__btn{
+      width: 360px;
+      margin: 0 auto $content-margin;
+      &__submit{
+        @include btn($main-color);
+        color: #fff;
+        border-color: $main-color;
+      }
+      &__write{
+        margin: 24px auto 0;
+        @include btn($btn-required-grey);
+      }
+      a {
+        display: block;
+        margin-top: 24px;
+        text-align: center;
+        text-decoration: none;
+        color: $main-color;
+        font-size: $text-base;
+      }
+    }
+    &__text{
+      margin: 0px 40px;
+      padding-bottom:  64px;
+      font-size: 12px;
+    }
+  }
+}
+
+.footer{
+  box-sizing: border-box;
+  height: 220px;
+  padding: 40px 0 41px;
+  &__link{
+    box-sizing: border-box;
+    &__list{
+      @include display-flex(center);
+      margin-bottom: 35px;
+      &__li{
+        margin-left: 16px;
+        a {
+          color: grey;
+          font-size: 12px;
+          text-decoration: none;
+        }
+      }
+    }
+  }
+  &__bottom{
+    @include display-flex(center);
+    &__img-link{
+      margin: auto 0;
+      &__img{
+      margin-bottom: 8px;
+      }
+    }
+  }
+  &__text{
+    font-size: $text-small;
+    text-align: center;
+  }
+}

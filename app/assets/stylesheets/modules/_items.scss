@@ -1,3 +1,8 @@
+　*{  
+  box-sizing: border-box;  
+  text-decoration: none;
+}
+
 .wrapper{
   width: 100%;
   height: 100%;
@@ -74,7 +79,6 @@
       &__text{
         margin-top: $content-margin;
         &__form{
-          box-sizing: border-box;
           border: $border-color $border-width solid;
           border-radius: 4px;
           margin-top: $text-margin;
@@ -151,7 +155,6 @@
             margin-right: 8px;
           }
           &__form{
-            box-sizing: border-box;
             border: $border-color $border-width solid;
             border-radius: 4px;
             width: 285px;
@@ -162,6 +165,7 @@
         }
       }
       &__fee{
+        box-sizing: content-box;
         height: $content-height;
         padding: 12px 0px;
         @include display-flex(space-between);
@@ -207,7 +211,6 @@
         display: block;
         margin-top: 24px;
         text-align: center;
-        text-decoration: none;
         color: $main-color;
         font-size: $text-base;
       }
@@ -221,11 +224,9 @@
 }
 
 .footer{
-  box-sizing: border-box;
   height: 220px;
   padding: 40px 0 41px;
   &__link{
-    box-sizing: border-box;
     &__list{
       @include display-flex(center);
       margin-bottom: 35px;
@@ -234,7 +235,6 @@
         a {
           color: grey;
           font-size: 12px;
-          text-decoration: none;
         }
       }
     }

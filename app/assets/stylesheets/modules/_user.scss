@@ -35,7 +35,7 @@
 
           .field-input {
             input {
-              @include input;
+              @include form;
             }
             select{
               width: 30%;
@@ -54,7 +54,7 @@
 
     
     .hissu{
-      @include hissu;
+      @include required(red);
     }
 
     .btn {

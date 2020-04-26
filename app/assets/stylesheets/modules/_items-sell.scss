@@ -226,6 +226,7 @@
 .footer{
   height: 220px;
   padding: 40px 0 41px;
+  background-color: $main-background;
   &__link{
     &__list{
       @include display-flex(center);
@@ -251,5 +252,6 @@
   &__text{
     font-size: $text-small;
     text-align: center;
+    color:black;
   }
 }

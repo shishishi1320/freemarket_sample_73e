@@ -1,0 +1,21 @@
+// 必須のマーク用
+@mixin hissu{
+    display: inline;
+    padding: 4px;
+    margin-left: 8px;
+    background-color: red;
+    border-radius: 2px;
+    color: $white;
+    font-weight: 600;
+    font-size :12px;  
+}
+
+@mixin input{
+  box-sizing: border-box;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  margin-top: 16px;
+  width: 100%;
+  height: 48px;
+  padding: 0 16px;
+}

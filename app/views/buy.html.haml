@@ -1,0 +1,45 @@
+.wrapper
+  = render 'partial/new-header'
+
+  .main
+    .main__content
+      %h.main__content__title
+        購入内容の確認
+      %section.main__content__item
+        .main__content__item__inner
+          .main__content__item__inner__box
+            %h.main__content__item__inner__box__img
+              = image_tag 'item.jpg', :size =>'80x80', alt: 'img'
+            .main__content__item__inner__box__detail
+              %p.main__content__item__inner__box__detail__item-name
+                ★新品・未使用★LUOTEEMI E16042611R ファッションピアス
+              %p.main__content__item__inner__box__detail__bold
+                %span ¥1,180
+                %span （税込）送料込み
+      %section.main__content__buy
+        .main__content__buy__inner
+          .main__content__buy__inner__price
+            .main__content__buy__inner__price__text
+              支払い金額
+            .main__content__buy__inner__price__int
+              ¥1,180
+          %section.main__content__buy__inner__section
+            .main__content__buy__inner__section__div
+              %h 支払い方法
+              = link_to "#" , class:"main__content__buy__inner__section__div__link" do
+                %i.fas.fa-plus-circle
+                  登録してください
+          %section.main__content__buy__inner__section
+            .main__content__buy__inner__section__div
+              %h 配送先
+              .main__content__buy__inner__section__div__address
+                %p 179-0074
+                %p 東京都練馬区春日町１−２−３
+                %p 山田 太郎
+              = link_to "#" do
+                変更する
+          .main__content__buy__inner__btn
+            %button{type: "submit", class:"main__content__buy__inner__btn"}
+              購入する
+
+  = render 'partial/new-footer'

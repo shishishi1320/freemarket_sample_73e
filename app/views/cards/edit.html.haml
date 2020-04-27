@@ -1,0 +1,55 @@
+
+.main-content
+  .main-content__side
+    .main-content__side__nav
+      .main-content__side__nav__list
+        .main-content__side__nav__list__item
+          = link_to 'マイページ', '#'
+        .main-content__side__nav__list__item
+          = link_to '出品する', '#'
+        .main-content__side__nav__list__item
+          = link_to '出品した商品 - 出品中' , '#'
+        .main-content__side__nav__list__item
+          = link_to '出品した商品 - 取引中' , '#'
+        .main-content__side__nav__list__item
+          = link_to '出品した商品 - 売却済み' , '#'
+        .main-content__side__nav__list__item
+          = link_to '購入した商品 - 取引中' , '#'
+        .main-content__side__nav__list__item
+          = link_to '購入した商品 - 過去の取引' , '#'
+        %h3.main-content__side__nav__list__head
+          設定
+      .main-content__side__nav__list
+        .main-content__side__nav__list__item
+          = link_to 'プロフィール' , '#'
+        .main-content__side__nav__list__item
+          = link_to '発送元・お届け先住所変更' , '#'
+        .main-content__side__nav__list__item
+          = link_to '支払い方法' ,'#'
+        .main-content__side__nav__list__item
+          = link_to 'メール/パスワード' , '#'
+        .main-content__side__nav__list__item
+          = link_to '本人情報' , '#'
+        .main-content__side__nav__list__item
+          = link_to '電話番号の確認' , '#'
+        .main-content__side__nav__list__item
+          = link_to 'ログアウト' , "#"
+
+  .main-content__right
+    .main-content__right__title
+      支払い方法
+    .main-content__right__innner
+      .main-content__right__innner__credit-cards
+        クレジットカード一覧
+        %ul.main-content__right__innner__credit-cards__contents
+          %li.main-content__right__innner__credit-cards__contents__list
+            .main-content__right__innner__credit-cards__contents__list__icon
+              = image_tag("1.png", width: '70', alt: @card_brand, id:"card_image")
+            .main-content__right__innner__credit-cards__contents__list__pay-num
+              = "**** **** **** **** "
+            .main-content__right__innner__credit-cards__contents__list__time
+              03/03
+          %li.main-content__right__innner__credit-cards__contents__destroy
+            = link_to '削除する' , "#"
+      .main-content__right__question
+        = link_to '支払い方法について' , "#"

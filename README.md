@@ -74,7 +74,7 @@
 - belongs_to :item
 
 
-## Credit cardテーブル
+## credit_cardテーブル
 |Column|Type|Options|
 |------|----|-----|
 |card_id|integer|null: false|

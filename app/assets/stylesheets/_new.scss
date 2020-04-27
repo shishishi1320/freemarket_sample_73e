@@ -55,6 +55,7 @@
         }
         &__head {
           margin-top: 40px;
+          font-weight: bold;
         }
       }
     }
@@ -70,6 +71,7 @@
       padding: 8px 24px;
       text-align: center;
       border-bottom: 1px solid #f5f5f5;
+      font-weight: bold;
     }
     &__form {
       width: 356px;
@@ -147,6 +149,7 @@
         margin: 24px 0 0;
         display: block;
         line-height: 48px;;
+        font-size: 14px;
       }
     }
   }

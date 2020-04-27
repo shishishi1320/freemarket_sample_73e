@@ -1,0 +1,132 @@
+
+.main-content {
+  height: 100%;
+  width: 100%;
+  margin: 40px auto 0;
+  @include display-flex(center);
+  background-color: #F8F8F8;
+  &__side {
+    width: 280px;
+    margin: 0 40px 0 0;
+    list-style: none;
+    &__nav {
+      &__list {
+        list-style: none;
+        &__item {
+          display: block;
+          padding: 16px;
+          background-color: #fff;
+          font-size: 14px;         
+          margin-bottom: 1px;
+          a { color: #333;
+            text-decoration: none;
+          }
+        }
+        &__head {
+          margin-top: 40px;
+          font-weight: bold;
+        }
+      }
+    }
+  }
+  &__right {
+    height: 550px;
+    width: 700px;
+    list-style: none;
+    background-color: #fff;
+    display: inline-block;
+    &__title {
+      font-size: 24px;
+      padding: 8px 24px;
+      text-align: center;
+      border-bottom: 1px solid #f5f5f5;
+      font-weight: bold;
+    }
+    &__form {
+      width: 356px;
+      padding: 24px 16px 40px;
+      margin: auto;
+      &__card-number {
+        &__input{
+          @include form;
+        }
+        &__label{
+          font-weight: 600;         
+        }
+        .hissu{
+          @include required(red);
+        }
+        &__input{
+          width: 100%;
+          margin: 8px 0 0;
+          input[type="password"] {
+            height: 100%;
+            width: 100%;
+            border:solid 0px;
+          }
+        }
+      }
+      &__card-icon {
+        display: flex;
+        margin: 8px 1px 0;
+        font-size: 0;
+      }
+      &__date {
+        margin: 24px 0 0;
+        &__label{
+          font-weight: 600;         
+        }
+        .hissu{
+          @include required(red);
+        }
+        &__select {
+          box-sizing: border-box;
+          border: 1px solid #ccc;
+          border-radius: 4px;
+          margin-top: 16px;
+          width: 40%;
+          height: 48px;
+          padding: 0 16px;
+        }
+      }
+      &__code {
+        margin: 24px 0 0;
+        &__input {
+          @include form;
+        }
+        &__label {
+          font-weight: 600; 
+        }
+        .hissu{
+          @include required(red);
+        }
+        &__input{
+          width: 100%;
+          margin: 8px 0 0;
+          input[type="password"] {
+            height: 100%;
+            width: 100%;
+            border:solid 0px;
+          }
+        }
+        &__question {
+          text-align: right;
+          a{ text-decoration: none;
+          color: #0099e8;
+          }
+        }
+      }
+      &__submit {
+        width: 100%;
+        background: #3CCACE;
+        border: 1px solid #3CCACE;
+        color: #fff;
+        margin: 24px 0 0;
+        display: block;
+        line-height: 48px;;
+        font-size: 14px;
+      }
+    }
+  }
+}
+

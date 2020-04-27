@@ -1,0 +1,69 @@
+.main-content
+  =render 'mypage/side'
+
+  .main-content__right
+    %h2.main-content__right__title
+      クレジットカード情報入力
+    .main-content__right__form
+      .main-content__right__form__card-number
+        .main-content__right__form__card-number__label
+          %label カード番号
+          %span.hissu 必須 
+        .main-content__right__form__card-number__input
+          %input{type: "password", name: "password", placeholder:"半角数字のみ"}
+      %ul.main-content__right__form__card-icon
+        %li.main-content__right__form__card-icon__visa
+          = image_tag("1.png", width: '49', alt: "サンプル画像", id:"icon--visa")
+        %li.main-content__right__form__card-icon__master
+          = image_tag("2.png", width: '49', alt: "サンプル画像", id:"icon--master")
+        %li.main-content__right__form__card-icon__saison
+          = image_tag("5.png", width: '49', alt: "サンプル画像", id:"icon--paypal")
+        %li.main-content__right__form__card-icon__jcb
+          = image_tag("16.png", width: '49', alt: "サンプル画像", id:"icon--jcb")
+        %li.main-content__right__form__card-icon__americanexpress
+          = image_tag("22.png", width: '49', alt: "サンプル画像", id:"icon--americanexpress")
+        %li.main-content__right__form__card-icon__diners
+          = image_tag("10.png", width: '49', alt: "サンプル画像", id:"icon--diners")
+        %li.main-content__right__form__card-icon__discover
+          = image_tag("14.png", width: '49', alt: "サンプル画像", id:"icon--discover")
+
+      .main-content__right__form__date
+        .main-content__right__form__date__label
+          %label 有効期限
+          %span.hissu 必須 
+      %select{class: "main-content__right__form__date__select"}
+        %option 01
+        %option 02
+        %option 03
+        %option 04
+        %option 05
+        %option 06
+        %option 07
+        %option 08
+        %option 09
+        %option 10
+        %option 11
+        %option 12
+      %span 月
+      %select{class: "main-content__right__form__date__select"}
+        %option 20
+        %option 21
+        %option 22
+        %option 23
+        %option 24
+        %option 25
+        %option 26
+        %option 27
+        %option 28
+        %option 29
+        %option 30
+      %span 年
+      .main-content__right__form__code
+        .main-content__right__form__code__label
+          %label セキュリティコード
+          %span.hissu 必須 
+        .main-content__right__form__code__input
+          %input{type: "password", name: "password", placeholder:"カード背面4桁もしくは3桁の番号"}
+      .main-content__right__form__code__question
+        = link_to 'カード裏面の番号とは？' , "#"
+      %button.main-content__right__form__submit{type: "button"} 追加する

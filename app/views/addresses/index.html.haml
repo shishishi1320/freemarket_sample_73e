@@ -1,0 +1,41 @@
+%h1 Listing addresses
+
+%table
+  %thead
+    %tr
+      %th Postal code
+      %th Prefecture
+      %th City
+      %th Block
+      %th Building
+      %th Phone number
+      %th User
+      %th Send first name
+      %th Send name
+      %th Send first name kana
+      %th Send name kana
+      %th
+      %th
+      %th
+
+  %tbody
+    - @addresses.each do |address|
+      %tr
+        %td= address.postal_code
+        %td= address.prefecture
+        %td= address.city
+        %td= address.block
+        %td= address.building
+        %td= address.phone_number
+        %td= address.user_id
+        %td= address.send_first_name
+        %td= address.send_name
+        %td= address.send_first_name_kana
+        %td= address.send_name_kana
+        %td= link_to 'Show', address
+        %td= link_to 'Edit', edit_address_path(address)
+        %td= link_to 'Destroy', address, method: :delete, data: { confirm: 'Are you sure?' }
+
+%br
+
+= link_to 'New Address', new_address_path

@@ -1,0 +1,23 @@
+%h1 Listing brands_categories
+
+%table
+  %thead
+    %tr
+      %th Category
+      %th Brand
+      %th
+      %th
+      %th
+
+  %tbody
+    - @brands_categories.each do |brands_category|
+      %tr
+        %td= brands_category.category_id
+        %td= brands_category.brand_id
+        %td= link_to 'Show', brands_category
+        %td= link_to 'Edit', edit_brands_category_path(brands_category)
+        %td= link_to 'Destroy', brands_category, method: :delete, data: { confirm: 'Are you sure?' }
+
+%br
+
+= link_to 'New Brands category', new_brands_category_path

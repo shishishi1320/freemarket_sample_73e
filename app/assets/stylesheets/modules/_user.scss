@@ -1,0 +1,77 @@
+*{
+  box-sizing: border-box;
+  text-decoration: none;
+}
+
+.account{
+  background-color: #f5f5f5;
+  padding-bottom: 200px;
+  .account-header{
+    height: 128px;
+  }
+  .account-page {
+    width: 700px;
+    margin: 0 auto;
+    &__inner {
+      background-color: $white;
+      &__title{
+        text-align: center;
+        line-height: 90px;
+        height: 90px;
+        border-bottom:1px solid #ddd;
+      }
+      &__user-form{
+        margin:0 auto;
+        max-width: 340px;
+        padding: 40px 0px 60px ;
+        .field {
+          margin-bottom: 10px;
+          .field-label {
+            padding: 10px 0;
+            letter-spacing: 1px;
+            font-size: 14px;
+            font-weight: 200;
+          }
+
+          .field-input {
+            input {
+              @include form;
+            }
+            select{
+              width: 30%;
+              height: 48px;
+            }
+          }
+        }
+      }
+    }
+     .full_name{
+      display: flex;
+      .field{
+        margin-right: 5px;
+      }
+    }
+
+    
+    .hissu{
+      @include required(red);
+    }
+
+    .btn {
+      display: inline-block;
+      height: 50px;
+      padding: 0 30px;
+      line-height: 50px;
+      letter-spacing: 1px;
+      text-align: center;
+      border: none;
+    }
+
+    input[type='submit'] {
+      margin-top: 20px;
+      color: $white;
+      background-color: #3CCACE;
+      width: 100%;
+    }
+  }
+}  

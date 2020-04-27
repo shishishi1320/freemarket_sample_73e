@@ -1,0 +1,14 @@
+.top-header
+ .top-header__inner
+  .top-header__inner__main
+   .top-header__inner__main__icon
+    = link_to image_tag("logo.png", width: '140', alt: "サンプル画像"), "/"
+   .top-header__inner__main__serch
+   .top-header__inner__main__resultlists 
+  .top-header__inner__nav
+   %ul.top-header__inner__nav__left
+    = link_to "カテゴリー", "/", class: "top-header__inner__nav__left__category" 
+    = link_to "ブランド", "/", class: "top-header__inner__nav__left__brand" 
+   %ul.top-header__inner__nav__right
+    = link_to "ログイン", new_user_session_path, class: "top-header__inner__nav__right__login" 
+    = link_to "新規会員登録", new_user_registration_path, class: "top-header__inner__nav__right__signup" 

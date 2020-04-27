@@ -1,84 +1,92 @@
 .showMain{
-  height: 100vh;
+  height: 300vh;
   width: 100%;
   background-color: #f8f8f8;
   position: relative;
   overflow: scroll;
-  .itembox{
-    height: 170vh;
+  .item-box{
+    height: 180vh;
     width: 700px;
     background-color: white;
     position: absolute;
     top: 10%;
     left: 25%;
-    padding: 24px 40px 40px;
-    &__name {
+ 
+    .itembox_name {
       text-align: center;
       font-weight: bold;
       font-size: 24px;
       margin-top:20px;
-    }
-    &__body{
-      .ul{
-        text-align: center;
-        justify-content: center;
-        .li{
-          margin-top: 10px;
-          margin-left: 90px;  
-        }
-        .ul{
-          display: flex;
-          .li{
-            margin: 3px;
-          }
-        }
+      .h2{
+       font-weight: bold;
+       font-size: 24px;
       }
     }
-    &__price {
+    .itembox-body{
+      margin: 5px;
+      .ul{
+        height: 300px;
+        justify-content: center;
+        margin-top: 10px;
+        .li{
+          height: 10px;
+          display: flex;
+          margin: 3px;
+           }
+      .ul{
+        height: 300px;
+        display: flex;
+      }
+    }
+      
+    }
+    .itembox_price {
+      margin-top: 200px;
       text-align: center;
       font-size: 46px;
       font-weight: bold;
-      &__detail {
+    }
+    .itembox_price_detail {
       text-align: center;
       font-size: 16px;
       margin-bottom: 20px;
     }
-    }
-    &__detail {
+    .itemdetail {
+      text-align: center;
       box-sizing: content-box;
+      line-height: 1.5;
       font-size: 18px;
       margin-bottom: 30px;
-      padding: 0 0 0 20px;
     }
-   
     .table {
-      width: 120%;
-      margin-bottom: 20px;
+      margin-left: 40px;
       table {
         margin: 0 30px 0 40px;
         border-collapse: collapse;
         width: 80%;
         margin: 30px 30px;
         border: 2px solid #dedede;
-        padding-bottom: 40px;
+
         tbody{
-          width: 200px;
-        th{
+
+         th{
           border: solid 1px black;
           background-color: #eee;
           font-size: 12px;
           font-weight: normal;
           padding: 1px;
           border: 2px solid #dedede;
-       }  
-        td{
-          border: 2px solid #dedede;
-          font-size: 14px;
-          text-align: left;
-          padding: 20px;
+         }
+          td{
+            border: 2px solid #dedede;
+            font-size: 14px;
+            text-align: left;
+            padding: 20px;
+
         }
-       }
       }
     }
+   }
+    
   }
 }

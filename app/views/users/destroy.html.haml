@@ -1,40 +1,5 @@
-
-.main-content
-  .main-content__side
-    .main-content__side__nav
-      .main-content__side__nav__list
-        .main-content__side__nav__list__item
-          = link_to 'マイページ', '#'
-        .main-content__side__nav__list__item
-          = link_to '出品する', '#'
-        .main-content__side__nav__list__item
-          = link_to '出品した商品 - 出品中' , '#'
-        .main-content__side__nav__list__item
-          = link_to '出品した商品 - 取引中' , '#'
-        .main-content__side__nav__list__item
-          = link_to '出品した商品 - 売却済み' , '#'
-        .main-content__side__nav__list__item
-          = link_to '購入した商品 - 取引中' , '#'
-        .main-content__side__nav__list__item
-          = link_to '購入した商品 - 過去の取引' , '#'
-        %h3.main-content__side__nav__list__head
-          設定
-      .main-content__side__nav__list
-        .main-content__side__nav__list__item
-          = link_to 'プロフィール' , '#'
-        .main-content__side__nav__list__item
-          = link_to '発送元・お届け先住所変更' , '#'
-        .main-content__side__nav__list__item
-          = link_to '支払い方法' ,'#'
-        .main-content__side__nav__list__item
-          = link_to 'メール/パスワード' , '#'
-        .main-content__side__nav__list__item
-          = link_to '本人情報' , '#'
-        .main-content__side__nav__list__item
-          = link_to '電話番号の確認' , '#'
-        .main-content__side__nav__list__item
-          = link_to 'ログアウト' , "#"
-
+=render partial: 'mypage/show'
+  
   .main-content__right
     .main-content__right__logout
       = link_to 'ログアウト' , "#"

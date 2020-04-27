@@ -1,33 +1,3 @@
-@mixin hissu{
-  display: inline;
-  padding: 4px;
-  margin-left: 8px;
-  background-color: red;
-  border-radius: 2px;
-  color: white;
-  font-weight: 600;
-  font-size :12px;  
-}
-
-@mixin input{
-  box-sizing: border-box;
-  border: 1px solid #ccc;
-  border-radius: 4px;
-  margin-top: 16px;
-  width: 100%;
-  height: 48px;
-  padding: 0 16px;
-} 
-
-@mixin select{
-  box-sizing: border-box;
-  border: 1px solid #ccc;
-  border-radius: 4px;
-  margin-top: 16px;
-  width: 40%;
-  height: 48px;
-  padding: 0 16px;
-} 
 
 .main-content {
   height: 100%;
@@ -79,13 +49,13 @@
       margin: auto;
       &__card-number {
         &__input{
-          @include input
+          @include form;
         }
         &__label{
           font-weight: 600;         
         }
         .hissu{
-          @include hissu;
+          @include required($bg-color);
         }
         &__input{
           width: 100%;
@@ -108,22 +78,22 @@
           font-weight: 600;         
         }
         .hissu{
-          @include hissu;
+          @include required($bg-color);
         }
         &__select {
-          @include select;
+          @include form;
         }
       }
       &__code {
         margin: 24px 0 0;
         &__input {
-          @include input
+          @include form;
         }
         &__label {
           font-weight: 600; 
         }
         .hissu{
-          @include hissu;
+          @include required($bg-color);
         }
         &__input{
           width: 100%;

@@ -2,8 +2,7 @@
 .main-content {
   width: 100%;
   margin: 40px auto 0;
-  display: flex;
-  justify-content: center;
+  @include display-flex(center);
   background-color: #F8F8F8;
   &__side {
     width: 280px;
@@ -60,9 +59,8 @@
     &__history {
       height: 74px;
       width: 100%;
-      display: flex;
-      background-color: #fff;
-      justify-content: space-evenly;     
+      @include display-flex(space-evenly);
+      background-color: #fff;  
       a { color: #333; 
         text-decoration: none;
         font-weight: bold;

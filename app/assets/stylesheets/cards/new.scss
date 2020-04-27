@@ -55,7 +55,7 @@
           font-weight: 600;         
         }
         .hissu{
-          @include required($bg-color);
+          @include required(red);
         }
         &__input{
           width: 100%;
@@ -78,10 +78,16 @@
           font-weight: 600;         
         }
         .hissu{
-          @include required($bg-color);
+          @include required(red);
         }
         &__select {
-          @include form;
+          box-sizing: border-box;
+          border: 1px solid #ccc;
+          border-radius: 4px;
+          margin-top: 16px;
+          width: 40%;
+          height: 48px;
+          padding: 0 16px;
         }
       }
       &__code {
@@ -93,7 +99,7 @@
           font-weight: 600; 
         }
         .hissu{
-          @include required($bg-color);
+          @include required(red);
         }
         &__input{
           width: 100%;

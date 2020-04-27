@@ -1,0 +1,15 @@
+%p#notice= notice
+
+%p
+  %b Card:
+  = @credit_card.card_id
+%p
+  %b Customer:
+  = @credit_card.customer_id
+%p
+  %b User:
+  = @credit_card.user_id
+
+= link_to 'Edit', edit_credit_card_path(@credit_card)
+\|
+= link_to 'Back', credit_cards_path

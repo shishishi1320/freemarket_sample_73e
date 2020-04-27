@@ -1,0 +1,12 @@
+%p#notice= notice
+
+%p
+  %b Category:
+  = @brands_category.category_id
+%p
+  %b Brand:
+  = @brands_category.brand_id
+
+= link_to 'Edit', edit_brands_category_path(@brands_category)
+\|
+= link_to 'Back', brands_categories_path

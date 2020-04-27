@@ -1,0 +1,51 @@
+%p#notice= notice
+
+%p
+  %b Name:
+  = @item.name
+%p
+  %b Price:
+  = @item.price
+%p
+  %b Text:
+  = @item.text
+%p
+  %b Status:
+  = @item.status
+%p
+  %b Size:
+  = @item.size
+%p
+  %b Brand:
+  = @item.brand_id
+%p
+  %b Condition:
+  = @item.condition
+%p
+  %b Shipping cost:
+  = @item.shipping_cost
+%p
+  %b Delivery method:
+  = @item.delivery_method
+%p
+  %b Delivery area:
+  = @item.delivery_area
+%p
+  %b Delivery date:
+  = @item.delivery_date
+%p
+  %b Category:
+  = @item.category_id
+%p
+  %b Category:
+  = @item.category_id
+%p
+  %b Seller:
+  = @item.seller_id
+%p
+  %b Buyer:
+  = @item.buyer_id
+
+= link_to 'Edit', edit_item_path(@item)
+\|
+= link_to 'Back', items_path

@@ -5,6 +5,9 @@ class ItemsController < ApplicationController
   # GET /items.json
   def index
     @items = Item.all
+    @images = Image.all
+    binding
+    # @image = @items.image.includes(:item)
   end
 
   # GET /items/1

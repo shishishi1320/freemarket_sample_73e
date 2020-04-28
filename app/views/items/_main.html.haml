@@ -90,48 +90,27 @@
  
  
  
+ 
+ 
  .top-main__product__list
   %h2.top-main__product__list__title
    商品一覧 
+
   .top-main__product__list__box
-   = link_to "/"  do
-    .top-main__product__list__box__item
-     = image_tag("pict-reason-01.jpg",  alt: "サンプル画像", class:"top-main__product__list__box__item__img")
+   - @items .each do |item|
+    = link_to item_path(id: item.id) ,class:"top-main__product__list__box__item" do
+     = image_tag("pict-reason-01.jpg",  alt: "サンプル画像",  class:"top-main__product__list__box__item__img")
      .top-main__product__list__box__item__body
-      %h3.top-main__product__list__box__item__body__name product3
+      %h3.top-main__product__list__box__item__body__name 
+       = item.name
       .top-main__product__list__box__item__body__details
        %ul
-        %li 30000円
         %li 
-        = icon("fas","star",class: "icon")
-        %li.text 0
+         = item.price
+         = "円"
        %p (税込)
-
-   = link_to "/"  do
-    .top-main__product__list__box__item
-     = image_tag("pict-reason-01.jpg",  alt: "サンプル画像", class:"top-main__product__list__box__item__img")
-     .top-main__product__list__box__item__body
-      %h3.top-main__product__list__box__item__body__name product3
-      .top-main__product__list__box__item__body__details
-       %ul
-        %li 30000円
-        %li 
-        = icon("fas","star",class: "icon")
-        %li.text 0
-       %p (税込)
-   = link_to "/"  do
-    .top-main__product__list__box__item
-     = image_tag("pict-reason-01.jpg",  alt: "サンプル画像", class:"top-main__product__list__box__item__img")
-     .top-main__product__list__box__item__body
-      %h3.top-main__product__list__box__item__body__name product3
-      .top-main__product__list__box__item__body__details
-       %ul
-        %li 30000円
-        %li 
-        = icon("fas","star",class: "icon")
-        %li.text 0
-       %p (税込)
-
+ 
+ 
 
 
 

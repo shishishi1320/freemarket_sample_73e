@@ -303,13 +303,17 @@
     }
     &__box{
       width: 780px;
+      height:1000px;
       margin: 26px auto;
       display: flex;
-      justify-content: space-around;
+      overflow-x: scroll;
+      flex-wrap: wrap;
+
       &__item{
         width: 220px;
         display: inline-block;
         float: left;
+        margin: 15px 20px;
         &__img{
           width: 220px;
           height: 150px;

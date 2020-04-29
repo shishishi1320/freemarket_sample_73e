@@ -97,9 +97,10 @@
    商品一覧 
 
   .top-main__product__list__box
-   - @items .each do |item|
+   - @items.each do |item|
     = link_to item_path(id: item.id) ,class:"top-main__product__list__box__item" do
-     = image_tag("pict-reason-01.jpg",  alt: "サンプル画像",  class:"top-main__product__list__box__item__img")
+     - item.images.find_each do |image| 
+      = image_tag image.url,class:"top-main__product__list__box__item__img"    
      .top-main__product__list__box__item__body
       %h3.top-main__product__list__box__item__body__name 
        = item.name

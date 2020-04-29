@@ -4,9 +4,11 @@ class ItemsController < ApplicationController
   # GET /items
   # GET /items.json
   def index
-    @items = Item.all
-    @images = Image.all
-    binding
+    #@items = Item.all
+    #@images = Image.all
+    @items = Item.includes([:images]).order(created_at: :desc)
+  
+    # binding.pry
     # @image = @items.image.includes(:item)
   end
 

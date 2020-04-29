@@ -4,12 +4,9 @@ class ItemsController < ApplicationController
   # GET /items
   # GET /items.json
   def index
-    #@items = Item.all
-    #@images = Image.all
-    @items = Item.includes([:images]).order(created_at: :desc)
-  
-    # binding.pry
-    # @image = @items.image.includes(:item)
+
+    @items = Item.on_sell.includes([:images]).order(created_at: :desc)
+
   end
 
   # GET /items/1

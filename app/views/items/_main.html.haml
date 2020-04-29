@@ -9,8 +9,8 @@
     %br
     フリマアプリです
    .top-main__visual__content__btn
-    = link_to image_tag("app-store-9c5e28e8f81bd9912e0ded2f78821e04778a1356c05dc7c7bf1e88614be37c34.svg", width: '180', alt: "サンプル画像", class:"app"), "/"
-    = link_to image_tag("google-play-469c63f1269e456307c4dde176b33cc3bbbbf142ac4d7369656010130149db1a.svg", width: '180', alt: "サンプル画像",class:"ggl"), "/"
+    = link_to image_tag("app-store-9c5e28e8f81bd9912e0ded2f78821e04778a1356c05dc7c7bf1e88614be37c34.svg", width: '180', alt: "サンプル画像", class:"app"), "https://www.apple.com/jp/ios/app-store/"
+    = link_to image_tag("google-play-469c63f1269e456307c4dde176b33cc3bbbbf142ac4d7369656010130149db1a.svg", width: '180', alt: "サンプル画像",class:"ggl"), "https://play.google.com/store"
    
  .top-main__introduction
   %h2.top-main__introduction__subtitle
@@ -63,8 +63,8 @@
     %br
     ほしかったあの商品に出会えるかもしれません。
    .top-main__middle__inner__btn
-    = link_to image_tag("app-store-9c5e28e8f81bd9912e0ded2f78821e04778a1356c05dc7c7bf1e88614be37c34.svg", width: '180', alt: "サンプル画像", class:"app"), "/"
-    = link_to image_tag("google-play-469c63f1269e456307c4dde176b33cc3bbbbf142ac4d7369656010130149db1a.svg", width: '180', alt: "サンプル画像",class:"ggl"), "/"  
+    = link_to image_tag("app-store-9c5e28e8f81bd9912e0ded2f78821e04778a1356c05dc7c7bf1e88614be37c34.svg", width: '180', alt: "サンプル画像", class:"app"), "https://www.apple.com/jp/ios/app-store/"
+    = link_to image_tag("google-play-469c63f1269e456307c4dde176b33cc3bbbbf142ac4d7369656010130149db1a.svg", width: '180', alt: "サンプル画像",class:"ggl"), "https://play.google.com/store"  
  .top-main__features
   %h2.top-main__features__head
    FURIMAの特徴
@@ -94,7 +94,7 @@
  
  .top-main__product__list
   %h2.top-main__product__list__title
-   商品一覧 
+   出品された商品一覧 
 
   .top-main__product__list__box
    - @items.each do |item|
@@ -110,9 +110,9 @@
          = item.price
          = "円"
        %p (税込)
+  
+  
  
  
-
-
 
 

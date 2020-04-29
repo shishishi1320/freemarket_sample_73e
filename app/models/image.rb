@@ -1,4 +1,4 @@
 class Image < ApplicationRecord
   belongs_to :item
-  mount_uploader :src, ImageUploader
+  mount_uploader :url, ImageUploader
 end

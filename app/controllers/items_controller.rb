@@ -14,7 +14,8 @@ class ItemsController < ApplicationController
 
   def new
     @item = Item.new
-    @item.images.new
+    @item.images.build
+    @item.build_brand
   end
 
   # # GET /items/1/edit
@@ -59,6 +60,6 @@ class ItemsController < ApplicationController
     # end
 
     def item_params
-      params.require(:item).permit(:name, :price, :text, :status, :size, :brand_id, :condition, :shipping_cost, :delivery_method, :delivery_area, :delivery_date, :category_id, :seller_id, :buyer_id, images_attributes: [:url])
+      params.require(:item).permit(:name, :price, :text, :status, :size, :condition, :shipping_cost, :delivery_method, :delivery_area, :delivery_date, :category_id, :seller_id, :buyer_id, brand_attributes: [:id, :name], images_attributes: [:url])
     end
 end

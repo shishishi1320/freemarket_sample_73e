@@ -99,7 +99,7 @@
   .top-main__product__list__box
    - @items.each do |item|
     = link_to item_path(id: item.id) ,class:"top-main__product__list__box__item" do
-     - item.images.find_each do |image| 
+     - item.images.first(1).each do |image| 
       = image_tag image.url,class:"top-main__product__list__box__item__img"    
      .top-main__product__list__box__item__body
       %h3.top-main__product__list__box__item__body__name 

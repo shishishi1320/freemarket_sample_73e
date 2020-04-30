@@ -1,4 +1,4 @@
 class BrandsCategory < ApplicationRecord
-  belongs_to :category_id
-  belongs_to :brand_id
+  belongs_to :category
+  belongs_to :brand
 end

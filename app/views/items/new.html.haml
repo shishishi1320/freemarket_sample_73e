@@ -19,7 +19,7 @@
                 %p.main__content__img-up__file__l__field__text
                   またはクリックしてファイルをアップロード
                 = f.fields_for :images do |i|
-                  = i.file_field :src, class: "main__content__img-up__file__l__field__file" 
+                  = i.file_field :url, class: "main__content__img-up__file__l__field__file" 
 
         .main__content__item-name
           .main__content__item-name__name
@@ -38,10 +38,7 @@
           .main__content__item-detail__category
             %span#label カテゴリー
             %span#required 必須
-          %select{class: "main__content__item-detail__select"}
-            %option 選択してください
-            %option レディース
-            %option メンズ
+            = f.number_field :category_id, class: "main__content__item-detail__select"
           .main__content__item-detail__category
             %span#label サイズ
             %span#required 必須
@@ -61,7 +58,14 @@
           .main__content__item-delivery__cost
             %span#label 配送料の負担
             %span#required 必須
-            = f.select :shipping_cost, Item.shipping_costs.keys.map { |k| [I18n.t("enums.item.shipping_cost.#{k}"), k]},  {}, {class: "main__content__item-delivery__select"}
+            = f.select :shipping_cost, Item.shipping_costs.keys, {prompt: "選択してください"}, {class: "main__content__item-delivery__select"}
+            -# = f.select :shipping_cost, Item.shipping_costs.keys.map { |k| [I18n.t("enums.item.shipping_cost.#{k}"), k]},  {}, {class: "main__content__item-delivery__select"}
+          -# この部分はあとでJSで表示
+          .main__content__item-delivery__cost
+            %span#label 配送方法
+            %span#required 必須
+            = f.select :delivery_method, Item.delivery_methods.keys, {prompt: "選択してください"}, {class: "main__content__item-delivery__select"}
+          -# ここまで
           .main__content__item-delivery__area
             %span#label 発送元の地域
             %span#required 必須
@@ -90,6 +94,13 @@
               %span.main__content__item-price__profit__label__text
                 販売利益
             %span.main__content__item-price__profit__price -
+          .ttt
+            %span#label ステータスフラグ（いらないよ！）
+            %span#required 必須
+            = f.number_field :status, class: "main__content__item-name__form", placeholder: "IDいれる"
+            %span#label 出品中フラグ
+            %span#required 必須
+          = f.number_field :seller_id, class: "main__content__item-name__form", placeholder: "IDいれる"
         .main__content__btn
           = f.submit "出品する", class:"main__content__btn__submit"
           %button{type: "submit", class:"main__content__btn__write"}

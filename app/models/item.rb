@@ -1,11 +1,12 @@
 class Item < ApplicationRecord
   belongs_to :brand
-  # belongs_to :category_id
+  belongs_to :category
   has_many :images
   accepts_nested_attributes_for :images, allow_destroy: true
   accepts_nested_attributes_for :brand
+  accepts_nested_attributes_for :category
 
-  enum shipping_cost: { default: 0, seller: 1, buyer: 2 }
+  enum shipping_cost: { 送料込み（出品者負担）:0,着払い（購入者負担）:1 }
   enum delivery_area: {
     北海道:1,青森県:2,岩手県:3,宮城県:4,秋田県:5,山形県:6,福島県:7,
     茨城県:8,栃木県:9,群馬県:10,埼玉県:11,千葉県:12,東京都:13,神奈川県:14,
@@ -20,4 +21,7 @@ class Item < ApplicationRecord
   enum size:{ default: 0, f: 1, xxs: 2, ss: 3, s: 4, m: 5, l: 6, ll: 7, lll: 8, llll: 9, lllll: 10 }, _prefix: true
   enum condition:{ default: 0, new: 1, nearlynew: 2, pristine: 3, somestains: 4, stains: 5, old: 6 }, _prefix: true
 
+  # 仮置きデータ。日本語でも上記でも使えそう？確認する
+  enum delivery_method: { 未定: 0, らくらくメルカリ便: 1, ゆうメール: 2 }
+  enum category: { レディース: 0, メンズ: 1, ベビー・キッズ: 2 }
 end

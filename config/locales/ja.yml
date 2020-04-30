@@ -1,10 +1,10 @@
 ja:
   enums:
    item:
-     shipping_cost:
-       default: 選択してください
-       seller: 送料込み(出品者負担)
-       buyer: 着払い(購入者負担)
+    #  shipping_cost:
+    #    default: 選択してください
+    #    seller: 送料込み(出品者負担)
+    #    buyer: 着払い(購入者負担)
      delivery_date:
        default: 選択してください
        short: 1~2日で発送
@@ -30,3 +30,11 @@ ja:
        somestains: やや傷や汚れあり
        stains: 傷や汚れあり
        old: 全体的に状態が悪い
+    #  delivery_method:
+    #    default: 選択してください
+    #    new: 新品、未使用
+    #    nearlynew: 未使用に近い
+    #    pristine: 目立った傷や汚れなし
+    #    somestains: やや傷や汚れあり
+    #    stains: 傷や汚れあり
+    #    old: 全体的に状態が悪い

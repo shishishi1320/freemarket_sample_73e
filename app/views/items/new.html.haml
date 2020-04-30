@@ -42,6 +42,10 @@
             %option 選択してください
             %option レディース
             %option メンズ
+          .main__content__item-detail__category
+            %span#label サイズ
+            %span#required 必須
+            = f.select :size, Item.sizes.keys.map { |k| [I18n.t("enums.item.size.#{k}"), k]},  {}, {class: "main__content__item-detail__select"}
           .main__content__item-detail__brand
             = f.fields_for :brand do |brand|
               %span#label ブランド
@@ -50,34 +54,22 @@
           .main__content__item-detail__status
             %span#label 商品の状態
             %span#required 必須
-          %select{class: "main__content__item-detail__select"}
-            %option 選択してください
-            %option 新品、未使用
-            %option 未使用に近い
+            = f.select :condition, Item.conditions.keys.map { |k| [I18n.t("enums.item.condition.#{k}"), k]},  {}, {class: "main__content__item-detail__select"}
         .main__content__item-delivery
           .main__content__item-delivery__label
             %span#grey-label 配送について
           .main__content__item-delivery__cost
             %span#label 配送料の負担
             %span#required 必須
-          %select{class: "main__content__item-delivery__select"}
-            %option 選択してください
-            %option 送料込み（出品者負担）
-            %option 着払い（購入者負担）
+            = f.select :shipping_cost, Item.shipping_costs.keys.map { |k| [I18n.t("enums.item.shipping_cost.#{k}"), k]},  {}, {class: "main__content__item-delivery__select"}
           .main__content__item-delivery__area
             %span#label 発送元の地域
             %span#required 必須
-          %select{class: "main__content__item-delivery__select"}
-            %option 選択してください
-            %option 北海道
-            %option 青森県
+            = f.select :delivery_area, Item.delivery_areas.keys, {prompt: "選択してください"}, {class: "main__content__item-delivery__select"}
           .main__content__item-delivery__date
             %span#label 発送までの日数
             %span#required 必須
-          %select{class: "main__content__item-delivery__select"}
-            %option 選択してください
-            %option 1~2日で発送
-            %option 2~3日で発送
+            = f.select :delivery_date, Item.delivery_dates.keys.map { |k| [I18n.t("enums.item.delivery_date.#{k}"), k]},  {}, {class: "main__content__item-delivery__select"}
         .main__content__item-price
           .main__content__item-price__label
             %span#grey-label 価格（¥300〜9,999,999）

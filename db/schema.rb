@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_04_27_114837) do
+ActiveRecord::Schema.define(version: 2020_04_30_114358) do
 
   create_table "addresses", id: :integer, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
     t.integer "postal_code", null: false
@@ -26,7 +26,6 @@ ActiveRecord::Schema.define(version: 2020_04_27_114837) do
     t.string "send_name_kana", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.index ["phone_number"], name: "index_addresses_on_phone_number", unique: true
     t.index ["user_id"], name: "index_addresses_on_user_id"
   end
 
@@ -88,7 +87,6 @@ ActiveRecord::Schema.define(version: 2020_04_27_114837) do
     t.datetime "updated_at", null: false
     t.index ["brand_id"], name: "index_items_on_brand_id"
     t.index ["category_id"], name: "index_items_on_category_id"
-    t.index ["name"], name: "index_items_on_name"
   end
 
   create_table "users", id: :integer, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
@@ -113,4 +111,5 @@ ActiveRecord::Schema.define(version: 2020_04_27_114837) do
   add_foreign_key "brands_categories", "brands"
   add_foreign_key "brands_categories", "categories"
   add_foreign_key "credit_cards", "users"
+  add_foreign_key "images", "items"
 end

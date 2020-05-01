@@ -6,7 +6,7 @@ class Item < ApplicationRecord
   accepts_nested_attributes_for :brand
   accepts_nested_attributes_for :category
 
-  enum status: { sell: 0, buy: 1 , trading:2}
+  # enum status: { sell: 0, buy: 1 , trading:2}
 
   scope :on_sell, -> { where(status: 0) }
 
@@ -29,5 +29,4 @@ class Item < ApplicationRecord
 
   # 仮置きデータ。
   enum delivery_method: { 未定: 0, らくらくメルカリ便: 1, ゆうメール: 2 }
-  
 end

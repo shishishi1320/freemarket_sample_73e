@@ -16,12 +16,13 @@ class Item < ApplicationRecord
     鳥取県:31,島根県:32,岡山県:33,広島県:34,山口県:35,
     徳島県:36,香川県:37,愛媛県:38,高知県:39,
     福岡県:40,佐賀県:41,長崎県:42,熊本県:43,大分県:44,宮崎県:45,鹿児島県:46,沖縄県:47
-  }, _prefix: true
-  enum delivery_date:{ default: 0, short: 1, middle: 2, long: 3 }, _prefix: true
-  enum size:{ default: 0, f: 1, xxs: 2, ss: 3, s: 4, m: 5, l: 6, ll: 7, lll: 8, llll: 9, lllll: 10 }, _prefix: true
-  enum condition:{ default: 0, new: 1, nearlynew: 2, pristine: 3, somestains: 4, stains: 5, old: 6 }, _prefix: true
+  }
+  enum delivery_date:{ "1~2日で発送": 0, "2~3日で発送": 1, "4~7日で発送": 2 }
+  enum size:{ "FREE SIZE": 0, "XXS以下": 1, "XS(SS)": 2, "S": 3, "M": 4, "L": 5, "XL(LL)": 6, "2XL(3L)": 7, "3XL(4L)": 8, "4XL(5L)以上": 9 }
+  # enum size:{ default: 0, f: 1, xxs: 2, ss: 3, s: 4, m: 5, l: 6, ll: 7, lll: 8, llll: 9, lllll: 10 }, _prefix: true
+  enum condition:{ 新品、未使用: 0, 未使用に近い: 1, 目立った傷や汚れなし: 2, やや傷や汚れあり: 3, 傷や汚れあり: 4, 全体的に状態が悪い: 5 }
+  # enum condition:{ default: 0, new: 1, nearlynew: 2, pristine: 3, somestains: 4, stains: 5, old: 6 }, _prefix: true
 
-  # 仮置きデータ。日本語でも上記でも使えそう？確認する
+  # 仮置きデータ。
   enum delivery_method: { 未定: 0, らくらくメルカリ便: 1, ゆうメール: 2 }
-  enum category: { レディース: 0, メンズ: 1, ベビー・キッズ: 2 }
 end

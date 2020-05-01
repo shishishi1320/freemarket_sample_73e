@@ -16,6 +16,7 @@ class ItemsController < ApplicationController
     @item = Item.new
     @item.images.build
     @item.build_brand
+    @parents = Category.where(ancestry: nil)
   end
 
   # # GET /items/1/edit
@@ -24,7 +25,6 @@ class ItemsController < ApplicationController
 
   def create
     @item = Item.new(item_params)
-    binding.pry
     if @item.save
       redirect_to root_path
     else

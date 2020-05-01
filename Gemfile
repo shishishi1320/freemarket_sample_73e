@@ -87,4 +87,5 @@ gem 'devise-i18n'
 gem 'devise-i18n-views' 
 gem 'rails-i18n', '~> 5.1' 
 
+gem 'ancestry'
 gem 'enum_help'

@@ -23,10 +23,10 @@ class Item < ApplicationRecord
   }
   enum delivery_date:{ "1~2日で発送": 0, "2~3日で発送": 1, "4~7日で発送": 2 }
   enum size:{ "FREE SIZE": 0, "XXS以下": 1, "XS(SS)": 2, "S": 3, "M": 4, "L": 5, "XL(LL)": 6, "2XL(3L)": 7, "3XL(4L)": 8, "4XL(5L)以上": 9 }
-  # enum size:{ default: 0, f: 1, xxs: 2, ss: 3, s: 4, m: 5, l: 6, ll: 7, lll: 8, llll: 9, lllll: 10 }, _prefix: true
   enum condition:{ 新品、未使用: 0, 未使用に近い: 1, 目立った傷や汚れなし: 2, やや傷や汚れあり: 3, 傷や汚れあり: 4, 全体的に状態が悪い: 5 }
-  # enum condition:{ default: 0, new: 1, nearlynew: 2, pristine: 3, somestains: 4, stains: 5, old: 6 }, _prefix: true
 
   # 仮置きデータ。
   enum delivery_method: { 未定: 0, らくらくメルカリ便: 1, ゆうメール: 2 }
+
+  validates :name, :price, :text, :status, :size, :brand_id, :condition, :shipping_cost, :delivery_method, :delivery_area, :delivery_date, :category_id, :seller_id, presence: true
 end

@@ -1,5 +1,6 @@
 class ItemsController < ApplicationController
   before_action :set_item, only: [:show, :edit, :update, :destroy]
+  before_action :set_parent, only: [:new, :create]
 
   # GET /items
   # GET /items.json
@@ -19,7 +20,6 @@ class ItemsController < ApplicationController
     @item = Item.new
     @item.images.build
     @item.build_brand
-    @parents = Category.where(ancestry: nil)
   end
 
   # GET /items/1/edit
@@ -65,6 +65,10 @@ class ItemsController < ApplicationController
     # Use callbacks to share common setup or constraints between actions.
     def set_item
       @item = Item.find(params[:id])
+    end
+
+    def set_parent
+      @parents = Category.where(ancestry: nil)
     end
 
     # Only allow a list of trusted parameters through.

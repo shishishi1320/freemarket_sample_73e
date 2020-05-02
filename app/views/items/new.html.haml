@@ -2,108 +2,117 @@
   = render 'partial/new-header'
 
   .main
-    .main__content
-      .main__content__img-up
-        .main__content__img-up__photo
-          %span#label 出品画像
-          %span#required 必須
-        .main__content__img-up__text
-          最大10枚までアップロードできます
-        .main__content__img-up__file
-          %label{ class:"main__content__img-up__file__l" }
-            .main__content__img-up__file__l__field
-              %i.fas.fa-camera.main__content__img-up__file__l__field__icon
-              %p.main__content__img-up__file__l__field__text
-                ドラッグアンドドロップ
-              %p.main__content__img-up__file__l__field__text
-                またはクリックしてファイルをアップロード
-              %input{type: "file", class: "main__content__img-up__file__l__field__file" }
-
-      .main__content__item-name
-        .main__content__item-name__name
-          %span#label 商品名
-          %span#required 必須
-        %input{type: "text", class: "main__content__item-name__form", placeholder: "40文字まで" }
-        .main__content__item-name__text
-          %span#label 商品の説明
-          %span#required 必須
-        %textarea{type: "textarea", rows:"7", class: "main__content__item-name__text__form", placeholder: "商品の説明（必須 1,000文字以内）" }
-        .main__content__item-name__count
-          %span.main__content__item-name__count__text 0/1000
-      .main__content__item-detail
-        .main__content__item-detail__label
-          %span#grey-label 商品の詳細
-        .main__content__item-detail__category
-          %span#label カテゴリー
-          %span#required 必須
-        %select{class: "main__content__item-detail__select"}
-          %option 選択してください
-          %option レディース
-          %option メンズ
-        .main__content__item-detail__brand
-          %span#label ブランド
-          %span#arbitrary 任意
-        %input{type: "text", class: "main__content__item-detail__form", placeholder: "例）シャネル" }
-        .main__content__item-detail__status
-          %span#label 商品の状態
-          %span#required 必須
-        %select{class: "main__content__item-detail__select"}
-          %option 選択してください
-          %option 新品、未使用
-          %option 未使用に近い
-      .main__content__item-delivery
-        .main__content__item-delivery__label
-          %span#grey-label 配送について
-        .main__content__item-delivery__cost
-          %span#label 配送料の負担
-          %span#required 必須
-        %select{class: "main__content__item-delivery__select"}
-          %option 選択してください
-          %option 送料込み（出品者負担）
-          %option 着払い（購入者負担）
-        .main__content__item-delivery__area
-          %span#label 発送元の地域
-          %span#required 必須
-        %select{class: "main__content__item-delivery__select"}
-          %option 選択してください
-          %option 北海道
-          %option 青森県
-        .main__content__item-delivery__date
-          %span#label 発送までの日数
-          %span#required 必須
-        %select{class: "main__content__item-delivery__select"}
-          %option 選択してください
-          %option 1~2日で発送
-          %option 2~3日で発送
-      .main__content__item-price
-        .main__content__item-price__label
-          %span#grey-label 価格（¥300〜9,999,999）
-        .main__content__item-price__box
-          .main__content__item-price__box__text
-            %span#label 販売価格
+    = form_for @item do |f|
+      .main__content
+        - if @item.errors.any?
+          .main__content__error
+            - @item.errors.full_messages.each do |message|
+              %li= message
+        .main__content__img-up
+          .main__content__img-up__photo
+            %span#label 出品画像
             %span#required 必須
-          .main__content__item-price__box__form
-            %span.main__content__item-price__box__form__doll ¥
-            %input{type: "number", class: "main__content__item-price__box__form__form", placeholder: "0" }
-        .main__content__item-price__fee
-          .main__content__item-price__fee__label
-            %span.main__content__item-price__fee__label__text
-              販売手数料（10%）
-          %span.main__content__item-price__fee__price -
-        .main__content__item-price__profit
-          .main__content__item-price__profit__label
-            %span.main__content__item-price__profit__label__text
-              販売利益
-          %span.main__content__item-price__profit__price -
-      .main__content__btn
-        %button{type: "submit", class:"main__content__btn__submit"}
-          出品する
-        %button{type: "submit", class:"main__content__btn__write"}
-          下書きに保存
-        = link_to "#" do
-          もどる
-      .main__content__text
-        %p
-          禁止されている行為および出品物を必ずご確認ください。偽ブランド品や盗品物などの販売は犯罪であり、法律により処罰される可能性があります。 また、出品をもちまして加盟店規約に同意したことになります。
+          .main__content__img-up__text
+            最大10枚までアップロードできます
+          .main__content__img-up__file
+            %label{ class:"main__content__img-up__file__l" }
+              .main__content__img-up__file__l__field
+                %i.fas.fa-camera.main__content__img-up__file__l__field__icon
+                %p.main__content__img-up__file__l__field__text
+                  ドラッグアンドドロップ
+                %p.main__content__img-up__file__l__field__text
+                  またはクリックしてファイルをアップロード
+                = f.fields_for :images do |i|
+                  = i.file_field :url, class: "main__content__img-up__file__l__field__file" 
+
+        .main__content__item-name
+          .main__content__item-name__name
+            %span#label 商品名
+            %span#required 必須
+          = f.text_field :name, class: "main__content__item-name__form", placeholder: "40文字まで"
+          .main__content__item-name__text
+            %span#label 商品の説明
+            %span#required 必須
+          = f.text_area :text, class:"main__content__item-name__text__form", placeholder: "商品の説明（必須 1,000文字以内）"
+          .main__content__item-name__count
+            %span.main__content__item-name__count__text 0/1000
+        .main__content__item-detail
+          .main__content__item-detail__label
+            %span#grey-label 商品の詳細
+          .main__content__item-detail__category
+            %span#label カテゴリー
+            %span#required 必須
+            = f.collection_select :category_id, @parents, :id, :name,{prompt: "選択してください"}, class: "main__content__item-detail__select"
+          .main__content__item-detail__category
+            %span#label サイズ
+            %span#required 必須
+            = f.select :size, Item.sizes.keys, {prompt: "選択してください"}, {class: "main__content__item-detail__select"}
+          .main__content__item-detail__brand
+            = f.fields_for :brand do |brand|
+              %span#label ブランド
+              %span#arbitrary 任意
+              = brand.text_field :name, class: "main__content__item-detail__form", placeholder: "例）シャネル"
+          .main__content__item-detail__status
+            %span#label 商品の状態
+            %span#required 必須
+            = f.select :condition, Item.conditions.keys, {prompt: "選択してください"}, {class: "main__content__item-detail__select"}
+        .main__content__item-delivery
+          .main__content__item-delivery__label
+            %span#grey-label 配送について
+          .main__content__item-delivery__cost
+            %span#label 配送料の負担
+            %span#required 必須
+            = f.select :shipping_cost, Item.shipping_costs.keys, {prompt: "選択してください"}, {class: "main__content__item-delivery__select"}
+          -# この部分はあとでJSで表示
+          .main__content__item-delivery__cost
+            %span#label 配送方法
+            %span#required 必須
+            = f.select :delivery_method, Item.delivery_methods.keys, {prompt: "選択してください"}, {class: "main__content__item-delivery__select"}
+          -# ここまで
+          .main__content__item-delivery__area
+            %span#label 発送元の地域
+            %span#required 必須
+            = f.select :delivery_area, Item.delivery_areas.keys, {prompt: "選択してください"}, {class: "main__content__item-delivery__select"}
+          .main__content__item-delivery__date
+            %span#label 発送までの日数
+            %span#required 必須
+            = f.select :delivery_date, Item.delivery_dates.keys, {prompt: "選択してください"}, {class: "main__content__item-delivery__select"}
+        .main__content__item-price
+          .main__content__item-price__label
+            %span#grey-label 価格（¥300〜9,999,999）
+          .main__content__item-price__box
+            .main__content__item-price__box__text
+              %span#label 販売価格
+              %span#required 必須
+            .main__content__item-price__box__form
+              %span.main__content__item-price__box__form__doll
+                ¥
+              = f.number_field :price, class: "main__content__item-price__box__form__form", placeholder: "0"
+          .main__content__item-price__fee
+            .main__content__item-price__fee__label
+              %span.main__content__item-price__fee__label__text
+                販売手数料（10%）
+            %span.main__content__item-price__fee__price -
+          .main__content__item-price__profit
+            .main__content__item-price__profit__label
+              %span.main__content__item-price__profit__label__text
+                販売利益
+            %span.main__content__item-price__profit__price -
+          .ttt
+            %span#label ステータスフラグ（このカラムいらないよ！）
+            %span#required 必須
+            = f.number_field :status, class: "main__content__item-name__form", placeholder: "とりあえず1をいれる"
+            %span#label 出品中フラグ（ログイン機能実装後.merge(seller_id: current_user.id) つける）
+            %span#required 必須
+          = f.number_field :seller_id, class: "main__content__item-name__form", placeholder: "仮フィールド。IDをいれる"
+        .main__content__btn
+          = f.submit "出品する", class:"main__content__btn__submit"
+          %button{type: "submit", class:"main__content__btn__write"}
+            下書きに保存
+          = link_to "#" do
+            もどる
+        .main__content__text
+          %p
+            禁止されている行為および出品物を必ずご確認ください。偽ブランド品や盗品物などの販売は犯罪であり、法律により処罰される可能性があります。 また、出品をもちまして加盟店規約に同意したことになります。
 
   = render 'partial/new-footer'

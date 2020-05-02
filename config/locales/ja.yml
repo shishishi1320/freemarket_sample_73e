@@ -1,35 +1,14 @@
 ja:
-  enums:
-   item:
-    #  shipping_cost:
-    #    seller: 送料込み(出品者負担)
-    #    buyer: 着払い(購入者負担)
-    #  delivery_date:
-    #    short: 1~2日で発送
-    #    middle: 2~3日で発送
-    #    long: 4~7日で発送
-     size:
-      #  f: FREE SIZE
-      #  xxs: XXS以下
-      #  ss: XS(SS)
-      #  s: S
-      #  m: M
-      #  l: L
-      #  ll: XL(LL)
-      #  lll: 2XL(3L)
-      #  llll: 3XL(4L)
-      #  lllll: 4XL(5L)以上
-     condition:
-      #  new: 新品、未使用
-      #  nearlynew: 未使用に近い
-      #  pristine: 目立った傷や汚れなし
-      #  somestains: やや傷や汚れあり
-      #  stains: 傷や汚れあり
-      #  old: 全体的に状態が悪い
-    #  delivery_method:
-    #    new: 新品、未使用
-    #    nearlynew: 未使用に近い
-    #    pristine: 目立った傷や汚れなし
-    #    somestains: やや傷や汚れあり
-    #    stains: 傷や汚れあり
-    #    old: 全体的に状態が悪い
+  activerecord:
+    attributes:
+      item:
+        name: 商品名
+        price: 販売価格
+        text: 商品の説明
+        size: サイズ
+        condition: 商品の状態
+        shipping_cost: 配送料の負担
+        delivery_method: 配送方法
+        delivery_area: 発送元の地域
+        delivery_date: 発送までの日数
+        category_id: カテゴリー

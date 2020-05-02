@@ -46,6 +46,8 @@ group :development, :test do
   gem 'capistrano-rails'
   gem 'capistrano3-unicorn'
   gem 'capistrano-rails-console'
+  gem 'rspec-rails'
+  gem 'factory_bot_rails'
 end
 
 group :development do
@@ -88,3 +90,6 @@ gem 'devise-i18n-views'
 gem 'rails-i18n', '~> 5.1' 
 
 gem 'ancestry'
+gem 'jp_prefecture'
+gem 'jquery-rails'
+

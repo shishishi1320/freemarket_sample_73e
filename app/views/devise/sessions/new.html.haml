@@ -3,19 +3,20 @@
   .account-page
     .account-page__inner
       .account-page__inner__title
-
+        = render "devise/shared/links"
       .account-page__inner__user-form
-        %form{action: "#"}
+        = form_for(resource, as: resource_name, url: session_path(resource_name)) do |f|
           .field
             .field-label
-              %P メールアドレス
+              = f.label :メールアドレス
             .field-input
-              %input{type: "email", name: "name" , placeholder:"メールアドレス" }
+              = f.email_field :email, placeholder: "メールアドレス"
           .field
             .field-label
-              %p パスワード
+              = f.label :パスワード
             .field-input
-              %input{type: "password", name: "password", placeholder:"パスワード"}
+              = f.password_field :password, autocomplete: "off",placeholder: "英数字７文字以上"
+
           .actions
-            %input{type: "submit", value: "ログイン", class: "btn"}
+            = f.submit "ログイン", class: 'btn'
   = render 'partial/new-footer'

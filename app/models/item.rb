@@ -1,10 +1,9 @@
 class Item < ApplicationRecord
   belongs_to :brand
-  belongs_to :category
+  belongs_to :category, optional: true
   has_many :images
   accepts_nested_attributes_for :images, allow_destroy: true
   accepts_nested_attributes_for :brand
-  accepts_nested_attributes_for :category
 
   # enum status: { sell: 0, buy: 1 , trading:2}
 
@@ -28,5 +27,5 @@ class Item < ApplicationRecord
   # 仮置きデータ。
   enum delivery_method: { 未定: 0, らくらくメルカリ便: 1, ゆうメール: 2 }
 
-  validates :name, :price, :text, :status, :size, :brand_id, :condition, :shipping_cost, :delivery_method, :delivery_area, :delivery_date, :category_id, :seller_id, presence: true
+  validates :name, :text, :category_id, :size, :condition, :shipping_cost, :delivery_method, :delivery_area, :delivery_date,  :price, :status, :seller_id, presence: true
 end

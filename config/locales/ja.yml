@@ -1,6 +1,35 @@
 ---
 ja:
   activerecord:
+    models:
+      user: "ユーザ"
+      address: "住所"
+    attributes:
+      user:
+        current_password: "現在のパスワード"
+        email: "メールアドレス"
+        password: "パスワード"
+        password_confirmation: "確認用パスワード"
+        remember_me: "ログインを記憶"
+        nickname: "ニックネーム"
+        first_name: "姓(漢字)"
+        name: "名(漢字)"
+        first_name_kana: "姓(ふりがな)"
+        name_kana: "名(ふりがな)"
+        birth: "生年月日"
+        
+      address:
+        send_first_name: "送付先の姓(漢字)"
+        send_name: "送付先の名(漢字)"
+        send_first_name_kana: "送付先の姓(ふりがな)"
+        send_name_kana: "送付先の名(ふりがな)" 
+        postal_code: "郵便番号"
+        prefecture: "都道府県"
+        city: "市区町村"
+        block: "番地"
+        building: "マンション、ビル名など"
+        phone_number: "電話番号"
+
     errors:
       messages:
         record_invalid: 'バリデーションに失敗しました: %{errors}'

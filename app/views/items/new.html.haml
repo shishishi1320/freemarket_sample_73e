@@ -4,6 +4,9 @@
   .main
     = form_for @item do |f|
       .main__content
+        .main__content__error
+          - @item.errors.full_messages.each do |message|
+            %li= message
         .main__content__img-up
           .main__content__img-up__photo
             %span#label 出品画像
@@ -81,7 +84,8 @@
               %span#label 販売価格
               %span#required 必須
             .main__content__item-price__box__form
-              %span.main__content__item-price__box__form__doll ¥
+              %span.main__content__item-price__box__form__doll
+                ¥
               = f.number_field :price, class: "main__content__item-price__box__form__form", placeholder: "0"
           .main__content__item-price__fee
             .main__content__item-price__fee__label

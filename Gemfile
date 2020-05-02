@@ -92,3 +92,4 @@ gem 'rails-i18n', '~> 5.1'
 gem 'ancestry'
 gem 'jp_prefecture'
 gem 'jquery-rails'
+

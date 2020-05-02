@@ -27,5 +27,12 @@ class Item < ApplicationRecord
   # 仮置きデータ。
   enum delivery_method: { 未定: 0, らくらくメルカリ便: 1, ゆうメール: 2 }
 
+  validate :img_erorr
   validates :name, :text, :category_id, :size, :condition, :shipping_cost, :delivery_method, :delivery_area, :delivery_date,  :price, :status, :seller_id, presence: true
+  def img_erorr
+    if images.present?
+    else
+      errors.add(:url, "は1枚以上登録してください")
+    end
+  end
 end

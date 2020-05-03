@@ -74,6 +74,6 @@ class ItemsController < ApplicationController
     # Only allow a list of trusted parameters through.
     def item_params
       params.require(:item).permit(:name, :price, :text, :status, :size, :condition, :shipping_cost, :delivery_method, :delivery_area, :delivery_date, :seller_id, :buyer_id, :category_id, brand_attributes: [:id, :name], images_attributes: [:url])
-      # .merge(seller_id: current_user.id) あとでつける
+      # .merge(seller_id: current_user.id, status: 0) あとでつける
     end
 end

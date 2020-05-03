@@ -1,8 +1,13 @@
 .wrapper
   = render 'partial/new-header'
+
   .main
     = form_for @item do |f|
       .main__content
+        - if @item.errors.any?
+          .main__content__error
+            - @item.errors.full_messages.each do |message|
+              %li= message
         .main__content__img-up
           .main__content__img-up__photo
             %span#label 出品画像
@@ -19,6 +24,7 @@
                   またはクリックしてファイルをアップロード
                 = f.fields_for :images do |i|
                   = i.file_field :url, class: "main__content__img-up__file__l__field__file" 
+
         .main__content__item-name
           .main__content__item-name__name
             %span#label 商品名
@@ -36,7 +42,7 @@
           .main__content__item-detail__category
             %span#label カテゴリー
             %span#required 必須
-
+            = f.collection_select :category_id, @parents, :id, :name,{prompt: "選択してください"}, class: "main__content__item-detail__select"
           .main__content__item-detail__category
             %span#label サイズ
             %span#required 必須
@@ -45,7 +51,7 @@
             = f.fields_for :brand do |brand|
               %span#label ブランド
               %span#arbitrary 任意
-              = brand.text_field :name, class: "main__content__item-detail__form", placeholder: "例）シャネル", value: ""
+              = brand.text_field :name, class: "main__content__item-detail__form", placeholder: "例）シャネル"
           .main__content__item-detail__status
             %span#label 商品の状態
             %span#required 必須
@@ -79,7 +85,8 @@
               %span#label 販売価格
               %span#required 必須
             .main__content__item-price__box__form
-              %span.main__content__item-price__box__form__doll ¥
+              %span.main__content__item-price__box__form__doll
+                ¥
               = f.number_field :price, class: "main__content__item-price__box__form__form", placeholder: "0"
           .main__content__item-price__fee
             .main__content__item-price__fee__label
@@ -91,13 +98,6 @@
               %span.main__content__item-price__profit__label__text
                 販売利益
             %span.main__content__item-price__profit__price -
-          .ttt
-            %span#label ステータスフラグ（このカラムいらないよ！）
-            %span#required 必須
-            = f.number_field :status, class: "main__content__item-name__form", placeholder: "とりあえず1をいれる"
-            %span#label 出品中フラグ（ログイン機能実装後.merge(seller_id: current_user.id) つける）
-            %span#required 必須
-          = f.number_field :seller_id, class: "main__content__item-name__form", placeholder: "仮フィールド。IDをいれる"
         .main__content__btn
           = f.submit "出品する", class:"main__content__btn__submit"
           %button{type: "submit", class:"main__content__btn__write"}
@@ -107,4 +107,5 @@
         .main__content__text
           %p
             禁止されている行為および出品物を必ずご確認ください。偽ブランド品や盗品物などの販売は犯罪であり、法律により処罰される可能性があります。 また、出品をもちまして加盟店規約に同意したことになります。
+
   = render 'partial/new-footer'

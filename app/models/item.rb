@@ -7,7 +7,7 @@ class Item < ApplicationRecord
 
   # enum status: { sell: 0, buy: 1 , trading:2}
 
-
+  enum status: { sell: 0, buy: 1 , trading:2}
   scope :on_sell, -> { where(status: 0) }
 
   enum shipping_cost: { 送料込み（出品者負担）:0,着払い（購入者負担）:1 }

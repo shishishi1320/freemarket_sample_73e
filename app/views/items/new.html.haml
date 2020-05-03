@@ -98,6 +98,13 @@
               %span.main__content__item-price__profit__label__text
                 販売利益
             %span.main__content__item-price__profit__price -
+          .ttt
+            %span#label ステータスフラグ（このカラムいらないよ！）
+            %span#required 必須
+            = f.number_field :status, class: "main__content__item-name__form", placeholder: "とりあえず1をいれる"
+            %span#label 出品中フラグ（ログイン機能実装後.merge(seller_id: current_user.id) つける）
+            %span#required 必須
+          = f.number_field :seller_id, class: "main__content__item-name__form", placeholder: "仮フィールド。IDをいれる"
         .main__content__btn
           = f.submit "出品する", class:"main__content__btn__submit"
           %button{type: "submit", class:"main__content__btn__write"}

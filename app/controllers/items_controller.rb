@@ -1,5 +1,6 @@
 class ItemsController < ApplicationController
   before_action :set_item, only: [:show, :edit, :update, :destroy]
+  before_action :set_parent, only: [:new, :create]
 
   # GET /items
   # GET /items.json
@@ -15,6 +16,8 @@ class ItemsController < ApplicationController
   # GET /items/new
   def new
     @item = Item.new
+    @item.images.build
+    @item.build_brand
   end
 
   # GET /items/1/edit
@@ -27,15 +30,10 @@ class ItemsController < ApplicationController
   # POST /items.json
   def create
     @item = Item.new(item_params)
-
-    respond_to do |format|
-      if @item.save
-        format.html { redirect_to @item, notice: 'Item was successfully created.' }
-        format.json { render :show, status: :created, location: @item }
-      else
-        format.html { render :new }
-        format.json { render json: @item.errors, status: :unprocessable_entity }
-      end
+    if @item.save
+      redirect_to root_path, notice: 'Event was successfully created.'
+    else
+      render :new
     end
   end
 
@@ -70,8 +68,12 @@ class ItemsController < ApplicationController
       @item = Item.find(params[:id])
     end
 
+    def set_parent
+      @parents = Category.where(ancestry: nil)
+    end
+
     # Only allow a list of trusted parameters through.
     def item_params
-      params.require(:item).permit(:name, :price, :text, :status, :size, :brand_id_id, :condition, :shipping_cost, :delivery_method, :delivery_area, :delivery_date, :category_id_id, :category_id_id, :seller_id, :buyer_id)
+      params.require(:item).permit(:name, :price, :text, :status, :size, :condition, :shipping_cost, :delivery_method, :delivery_area, :delivery_date, :seller_id, :buyer_id, :category_id, brand_attributes: [:id, :name], images_attributes: [:url]).merge(seller_id: current_user.id, status: 0)
     end
 end

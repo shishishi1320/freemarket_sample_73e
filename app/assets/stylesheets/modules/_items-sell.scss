@@ -38,6 +38,14 @@
   max-width: 700px;
   margin: 0 auto;
   &__content{
+    &__error{
+      padding: 20px 40px 0 40px;
+      li{
+        list-style: none;
+        font-size: $text-base;
+        color: red;
+      }
+    }
     &__img-up{
       padding: $content-padding;
       border-bottom: $border-color $border-width solid;
@@ -150,7 +158,10 @@
           margin: auto 0;
         }
         &__form{
+          @include display-flex(space-between);
           &__doll{
+            display: block;
+            line-height: 48px;
             font-size: $text-base;
             margin-right: 8px;
           }

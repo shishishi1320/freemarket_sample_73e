@@ -5,124 +5,66 @@
       .account-page__inner__title
         %h2 新規会員登録
       .account-page__inner__user-form
-        %form{action: "#"}
-          -# = devise_error_messages!
+        = form_for(@user, url: user_registration_path) do |f|
+          = render "devise/shared/error_messages", resource: @user
           %h3 ユーザー情報
           .field
             .field-label
-              %label ニックネーム 
+              = f.label :ニックネーム
               %span.hissu 必須 
             .field-input
-              %input{type: "text", name: "nickename" ,placeholder:"ニックネーム" } 
+              = f.text_field :nickname, autofocus: true 
           .field
             .field-label
-              %label メールアドレス
+              = f.label :メールアドレス
               %span.hissu 必須 
             .field-input
-              %input{type: "email", name: "email" , placeholder:"メールアドレス" }
+              = f.email_field :email, placeholder: "メールアドレス"
           .field
             .field-label
-              %label パスワード
+              = f.label :パスワード
               %span.hissu 必須 
             .field-input
-              %input{type: "password", name: "password", placeholder:"パスワードは英数字７文字以上"}
+              = f.password_field :password, autocomplete: "off",placeholder: "英数字７文字以上"
           .field
             .field-label
-              %label パスワード(確認)
+              = f.label :確認用パスワード
               %span.hissu 必須 
             .field-input
-              %input{type: "password", name: "password_confirmation", placeholder:"パスワード"}
+              = f.password_field :password_confirmation, autocomplete: "off",placeholder: "確認用パスワードを入力してください"
           %h3 本人確認情報
           .full_name
             .field
               .field-label
-                %label 姓
+                = f.label :姓
                 %span.hissu 必須 
               .field-input
-                %input{type: "text", name: "first_name" ,placeholder:"山田" } 
+                = f.text_field :first_name,placeholder: "山田"
             .field
               .field-label
-                %label 名
+                = f.label :名
+                %span.hissu 必須 
               .field-input
-                %input{type: "text", name: "name" ,placeholder:"太郎" } 
+                = f.text_field :name,placeholder: "太郎"
           .full_name
             .field
               .field-label
-                %label 姓
+                = f.label :姓
                 %span.hissu 必須 
               .field-input
-                %input{type: "text", name: "first_name_kana" ,placeholder:"ヤマダ" } 
+                = f.text_field :first_name_kana,placeholder: "やまだ"
             .field
               .field-label
-                %label 名
+                = f.label :名
+                %span.hissu 必須 
               .field-input
-                %input{type: "text", name: "name_kana" ,placeholder:"タロウ" } 
+                = f.text_field :name_kana,placeholder: "たろう"
           .field
             .field-label
-              %label 生年月日
+              = f.label :生年月日
               %span.hissu 必須 
             .field-input
-              %input{type: "date", name: "birth"} 
-          %h3 商品送付先住所情報
-          .full_name
-            .field
-              .field-label
-                %label 姓
-                %span.hissu 必須 
-              .field-input
-                %input{type: "text", name: "first_name" ,placeholder:"山田" } 
-            .field
-              .field-label
-                %label 名
-              .field-input
-                %input{type: "text", name: "name" ,placeholder:"太郎" } 
-          .full_name
-            .field
-              .field-label
-                %label 姓
-                %span.hissu 必須 
-              .field-input
-                %input{type: "text", name: "first_name_kana" ,placeholder:"ヤマダ" } 
-            .field
-              .field-label
-                %label 名
-              .field-input
-                %input{type: "text", name: "name_kana" ,placeholder:"タロウ" } 
-          %form{action: "#"}
-            .field
-              .field-label
-                %label 郵便番号
-                %span.hissu 必須 
-              .field-input
-                %input{type: "number", name: "postal_code" ,placeholder:"2770098" } 
-            .field
-              .field-label
-                %label 都道府県
-                %span.hissu 必須 
-              .field-input
-                %input{type: "text", name: "pefecture" ,placeholder:"東京都" } 
-            .field
-              .field-label
-                %label 市区町村
-                %span.hissu 必須 
-              .field-input
-                %input{type: "text", name: "city" ,placeholder:"__区" } 
-            .field
-              .field-label
-                %label 番地
-                %span.hissu 必須 
-              .field-input
-                %input{type: "text", name: "block" ,placeholder:"__丁目__番地" } 
-            .field
-              .field-label
-                %label マンション,ビル名など
-              .field-input
-                %input{type: "text", name: "buildding" ,placeholder:"___マンション___号室" } 
-            .field
-              .field-label
-                %label 電話番号
-              .field-input
-                %input{type: "number", name: "phone_number" ,placeholder:"ハイフンなし" }             
+              = f.date_select	 :birth              
           .actions
-            %input{type: "submit", value: "会員登録", class: "btn"}
+            = f.submit "NEXT", class: 'btn'
   = render 'partial/new-footer'

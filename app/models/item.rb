@@ -7,6 +7,7 @@ class Item < ApplicationRecord
 
   # enum status: { sell: 0, buy: 1 , trading:2}
 
+  enum status: { sell: 0, buy: 1 , trading:2}
   scope :on_sell, -> { where(status: 0) }
 
   enum shipping_cost: { 送料込み（出品者負担）:0,着払い（購入者負担）:1 }
@@ -23,12 +24,13 @@ class Item < ApplicationRecord
   enum delivery_date:{ "1~2日で発送": 0, "2~3日で発送": 1, "4~7日で発送": 2 }
   enum size:{ "FREE SIZE": 0, "XXS以下": 1, "XS(SS)": 2, "S": 3, "M": 4, "L": 5, "XL(LL)": 6, "2XL(3L)": 7, "3XL(4L)": 8, "4XL(5L)以上": 9 }
   enum condition:{ 新品、未使用: 0, 未使用に近い: 1, 目立った傷や汚れなし: 2, やや傷や汚れあり: 3, 傷や汚れあり: 4, 全体的に状態が悪い: 5 }
-
-  # 仮置きデータ。
+  
+  # 仮置きデータ。JS等実装の際整備します
   enum delivery_method: { 未定: 0, らくらくメルカリ便: 1, ゆうメール: 2 }
+  # ここまで
 
   validate :img_erorr
-  validates :name, :text, :category_id, :size, :condition, :shipping_cost, :delivery_method, :delivery_area, :delivery_date,  :price, :status, :seller_id, presence: true
+  validates :name, :text, :category_id, :size, :condition, :shipping_cost, :delivery_method, :delivery_area, :delivery_date,  :price, :seller_id, presence: true
   def img_erorr
     if images.present?
     else

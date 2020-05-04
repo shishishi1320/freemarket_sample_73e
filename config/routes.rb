@@ -1,12 +1,6 @@
 Rails.application.routes.draw do
-  resources :items
-  resources :images
-  resources :addresses
-  resources :brands_categories
-  resources :categories
-  resources :brands
-  resources :credit_cards
   devise_for :users
-  root 'items#index'
+  root 'credit_cards#new'
   resources :items, only: [:new]
+  resources :credit_cards, only: [:new, :create, :index, :destroy] 
 end

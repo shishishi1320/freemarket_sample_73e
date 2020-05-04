@@ -1,25 +1,21 @@
-%h1 Listing credit_cards
+.main-content
+  =render 'mypage/side'
 
-%table
-  %thead
-    %tr
-      %th Card
-      %th Customer
-      %th User
-      %th
-      %th
-      %th
-
-  %tbody
-    - @credit_cards.each do |credit_card|
-      %tr
-        %td= credit_card.card_id
-        %td= credit_card.customer_id
-        %td= credit_card.user_id
-        %td= link_to 'Show', credit_card
-        %td= link_to 'Edit', edit_credit_card_path(credit_card)
-        %td= link_to 'Destroy', credit_card, method: :delete, data: { confirm: 'Are you sure?' }
-
-%br
-
-= link_to 'New Credit card', new_credit_card_path
+  .main-content__right
+    .main-content__right__title
+      支払い方法
+    .main-content__right__innner
+      .main-content__right__innner__credit-cards
+        クレジットカード一覧
+        %ul.main-content__right__innner__credit-cards__contents
+          %li.main-content__right__innner__credit-cards__contents__list
+            .main-content__right__innner__credit-cards__contents__list__icon
+              = image_tag("1.png", width: '70', alt: @card_brand, id:"card_image")
+            .main-content__right__innner__credit-cards__contents__list__pay-num
+              = "**** **** **** " + @default_card_information.last4
+            .main-content__right__innner__credit-cards__contents__list__time
+              = @exp_month + " / " + @exp_year
+          %li.main-content__right__innner__credit-cards__contents__destroy
+            = link_to '削除する' , credit_cards_path(@card.id), method: :delete
+      .main-content__right__question
+        = link_to '支払い方法について' , "#"

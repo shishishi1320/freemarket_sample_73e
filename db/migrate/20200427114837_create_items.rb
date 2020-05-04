@@ -15,7 +15,6 @@ class CreateItems < ActiveRecord::Migration[5.0]
       t.references :category, null: false,foreign_key: true
       t.integer :seller_id,null: false
       t.integer :buyer_id
-
       t.timestamps
     end
     add_index :items, :name 

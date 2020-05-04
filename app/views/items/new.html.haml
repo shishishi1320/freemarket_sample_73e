@@ -2,12 +2,12 @@
   = render 'partial/new-header'
 
   .main
-    = form_for @item do |f|
-      .main__content
-        - if @item.errors.any?
-          .main__content__error
-            - @item.errors.full_messages.each do |message|
-              %li= message
+    .main__content
+      - if @item.errors.any?
+        .main__content__error
+          - @item.errors.full_messages.each do |message|
+            %li= message
+      = form_for @item do |f|
         .main__content__img-up
           .main__content__img-up__photo
             %span#label 出品画像
@@ -22,8 +22,10 @@
                   ドラッグアンドドロップ
                 %p.main__content__img-up__file__l__field__text
                   またはクリックしてファイルをアップロード
-                = f.fields_for :images do |i|
-                  = i.file_field :url, class: "main__content__img-up__file__l__field__file" 
+                #image-box
+                  = f.fields_for :images do |i|
+                    .js-file_group{ dataindex: "#{i.index}"}
+                      = i.file_field :url, class: "main__content__img-up__file__l__field__file js-file"
 
         .main__content__item-name
           .main__content__item-name__name

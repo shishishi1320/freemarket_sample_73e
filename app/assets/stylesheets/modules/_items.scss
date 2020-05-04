@@ -79,6 +79,12 @@
         padding: 0 0 0 16px;  
         text-decoration: none;
       }
+      &__my-page{
+        color: #333;
+        line-height: 38px;
+        padding: 0 0 0 16px;
+        text-decoration: none;
+      }
     }
     }
     
@@ -232,7 +238,6 @@
       }
       &__btn {
         display: flex;
-
       }
     }
   }
@@ -303,13 +308,17 @@
     }
     &__box{
       width: 780px;
+      max-height:700px;
       margin: 26px auto;
       display: flex;
-      justify-content: space-around;
+      overflow-x: scroll;
+      flex-wrap: wrap;
+
       &__item{
         width: 220px;
         display: inline-block;
         float: left;
+        margin: 15px 20px;
         &__img{
           width: 220px;
           height: 150px;

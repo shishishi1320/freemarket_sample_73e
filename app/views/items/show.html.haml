@@ -1,28 +1,18 @@
+= render "header"
 .show-main
   .itembox
     .itembox__name
       .h1
-        product2
+        = @item.name
     .itembox__body
-      .ul
-        .li
-        = image_tag("https://s3-ap-northeast-1.amazonaws.com/mercarimaster/uploads/captured_image/content/10/a004.png", width: '560', height: '346',alt: "サンプル画像", class:"app")
-        .ul
-          .li
-          = image_tag("https://s3-ap-northeast-1.amazonaws.com/mercarimaster/uploads/captured_image/content/10/a004.png", width: '140', height: '87',alt: "サンプル画像", class:"app")
-          .li
-          = image_tag("https://s3-ap-northeast-1.amazonaws.com/mercarimaster/uploads/captured_image/content/10/a004.png", width: '140', height: '87',alt: "サンプル画像", class:"app")
-          .li
-          = image_tag("https://s3-ap-northeast-1.amazonaws.com/mercarimaster/uploads/captured_image/content/10/a004.png", width: '140', height: '87',alt: "サンプル画像", class:"app")      
+      - @item.images.each do |image|
+        = image_tag image.url.to_s, width: '620', height: '346'
     .itembox__price
-      ¥20000
+      = @item.price
       .itembox__price__detail 
         (税込)送料込み
     .itembox__detail
-      親譲りの無鉄砲で小供の時から損ばかりしている。小学校に居る時分学校の二階から飛び降りて一週間ほど腰を抜かした事がある。
-      なぜそんな無闇をしたと聞く人があるかも知れぬ。別段深い理由でもない。新築の二階から首を出していたら、同級生の一人が冗談に、
-      いくら威張っても、そこから飛び降りる事は出来まい。弱虫やーい。と囃したからである。小使に負ぶさって帰って来た時、おやじが
-      大きな眼をして二階ぐらいから飛び降りて腰
+      = @item.text
     .table 
       %table 
         %tbody
@@ -30,37 +20,56 @@
             %th
               出品者
             %td
-              hoge
+              = @user.name
           %tr
             %th
               カテゴリー
             %td
+              - @category.ancestors.each do |ancestor|
+                = ancestor.name
+              = @category.name
           %tr
             %th
               ブランド
             %td
-              CK
+              = @brand.name
           %tr
             %th
               商品のサイズ
             %td
-              X
+              = @item.size
           %tr
             %th
               出品の状態
             %td
-              新品/未使用
+              = @item.condition
           %tr
             %th
               配送料の負担
             %td
-              送料込み（出品者負担）
+              = @item.shipping_cost
           %tr
             %th
               発送元の地域
             %td
+              = @item.delivery_area
           %tr
             %th
               発送の目安
             %td
-              2-3日
+              = @item.delivery_date
+    .itembox__btns
+      .itembox__btns__contents-btn
+        - if user_signed_in? && current_user.id == @item.seller_id
+          .itembox__btns__contents-btn__seller-menu
+            .itembox__btns__contents-btn__seller-menu__edit
+              = link_to edit_item_path(@item) do
+                編集
+            .itembox__btns__contents-btn__seller-menu__destroy
+              = link_to item_path(@item), method: "delete" do
+                削除
+        - else
+          .itembox__btns__contents-btn__seller-menu__buy
+            = link_to "購入", "#"
+              
+= render "footer"

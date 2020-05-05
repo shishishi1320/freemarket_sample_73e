@@ -11,6 +11,9 @@ class ItemsController < ApplicationController
   # GET /items/1
   # GET /items/1.json
   def show
+    @user = User.find_by(id: @item.seller_id)
+    @category = Category.find_by(id: @item.category_id)
+    @brand = Brand.find_by(id: @item.brand_id)
   end
 
   # GET /items/new

@@ -6,11 +6,12 @@
 .show-main{
   background-color: #f8f8f8;
   .itembox{
-    height: 1298px;
+    height: 100%;
     width: 700px;
     background-color: white;
     padding: 24px 40px 40px;
     margin: 0 auto;
+
     &__name {
       text-align: center;
       font-weight: bold;
@@ -18,19 +19,37 @@
       margin-top:20px;
     }
     &__body{
-      .ul{
-        text-align: center;
-        justify-content: center;
-        .li{
-          margin-top: 10px;
-          margin-left: 90px;  
-        }
-        .ul{
-          display: flex;
-          .li{
-            margin: 3px;
-          }
-        }
+      &__image {
+        margin: 0 auto;
+        min-width: 500px;
+        max-width: 500px;
+        min-height: 375px;
+        position: relative;
+      }
+      
+      &__image__main__photo {
+        object-fit: cover;
+        height: auto;
+        width: 100%;
+        vertical-align: bottom;
+      }
+      &__image__sub {
+        line-height: 0;
+        height: 120px;
+      }
+      &__image__sub__thumb {
+        display: block;
+        float: left;
+        width: 30px;
+        height: 30px;
+        cursor: pointer;
+      }
+      &__image__sub__thumb__photo {
+        padding: 0;
+        margin: 0；
+      }
+      &__image__sub__thumb:not(.active) {
+        opacity: 0.4;
       }
     }
     &__price {

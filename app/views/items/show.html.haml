@@ -5,8 +5,14 @@
       .h1
         = @item.name
     .itembox__body
-      - @item.images.each do |image|
-        = image_tag image.url.to_s, width: '620', height: '346'
+      .itembox__body__image
+        .itembox__body__image__main
+          - @item.images.first(1).each do |image| 
+            = image_tag image.url.url,class: "itembox__body__image__main__photo"
+        .itembox__body__image__sub
+          .itembox__body__image__sub__thumb
+            - @item.images.each do |image| 
+              = image_tag image.url.url,class: "itembox__body__image__sub__thumb__photo"
     .itembox__price
       = @item.price
       .itembox__price__detail 
@@ -32,7 +38,10 @@
             %th
               ブランド
             %td
-              = @brand.name
+              - if @brand.name != ""
+                = @brand.name
+              - else
+                無し
           %tr
             %th
               商品のサイズ

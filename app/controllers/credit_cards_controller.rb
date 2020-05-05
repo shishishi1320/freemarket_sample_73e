@@ -1,5 +1,5 @@
 class CreditCardsController < ApplicationController
-  require "payjp" # PAYJPとやり取りするために、payjpをロード
+  require "payjp" 
 
   def new
     
@@ -16,11 +16,11 @@ class CreditCardsController < ApplicationController
     else
       customer = Payjp::Customer.create(
         card: params["payjp_token"],
-        # metadata: {user_id: current_user.id}
+        metadata: {user_id: current_user.id}
       )
       @card = CreditCard.new(user_id: current_user.id, customer_id: customer.id, card_id: customer.default_card)
       if @card.save
-        redirect_to card_path(card)
+        redirect_to action: "index"
       else
         redirect_to action: "create"
       end

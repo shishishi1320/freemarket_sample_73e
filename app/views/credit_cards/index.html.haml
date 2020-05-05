@@ -12,10 +12,11 @@
             .main-content__right__innner__credit-cards__contents__list__icon
               = image_tag("1.png", width: '70', alt: @card_brand, id:"card_image")
             .main-content__right__innner__credit-cards__contents__list__pay-num
-              = "**** **** **** " + @default_card_information.last4
+              = "**** **** **** " + @customer_card.last4
             .main-content__right__innner__credit-cards__contents__list__time
               = @exp_month + " / " + @exp_year
           %li.main-content__right__innner__credit-cards__contents__destroy
-            = link_to '削除する' , credit_cards_path(@card.id), method: :delete
+            -# = link_to '削除する' , credit_cards_path, method: :delete
+            = link_to "[Delete]", credit_cards_path(card_id: @card.id), method: :delete
       .main-content__right__question
         = link_to '支払い方法について' , "#"

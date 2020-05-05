@@ -33,6 +33,15 @@
   @include required($btn-required-grey);
 }
 
+// 暫定CSS
+#previews{
+  @include display-flex(wrap);
+}
+.js-file_group{
+    @include display-flex(flex-start)
+  }
+
+
 .main{
   background-color: #fff;
   max-width: 700px;
@@ -72,7 +81,11 @@
               font-size: $text-small;
             }
             &__file{
-              display: none;
+              // 暫定CSS
+              display: inline-block;
+
+              // 一旦消してる↓
+              // display: none;
             }
           }
         }

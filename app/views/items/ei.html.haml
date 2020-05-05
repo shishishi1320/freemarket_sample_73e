@@ -1,0 +1,25 @@
+取り除いてしまったnew.haml
+
+          .main__content__img-up__file
+            %label{ class:"main__content__img-up__file__l" }
+              .main__content__img-up__file__l__field
+                %i.fas.fa-camera.main__content__img-up__file__l__field__icon
+                %p.main__content__img-up__file__l__field__text
+                  ドラッグアンドドロップ
+                  %br
+                  またはクリックしてファイルをアップロード
+
+              #image-box
+                #previews
+                  - if @item.persisted?
+                    - @item.images.each_with_index do |image, i|
+                      = image_tag image.url.url, data: { index: i }, width: "120", height: '120'
+                = f.fields_for :images do |i|
+                  .js-file_group{ dataindex: "#{i.index}"}
+                    = i.file_field :url, class: 'js-file main__content__img-up__file__l__field__file'
+                  - if @item.persisted?
+                    = i.check_box :_destroy, data:{ index: image.index }, class: 'hidden-destroy'
+                - if @item.persisted?
+                  .js-file_group{ dataindex: "#{@item.images.count}"}
+                    = file_field_tag :url, name: "item[images_attributes][#{@item.images.count}][url]", class: "js-file main__content__img-up__file__l__field__file"
+                    .js-remove 削除

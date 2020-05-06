@@ -5,6 +5,7 @@ $(document).on('turbolinks:load', ()=> {
     $('.showCnt').text(cnt);
   });
 
+  // 配送方法
   var array1 = [ "未定","らくらくメルカリ便","ゆうメール","レターパック","普通郵便（定型、定型外）",
   "クロネコヤマト","ゆうパック","クリックポスト","ゆうパケット" ]
   var array2 = ["ゆうメール","クロネコヤマト","ゆうパック"]
@@ -25,9 +26,7 @@ $(document).on('turbolinks:load', ()=> {
         type: "GET",
         data: { parent_name: delivery_parentCategory },
         dataType: "json"
-        
       })
-      
 
       .done(function(method) {
         $("#delivery_method-parent").remove();
@@ -51,12 +50,12 @@ $(document).on('turbolinks:load', ()=> {
                             </select>
                           </div>`;
       $(".main__content__item-delivery__method").append(methodBoxHtml);
-
         console.log(delivery_parentCategory)
       })
     }
     else {$("#delivery_method-parent").remove();}
-    
+
+  // 画像プレビュー
   const buildFileField = (index)=> {
     const html = `<div data-index="${index}" class="js-file_group">
                     <input class="js-file main__content__img-up__file__l__field__file" type="file"

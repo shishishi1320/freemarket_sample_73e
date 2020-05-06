@@ -24,32 +24,31 @@
         max-width: 500px;
         min-height: 375px;
         position: relative;
-      }
-      
-      &__image__main__photo {
-        object-fit: contain;
-        height:300px;
-        width: 100%;
-        vertical-align: bottom;
-        
-      }
-      &__image__sub {
-        line-height: 0;
-        height: 120px;
-      }
-      &__image__sub__thumb {
-        display: block;
-        float: left;
-        width: 30px;
-        height: 30px;
-        cursor: pointer;
-      }
-      &__image__sub__thumb__photo {
-        padding: 0;
-        margin: 0；
-      }
-      &__image__sub__thumb:not(.active) {
-        opacity: 0.4;
+        &__main__photo {
+          object-fit: contain;
+          height:300px;
+          width: 100%;
+          vertical-align: bottom;
+        }
+        &__sub {
+          line-height: 0;
+          height: 120px;
+          overflow-x: scroll;
+          &__thumb {
+            display: flex;
+            word-wrap: normal;
+            width: 30px;
+            height: 100px;
+            cursor: pointer;
+            &__photo {
+              padding: 0;
+              margin: 0；
+            }
+          }
+          &__thumb:not(.active) {
+            opacity: 0.4;
+          }
+        }
       }
     }
     &__price {

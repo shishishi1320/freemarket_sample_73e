@@ -8,13 +8,14 @@
       .itembox__body__image
         .itembox__body__image__main
           - @item.images.first(1).each do |image| 
-            = image_tag image.url.url,class: "itembox__body__image__main__photo"
+            = image_tag image.url.to_s,class: "itembox__body__image__main__photo"
         .itembox__body__image__sub
           .itembox__body__image__sub__thumb
             - @item.images.each do |image| 
-              = image_tag image.url.url,class: "itembox__body__image__sub__thumb__photo"
+              = image_tag image.url.to_s,class: "itembox__body__image__sub__thumb__photo"
     .itembox__price
-      = @item.price
+      %a ¥
+      = @item.price 
       .itembox__price__detail 
         (税込)送料込み
     .itembox__detail

@@ -117,27 +117,30 @@
             width: 100%;
             font-size: 24px;
             font-weight: 400;
-            background-color: blue;
+            background-color: #3CCACE;
             text-align: center;
             line-height: 48px;
+            border-radius: 100px;
           }
           &__destroy{
             height: 48px;
             width: 100%;
             font-size: 24px;
             font-weight: 400;
-            background-color: red;
+            background-color: #ea352d;
             text-align: center;
             line-height: 48px;
+            border-radius: 100px;
           }
           &__buy {
             height: 48px;
             width: 100%;
             font-size: 24px;
             font-weight: 400;
-            background-color: red;
+            background-color: #ea352d;
             text-align: center;
             line-height: 48px;
+            border-radius: 100px;
             a{
               color: white;
             }

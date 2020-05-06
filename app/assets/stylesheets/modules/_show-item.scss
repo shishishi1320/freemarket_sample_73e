@@ -1,18 +1,16 @@
+*{
+  box-sizing: border-box;
+  text-decoration: none;
+}
+
 .show-main{
-  height: 100vh;
-  width: 100%;
   background-color: #f8f8f8;
-  position: relative;
-  overflow: scroll;
   .itembox{
-    height: 170vh;
+    height: 1600px;
     width: 700px;
     background-color: white;
-    position: absolute;
-    top: 10%;
-    left: 25%;
     padding: 24px 40px 40px;
-    box-sizing: border-box;
+    margin: 0 auto;
     &__name {
       text-align: center;
       font-weight: bold;
@@ -20,17 +18,35 @@
       margin-top:20px;
     }
     &__body{
-      .ul{
-        text-align: center;
-        justify-content: center;
-        .li{
-          margin-top: 10px;
-          margin-left: 90px;  
+      &__image {
+        margin: 0 auto;
+        min-width: 500px;
+        max-width: 500px;
+        min-height: 375px;
+        position: relative;
+        &__main__photo {
+          object-fit: contain;
+          height:300px;
+          width: 100%;
+          vertical-align: bottom;
         }
-        .ul{
-          display: flex;
-          .li{
-            margin: 3px;
+        &__sub {
+          line-height: 0;
+          height: 120px;
+          overflow-x: scroll;
+          &__thumb {
+            display: flex;
+            word-wrap: normal;
+            width: 30px;
+            height: 100px;
+            cursor: pointer;
+            &__photo {
+              padding: 0;
+              margin: 0；
+            }
+          }
+          &__thumb:not(.active) {
+            opacity: 0.4;
           }
         }
       }
@@ -53,7 +69,7 @@
     }
    
     .table {
-      width: 120%;
+      width: 115%;
       margin-bottom: 20px;
       table {
         margin: 0 30px 0 40px;
@@ -79,6 +95,57 @@
           padding: 20px;
         }
        }
+      }
+    }
+    &__btns{
+      height: 60px;
+      width: 600px;
+      &__contents-btn{
+        font-size: 24px;
+        margin: 0 auto;
+        padding: 0 40px;
+        text-align: center;
+        &__seller-menu{
+          margin: 0 auto;
+          a{
+            color: white;
+          }
+          &__edit{
+            margin-right: 10px;
+            margin-bottom: 30px;
+            height: 48px;
+            width: 100%;
+            font-size: 24px;
+            font-weight: 400;
+            background-color: #3CCACE;
+            text-align: center;
+            line-height: 48px;
+            border-radius: 100px;
+          }
+          &__destroy{
+            height: 48px;
+            width: 100%;
+            font-size: 24px;
+            font-weight: 400;
+            background-color: #ea352d;
+            text-align: center;
+            line-height: 48px;
+            border-radius: 100px;
+          }
+          &__buy {
+            height: 48px;
+            width: 100%;
+            font-size: 24px;
+            font-weight: 400;
+            background-color: #ea352d;
+            text-align: center;
+            line-height: 48px;
+            border-radius: 100px;
+            a{
+              color: white;
+            }
+          }
+        }
       }
     }
   }

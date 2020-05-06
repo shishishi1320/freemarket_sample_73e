@@ -56,8 +56,7 @@ $(document).on('turbolinks:load', ()=> {
       })
     }
     else {$("#delivery_method-parent").remove();}
-  });
-
+    
   const buildFileField = (index)=> {
     const html = `<div data-index="${index}" class="js-file_group">
                     <input class="js-file main__content__img-up__file__l__field__file" type="file"
@@ -108,4 +107,5 @@ $(document).on('turbolinks:load', ()=> {
 
     if ($('.js-file').length == 0) $('#image-box').append(buildFileField(fileIndex[0]));
   });
+});
 });

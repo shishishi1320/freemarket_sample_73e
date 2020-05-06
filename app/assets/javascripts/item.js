@@ -39,7 +39,7 @@ $(function(){
         methodBoxHtml = `<div id="delivery_method-parent"> 
                           <span id="label">配送の方法</span> 
                           <span id="required">必須</span> 
-                            <select name="delivery_method" class="main__content__item-delivery__select" id="delivery_charge">
+                            <select name="item[delivery_method]" class="main__content__item-delivery__select" id="delivery_charge">
                             <option value="">選択してください</option>
                             ${insertHTML}
                             </select>

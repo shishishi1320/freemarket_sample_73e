@@ -8,6 +8,7 @@ Rails.application.routes.draw do
   end
   root 'items#index'
   resources :user
+  
   resources :items do
     collection do
       get "get_delivery_method"

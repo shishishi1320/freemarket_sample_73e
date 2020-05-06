@@ -21,6 +21,7 @@ $(function(){
         dataType: "json"
         
       })
+      
 
       .done(function(method) {
         $("#delivery_method-parent").remove();
@@ -35,10 +36,10 @@ $(function(){
             insertHTML += appendOption(method);
             });
           }
-        methodBoxHtml = `<div class="listing-product-delivery-method" id="delivery_method-parent"> 
+        methodBoxHtml = `<div id="delivery_method-parent"> 
                           <span id="label">配送の方法</span> 
                           <span id="required">必須</span> 
-                            <select class="main__content__item-delivery__select" id="delivery_charge">
+                            <select name="delivery_method" class="main__content__item-delivery__select" id="delivery_charge">
                             <option value="">選択してください</option>
                             ${insertHTML}
                             </select>

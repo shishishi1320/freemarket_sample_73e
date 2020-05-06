@@ -62,13 +62,8 @@
           .main__content__item-delivery__cost
             %span#label 配送料の負担
             %span#required 必須
-            = f.select :shipping_cost, Item.shipping_costs.keys, {prompt: "選択してください"}, {class: "main__content__item-delivery__select"}
-          -# この部分はあとでJSで表示
-          .main__content__item-delivery__cost
-            %span#label 配送方法
-            %span#required 必須
-            = f.select :delivery_method, Item.delivery_methods.keys, {prompt: "選択してください"}, {class: "main__content__item-delivery__select"}
-          -# ここまで
+            = f.select :shipping_cost, Item.shipping_costs.keys, {prompt: "選択してください"}, {class: "main__content__item-delivery__select", id:"delivery_charge"}
+          .main__content__item-delivery__method
           .main__content__item-delivery__area
             %span#label 発送元の地域
             %span#required 必須

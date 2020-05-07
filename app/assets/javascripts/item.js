@@ -103,6 +103,6 @@ $(document).on('turbolinks:load', ()=> {
     $(this).parent().remove();
     $(`img[data-index="${targetIndex}"]`).remove();
 
-    if ($('.js-file').length == 0) $('#image-box').append(buildFileField(fileIndex[0]));
+    if ($('.js-file').length == 1) $('#image-box').append(buildFileField(fileIndex[0]));
   });
 });

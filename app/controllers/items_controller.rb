@@ -63,9 +63,7 @@ class ItemsController < ApplicationController
           end
         end
         @item.update(item_params)
-        @size = @item.categories[1].sizes[0]
-        @item.update(size: nil) unless @size
-        redirect_to item_product_path(@product), notice: "商品を更新しました"
+        redirect_to @item, notice: 'Item was successfully updated.' 
       else
         render 'edit'
       end
@@ -73,17 +71,8 @@ class ItemsController < ApplicationController
       redirect_back(fallback_location: root_path,flash: {success: '画像がありません'})
     end
   end
-    respond_to do |format|
-      if @item.update(item_params)
-        format.html { redirect_to @item, notice: 'Item was successfully updated.' }
-        format.json { render :show, status: :ok, location: @item }
-        
-      else
-        format.html { render :edit }
-        format.json { render json: @item.errors, status: :unprocessable_entity }
-      end
-    end
-  end
+
+  
 
   # DELETE /items/1
   # DELETE /items/1.json

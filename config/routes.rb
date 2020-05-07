@@ -1,7 +1,4 @@
-Rails.application.routes.draw do
-  root 'credit_cards#new'
-  resources :items, only: [:new]
-  resources :credit_cards, only: [:new, :create, :index, :destroy] 
+Rails.application.routes.draw do 
   devise_for :users, controllers: {
     registrations: 'users/registrations',
   }
@@ -10,6 +7,8 @@ Rails.application.routes.draw do
     post 'addresses', to: 'users/registrations#create_address'
   end
   root 'items#index'
-  resources :user
+  resources :users, only: [:show, :destroy]
   resources :items
+  root 'credit_cards#new'
+  resources :credit_cards, only: [:new, :create, :index, :destroy] 
 end

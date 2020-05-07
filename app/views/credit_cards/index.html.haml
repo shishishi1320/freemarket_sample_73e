@@ -1,3 +1,6 @@
+.wrapper
+  = render 'partial/new-header'
+
 .main-content
   =render 'mypage/side'
 
@@ -16,7 +19,9 @@
             .main-content__right__innner__credit-cards__contents__list__time
               = @exp_month + " / " + @exp_year
           %li.main-content__right__innner__credit-cards__contents__destroy
-            -# = link_to '削除する' , credit_cards_path, method: :delete
-            = link_to "[Delete]", credit_cards_path(card_id: @card.id), method: :delete
+            = link_to("削除", "/credit_cards/#{@card.id}", {method: "delete"})
       .main-content__right__question
         = link_to '支払い方法について' , "#"
+
+.footer  
+  = render 'partial/new-footer'

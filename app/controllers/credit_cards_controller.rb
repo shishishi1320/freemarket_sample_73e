@@ -1,11 +1,10 @@
 class CreditCardsController < ApplicationController
   require "payjp" 
 
-  def new
-    
+  def new  
     # すでにクレジットカード登録されている場合は、showアクションにリダイレクト
-    # @card = CreditCard.where(user_id: current_user.id)
-    # redirect_to credit_card_path(current_user.id) if @card.exists?
+    @card = CreditCard.where(user_id: current_user.id)
+    redirect_to credit_card_path(current_user.id) if @card.exists?
   end
 
   def create
@@ -86,7 +85,7 @@ class CreditCardsController < ApplicationController
       if @card.destroy
       # 削除完了していればdestroyのビューに移行
       # destroyビューを作るのが面倒であれば、flashメッセージを入れてトップページやマイページに飛ばしてもOK
-
+        redirect_to user_path(current_user.id), alert: "削除しました。"
       else
         # 削除されなかった場合flashメッセージを表示させて、showのビューに移行
         redirect_to credit_card_path(current_user.id), alert: "削除できませんでした。"

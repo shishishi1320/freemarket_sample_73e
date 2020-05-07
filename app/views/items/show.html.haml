@@ -19,7 +19,7 @@
       .itembox__price__detail 
         (税込)送料込み
     .itembox__detail
-      = @item.text
+      = safe_join(@item.text.split("\n"),tag(:br))
     .table 
       %table 
         %tbody
@@ -27,7 +27,7 @@
             %th
               出品者
             %td
-              = @user.name
+              = @user.nickname
           %tr
             %th
               カテゴリー

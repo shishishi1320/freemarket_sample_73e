@@ -38,9 +38,11 @@
           .main__content__item-name__text
             %span#label 商品の説明
             %span#required 必須
-          = f.text_area :text, class:"main__content__item-name__text__form", placeholder: "商品の説明（必須 1,000文字以内）"
+          = f.text_area :text, class:"main__content__item-name__text__form", placeholder: "商品の説明（必須 1,000文字以内）", id: "textBox"
           .main__content__item-name__count
-            %span.main__content__item-name__count__text 0/1000
+            .main__content__item-name__count__text 
+              %span.showCnt 0
+              %span /1000
         .main__content__item-detail
           .main__content__item-detail__label
             %span#grey-label 商品の詳細
@@ -67,13 +69,8 @@
           .main__content__item-delivery__cost
             %span#label 配送料の負担
             %span#required 必須
-            = f.select :shipping_cost, Item.shipping_costs.keys, {prompt: "選択してください"}, {class: "main__content__item-delivery__select"}
-          -# この部分はあとでJSで表示
-          .main__content__item-delivery__cost
-            %span#label 配送方法
-            %span#required 必須
-            = f.select :delivery_method, Item.delivery_methods.keys, {prompt: "選択してください"}, {class: "main__content__item-delivery__select"}
-          -# ここまで
+            = f.select :shipping_cost, Item.shipping_costs.keys, {prompt: "選択してください"}, {class: "main__content__item-delivery__select", id:"delivery_charge"}
+          .main__content__item-delivery__method
           .main__content__item-delivery__area
             %span#label 発送元の地域
             %span#required 必須

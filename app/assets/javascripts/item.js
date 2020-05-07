@@ -54,7 +54,6 @@ $(document).on('turbolinks:load', ()=> {
     }
     else {$("#delivery_method-parent").remove();}
 
-  });
   // 画像プレビュー
   const buildFileField = (index)=> {
     const html = `<div data-index="${index}" class="js-file_group">
@@ -106,4 +105,5 @@ $(document).on('turbolinks:load', ()=> {
 
     if ($('.js-file').length == 0) $('#image-box').append(buildFileField(fileIndex[0]));
   });
+});
 });

@@ -15,7 +15,7 @@
               %p.main__content__item__inner__box__detail__item-name
                 = @item.name
               %p.main__content__item__inner__box__detail__bold
-                = "¥#{@item.price}"
+                = enmark_item_price(@item)
               %span （税込）送料込み
       %section.main__content__buy
         .main__content__buy__inner
@@ -23,7 +23,7 @@
             .main__content__buy__inner__price__text
               支払い金額
             .main__content__buy__inner__price__int
-              = @item.price
+              = enmark_item_price(@item)
           %section.main__content__buy__inner__section
             .main__content__buy__inner__section__div
               %h 支払い方法
@@ -34,11 +34,11 @@
             .main__content__buy__inner__section__div
               %h 配送先
               .main__content__buy__inner__section__div__address
-                %p 179-0074
-                %p 東京都練馬区春日町１−２−３
-                %p 山田 太郎
-              = link_to "#" do
-                変更する
+                = user_post_code(@address)
+                %br
+                = safe_join(user_address_info(@address).split("\n"),tag(:br))
+                %br
+                = user_full_name(@address)
           .main__content__buy__inner__btn
             %button{type: "submit", class:"main__content__buy__inner__btn"}
               購入する

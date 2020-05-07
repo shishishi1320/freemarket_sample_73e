@@ -1,5 +1,5 @@
 class ItemsController < ApplicationController
-  before_action :set_item, only: [:show, :edit, :update,  :buy, :destroy]
+  before_action :set_item, only: [:show, :edit, :update, :buy, :destroy]
   before_action :set_parent, only: [:new, :create]
 
   # GET /items
@@ -30,7 +30,7 @@ class ItemsController < ApplicationController
   end
 
   def buy
-
+    @address = Address.find(current_user.id)
   end
 
   # POST /items

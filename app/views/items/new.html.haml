@@ -19,7 +19,7 @@
             #previews
               - if @item.persisted?
                 - @item.images.each_with_index do |image, i|
-                  = image_tag image.url.url, data: { index: i }, width: "118", height: '118'
+                  = image_tag image.url.url, data: { index: i }
             = f.fields_for :images do |i|
               .js-file_group{ data: {index: "#{i.index}"}}
                 = i.file_field :url, class: 'js-file main__content__img-up__file__l__field__file'

@@ -35,7 +35,13 @@
 
 // 暫定CSS
 #previews{
-  @include display-flex(wrap);
+  display: flex;
+  flex-wrap: wrap;
+  img{
+    height: 124px;
+    width: 124px;
+    object-fit: cover;
+  }
 }
 .js-file_group{
     @include display-flex(flex-start)

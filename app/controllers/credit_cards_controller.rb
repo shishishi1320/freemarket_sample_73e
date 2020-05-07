@@ -10,7 +10,7 @@ class CreditCardsController < ApplicationController
     Payjp.api_key = Rails.application.credentials.dig(:payjp, :PAYJP_SECRET_KEY)
 
     if params["payjp_token"].blank?
-      redirect_to action: "new", alert: "クレジットカードを登録できませんでした。"
+      redirect_to credit_cards_path(current_user.id), alert: "クレジットカードを登録できませんでした。"
     else
       customer = Payjp::Customer.create(
         card: params["payjp_token"],
@@ -40,6 +40,8 @@ class CreditCardsController < ApplicationController
         @card_src = "visa.png"
       when "JCB"
         @card_src = "jcb.png"
+      when "Psypal"
+        @card_src = "paypal.png"
       when "MasterCard"
         @card_src = "master.png"
       when "American Express"

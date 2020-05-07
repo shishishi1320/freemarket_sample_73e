@@ -2,28 +2,36 @@
   = render 'partial/new-header'
 
   .main
-    = form_for @item do |f|
-      .main__content
-        - if @item.errors.any?
-          .main__content__error
-            - @item.errors.full_messages.each do |message|
-              %li= message
+    .main__content
+      - if @item.errors.any?
+        .main__content__error
+          - @item.errors.full_messages.each do |message|
+            %li= message
+      = form_for @item do |f|
         .main__content__img-up
           .main__content__img-up__photo
             %span#label 出品画像
             %span#required 必須
           .main__content__img-up__text
             最大10枚までアップロードできます
-          .main__content__img-up__file
-            %label{ class:"main__content__img-up__file__l" }
-              .main__content__img-up__file__l__field
-                %i.fas.fa-camera.main__content__img-up__file__l__field__icon
-                %p.main__content__img-up__file__l__field__text
-                  ドラッグアンドドロップ
-                %p.main__content__img-up__file__l__field__text
-                  またはクリックしてファイルをアップロード
-                = f.fields_for :images do |i|
-                  = i.file_field :url, class: "main__content__img-up__file__l__field__file" 
+
+          #image-box
+            #previews
+              - if @item.persisted?
+                - @item.images.each_with_index do |image, i|
+                  = image_tag image.url.to_s, data: { index: i }, width: "118", height: '118'
+                  
+            = f.fields_for :images do |i|
+              .js-file_group{ data: {index: "#{i.index}"}}
+                = i.file_field :url, class: 'js-file main__content__img-up__file__l__field__file'
+                %span.js-remove 削除
+              - if @item.persisted?
+                = i.check_box :_destroy, data: { index: @item.images.index }, class: 'hidden-destroy'
+            
+            - if @item.persisted?
+              .js-file_group{ data: {index: "#{@item.images.count}"}}
+                = file_field_tag :url, name: "item[images_attributes][#{@item.images.count}][url]", class: "js-file main__content__img-up__file__l__field__file"
+                .js-remove 削除
 
         .main__content__item-name
           .main__content__item-name__name
@@ -99,9 +107,7 @@
                 販売利益
             %span.main__content__item-price__profit__price -
         .main__content__btn
-          = f.submit "出品する", class:"main__content__btn__submit"
-          %button{type: "submit", class:"main__content__btn__write"}
-            下書きに保存
+          = f.submit "変更する", class:"main__content__btn__submit"
           = link_to "#" do
             もどる
         .main__content__text

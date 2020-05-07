@@ -11,4 +11,11 @@ Rails.application.routes.draw do
   resources :items
   root 'credit_cards#new'
   resources :credit_cards, only: [:new, :create, :index, :destroy] 
+  resources :user
+  
+  resources :items do
+    collection do
+      get "get_delivery_method"
+    end
+  end
 end

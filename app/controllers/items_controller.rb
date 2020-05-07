@@ -11,6 +11,9 @@ class ItemsController < ApplicationController
   # GET /items/1
   # GET /items/1.json
   def show
+    @user = User.find_by(id: @item.seller_id)
+    @category = Category.find_by(id: @item.category_id)
+    @brand = Brand.find_by(id: @item.brand_id)
   end
 
   # GET /items/new
@@ -18,6 +21,10 @@ class ItemsController < ApplicationController
     @item = Item.new
     @item.images.build
     @item.build_brand
+  end
+
+  #format json
+  def get_delivery_method
   end
 
   # GET /items/1/edit
@@ -74,6 +81,6 @@ class ItemsController < ApplicationController
 
     # Only allow a list of trusted parameters through.
     def item_params
-      params.require(:item).permit(:name, :price, :text, :status, :size, :condition, :shipping_cost, :delivery_method, :delivery_area, :delivery_date, :category_id, brand_attributes: [:id, :name], images_attributes: [:url]).merge(seller_id: current_user.id, status: 0)
+      params.require(:item).permit(:name, :price, :text, :status, :size, :condition, :shipping_cost, :delivery_method, :delivery_area, :delivery_date, :category_id, brand_attributes: [:id, :name], images_attributes: [:url, :_destroy, :id]).merge(seller_id: current_user.id, status: 0)
     end
 end

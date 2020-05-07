@@ -1,7 +1,14 @@
+.wrapper
+  = render 'items/header'
+
 .main-content
   =render 'mypage/side'
   
   .main-content__right
     .main-content__right__logout
-      = link_to 'ログアウト' , "#"
+      = link_to "ログアウト", destroy_user_session_path, method: :delete
  
+.footer  
+  = render "items/banner"
+  = render "items/footer"
+  = render "items/purchase"

@@ -50,7 +50,6 @@ $(document).on('turbolinks:load', ()=> {
                             </select>
                           </div>`;
       $(".main__content__item-delivery__method").append(methodBoxHtml);
-        console.log(delivery_parentCategory)
       })
     }
     else {$("#delivery_method-parent").remove();}

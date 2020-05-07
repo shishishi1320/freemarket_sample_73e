@@ -8,5 +8,9 @@ Rails.application.routes.draw do
   end
   root 'items#index'
   resources :user
-  resources :items
+  resources :items do
+    member do
+      get :buy
+    end
+  end
 end

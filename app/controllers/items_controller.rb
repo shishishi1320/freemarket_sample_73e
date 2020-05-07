@@ -1,5 +1,5 @@
 class ItemsController < ApplicationController
-  before_action :set_item, only: [:show, :edit, :update, :destroy]
+  before_action :set_item, only: [:show, :edit, :update,  :buy, :destroy]
   before_action :set_parent, only: [:new, :create]
 
   # GET /items
@@ -26,6 +26,10 @@ class ItemsController < ApplicationController
   # GET /items/1/edit
   def edit
     @item = Item.find(params[:id])
+
+  end
+
+  def buy
 
   end
 

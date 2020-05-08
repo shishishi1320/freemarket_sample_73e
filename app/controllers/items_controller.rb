@@ -27,6 +27,18 @@ class ItemsController < ApplicationController
   def get_delivery_method
   end
 
+  def set_parents
+    @parents  = Category.where(ancestry: nil)
+  end
+
+  def set_children
+    @children = Category.where(ancestry: params[:parent_id])
+  end
+
+  def set_grandchildren
+    @grandchildren = Category.where(ancestry: params[:ancestry])
+  end
+
   # GET /items/1/edit
   def edit
     @item = Item.find(params[:id])

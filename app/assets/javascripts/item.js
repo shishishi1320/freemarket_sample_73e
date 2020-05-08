@@ -106,3 +106,14 @@ $(document).on('turbolinks:load', ()=> {
     if ($('.js-file').length == 0) $('#image-box').append(buildFileField(fileIndex[0]));
   });
 });
+
+//item詳細ページの画面表示
+$(function () {
+  $(".itembox__body__image__sub__thumb").first().addClass("active");
+  $(".itembox__body__image__sub__thumb__photo").click(function () { 
+    image_url = $(this).attr("src");
+    $(".itembox__body__image__main__photo").attr("src", image_url).hide().fadeIn();
+    $(".itembox__body__image__sub__thumb.active").removeClass("active");
+    $(this).parent().addClass("active"); 
+  });
+});

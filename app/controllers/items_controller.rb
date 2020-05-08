@@ -25,6 +25,10 @@ class ItemsController < ApplicationController
     @item.build_brand
   end
 
+  #format json
+  def get_delivery_method
+  end
+
   # GET /items/1/edit
   def edit
     @item = Item.find(params[:id])

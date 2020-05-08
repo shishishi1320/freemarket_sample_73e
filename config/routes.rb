@@ -9,13 +9,15 @@ Rails.application.routes.draw do
   root 'items#index'
   resources :users, only: [:show, :destroy]
   resources :items
-  root 'credit_cards#new'
-  resources :credit_cards, only: [:new, :create, :index, :destroy] 
   resources :user
-  
+  resources :credit_cards, only: [:new, :create, :index, :destroy] 
   resources :items do
     collection do
       get "get_delivery_method"
+    end
+    member do
+      get "buy"
+      get "pay"
     end
   end
 end

@@ -1,6 +1,7 @@
 class ItemsController < ApplicationController
-  before_action :set_item, only: [:show, :edit, :update, :destroy]
-  before_action :set_parent, only: [:new, :create]
+  before_action :set_item, only: [:show, :edit, :update, :destroy, :buy, :pay]
+  before_action :set_parent, [:new, :create]
+  require "payjp" 
 
   # GET /items
   # GET /items.json
@@ -66,6 +67,36 @@ class ItemsController < ApplicationController
     respond_to do |format|
       format.html { redirect_to items_url, notice: 'Item was successfully destroyed.' }
       format.json { head :no_content }
+    end
+  end
+
+  def buy
+    unless @item.buy?
+      card = CreditCard.where(user_id: current_user.id)
+      if card.exists?
+        @card = CreditCard.find_by(user_id: current_user.id)
+        Payjp.api_key = Rails.application.credentials.dig(:payjp, :PAYJP_SECRET_KEY)
+        customer = Payjp::Customer.retrieve(@card.customer_id)
+        @default_card_information = Payjp::Customer.retrieve(@card.customer_id).cards.data[0]
+      end
+    else
+      redirect_to item_path(@item)
+    end
+  end
+
+  def pay
+    unless @item.buy?
+      @card = CreditCard.find_by(user_id: current_user.id)
+      @item.status = 1
+      @item.save!
+      Payjp.api_key = Rails.application.credentials.dig(:payjp, :PAYJP_SECRET_KEY)
+      @charge = Payjp::Charge.create(
+      amount: @item.price,
+      customer: @card.customer_id,
+      currency: 'jpy'
+      )
+    else
+      redirect_to item_path(@item)
     end
   end
 

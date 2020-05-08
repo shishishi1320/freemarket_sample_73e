@@ -81,6 +81,7 @@
                 削除
         - else
           .itembox__btns__contents-btn__seller-menu__buy
-            = link_to "購入", "#"
+            = link_to buy_item_path(@item), class:"show-wrapper__main__buy-button" do
+              商品購入へ進む
               
 = render "footer"

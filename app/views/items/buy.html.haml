@@ -9,7 +9,7 @@
         .main__content__item__inner
           .main__content__item__inner__box
             %h.main__content__item__inner__box__img
-              = image_tag 'item.jpg', :size =>'80x80', alt: 'img'
+              -# = image_tag 'item.jpg', :size =>'80x80', alt: 'img'
             .main__content__item__inner__box__detail
               %p.main__content__item__inner__box__detail__item-name
                 ★新品・未使用★LUOTEEMI E16042611R ファッションピアス
@@ -39,7 +39,7 @@
               = link_to "#" do
                 変更する
           .main__content__buy__inner__btn
-            %button{type: "submit", class:"main__content__buy__inner__btn"}
-              購入する
+            = link_to pay_item_path(@item), class: "buy-wrapper__main__pay-btn" do
+              購入を確定する
 
   = render 'partial/new-footer'

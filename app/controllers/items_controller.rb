@@ -1,6 +1,6 @@
 class ItemsController < ApplicationController
   before_action :set_item, only: [:show, :edit, :update, :destroy, :buy, :pay]
-  before_action :set_parent, [:new, :create]
+  before_action :set_parent, only: [:new, :create]
   require "payjp" 
 
   # GET /items

@@ -1,6 +1,8 @@
 class ItemsController < ApplicationController
-  before_action :set_item, only: [:show, :edit, :update, :destroy]
+  before_action :authenticate_user!, only: [:buy]
+  before_action :set_item, only: [:show, :edit, :update, :buy, :destroy]
   before_action :set_parent, only: [:new, :create]
+
 
   # GET /items
   # GET /items.json
@@ -31,6 +33,10 @@ class ItemsController < ApplicationController
   def edit
     @item = Item.find(params[:id])
 
+  end
+
+  def buy
+    @address = Address.find(current_user.id)
   end
 
   # POST /items

@@ -13,5 +13,8 @@ Rails.application.routes.draw do
     collection do
       get "get_delivery_method"
     end
+    member do
+      get :buy
+    end
   end
 end

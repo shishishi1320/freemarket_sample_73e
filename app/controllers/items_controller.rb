@@ -1,6 +1,8 @@
 class ItemsController < ApplicationController
+  before_action :authenticate_user!, only: [:buy]
   before_action :set_item, only: [:show, :edit, :update, :buy, :destroy]
   before_action :set_parent, only: [:new, :create]
+
 
   # GET /items
   # GET /items.json

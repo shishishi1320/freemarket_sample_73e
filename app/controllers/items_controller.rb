@@ -3,6 +3,7 @@ class ItemsController < ApplicationController
   before_action :set_parent, only: [:new, :create]
   require "payjp" 
 
+
   # GET /items
   # GET /items.json
   def index
@@ -34,6 +35,10 @@ class ItemsController < ApplicationController
 
   end
 
+  def buy
+    @address = Address.find(current_user.id)
+  end
+
   # POST /items
   # POST /items.json
   def create
@@ -63,10 +68,11 @@ class ItemsController < ApplicationController
   # DELETE /items/1
   # DELETE /items/1.json
   def destroy
-    @item.destroy
+    @item.destroy  if user_signed_in? && current_user.id == @item.seller_id
     respond_to do |format|
       format.html { redirect_to items_url, notice: 'Item was successfully destroyed.' }
       format.json { head :no_content }
+      
     end
   end
 

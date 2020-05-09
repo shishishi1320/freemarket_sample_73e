@@ -1,6 +1,9 @@
 class ItemsController < ApplicationController
-  before_action :set_item, only: [:show, :edit, :update, :destroy]
-  before_action :set_parent, only: [:new, :create, :edit, :update]
+  before_action :authenticate_user!, only: [:buy]
+  before_action :set_item, only: [:show, :edit, :update, :buy, :destroy]
+  
+  before_action :set_parent, only: [:new, :create,:edit, :update, :destroy]
+
 
   # GET /items
   # GET /items.json
@@ -23,10 +26,18 @@ class ItemsController < ApplicationController
     @item.build_brand
   end
 
+  #format json
+  def get_delivery_method
+  end
+
   # GET /items/1/edit
   def edit
     @item = Item.find(params[:id])
 
+  end
+
+  def buy
+    @address = Address.find(current_user.id)
   end
 
   # POST /items
@@ -66,10 +77,11 @@ class ItemsController < ApplicationController
   # DELETE /items/1
   # DELETE /items/1.json
   def destroy
-    @item.destroy
+    @item.destroy  if user_signed_in? && current_user.id == @item.seller_id
     respond_to do |format|
       format.html { redirect_to items_url, notice: 'Item was successfully destroyed.' }
       format.json { head :no_content }
+      
     end
   end
 

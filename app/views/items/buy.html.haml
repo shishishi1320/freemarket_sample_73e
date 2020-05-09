@@ -9,20 +9,21 @@
         .main__content__item__inner
           .main__content__item__inner__box
             %h.main__content__item__inner__box__img
-              = image_tag 'item.jpg', :size =>'80x80', alt: 'img'
+              - @item.images.first(1).each do |image|
+                = image_tag image.url.to_s,  size:'130x130'
             .main__content__item__inner__box__detail
               %p.main__content__item__inner__box__detail__item-name
-                ★新品・未使用★LUOTEEMI E16042611R ファッションピアス
+                = @item.name
               %p.main__content__item__inner__box__detail__bold
-                %span ¥1,180
-                %span （税込）送料込み
+                = enmark_item_price(@item)
+              %span （税込）送料込み
       %section.main__content__buy
         .main__content__buy__inner
           .main__content__buy__inner__price
             .main__content__buy__inner__price__text
               支払い金額
             .main__content__buy__inner__price__int
-              ¥1,180
+              = enmark_item_price(@item)
           %section.main__content__buy__inner__section
             .main__content__buy__inner__section__div
               %h 支払い方法
@@ -33,11 +34,11 @@
             .main__content__buy__inner__section__div
               %h 配送先
               .main__content__buy__inner__section__div__address
-                %p 179-0074
-                %p 東京都練馬区春日町１−２−３
-                %p 山田 太郎
-              = link_to "#" do
-                変更する
+                = user_post_code(@address)
+                %br
+                = safe_join(user_address_info(@address).split("\n"),tag(:br))
+                %br
+                = user_full_name(@address)
           .main__content__buy__inner__btn
             %button{type: "submit", class:"main__content__buy__inner__btn"}
               購入する

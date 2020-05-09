@@ -1,6 +1,6 @@
 class ItemsController < ApplicationController
   before_action :set_item, only: [:show, :edit, :update, :destroy]
-  before_action :set_parent, only: [:new, :create]
+  before_action :set_parent, only: [:new, :create, :set_parents]
 
   # GET /items
   # GET /items.json
@@ -28,7 +28,6 @@ class ItemsController < ApplicationController
   end
 
   def set_parents
-    @parents  = Category.where(ancestry: nil)
   end
 
   def set_children
@@ -50,8 +49,9 @@ class ItemsController < ApplicationController
   def create
     @item = Item.new(item_params)
     if @item.save
-      redirect_to root_path, notice: 'Event was successfully created.'
+      # redirect_to root_path, notice: 'Event was successfully created.'
     else
+      @item.images.build
       render :new
     end
   end

@@ -43,36 +43,21 @@ class ItemsController < ApplicationController
   # PATCH/PUT /items/1
   # PATCH/PUT /items/1.json
   def update
-    if params[:item].keys.include?("image") || params[:item].keys.include?("images_attributes") 
-      if @item.valid?
-        if params[:item].keys.include?("image") 
-        # dbにある画像がedit画面で一部削除してるか確認
-          update_images_ids = params[:item][:image].values #投稿済み画像 
-          before_images_ids = @item.images.ids
-          #  商品に紐づく投稿済み画像が、投稿済みにない場合は削除する
-          # @product.images.ids.each doで、一つずつimageハッシュにあるか確認。なければdestroy
-          before_images_ids.each do |before_img_id|
-            Image.find(before_img_id).destroy unless update_image_ids.include?("#{before_img_id}") 
-
-          end
-        else
-          # imageハッシュがない = 投稿済みの画像をすべてedit画面で消しているので、商品に紐づく投稿済み画像を削除する。
-          # @product.images.destroy = nil と削除されないので、each do で一つずつ削除する
-          before_images_ids.each do |before_img_id|
-            Image.find(before_img_id).destroy 
-          end
-        end
-        @item.update(item_params)
-        redirect_to @item, notice: 'Item was successfully updated.' 
+    if params[:delete_image]
+      #削除ボタンが押されたらnil
+ 
+    end
+ 
+    respond_to do |format|
+      if @item.update(item_params)
+        format.html { redirect_to @item, notice: 'Item was successfully updated.' }
+        format.json { render :show, status: :ok, location: @item }
       else
-        render 'edit'
+        format.html { render :edit }
+        format.json { render json: @item.errors, status: :unprocessable_entity }
       end
-    else
-      redirect_back(fallback_location: root_path,flash: {success: '画像がありません'})
     end
   end
-
-  
 
   # DELETE /items/1
   # DELETE /items/1.json

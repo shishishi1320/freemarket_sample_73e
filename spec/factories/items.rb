@@ -4,7 +4,7 @@ FactoryBot.define do
     name              {"abe"}
     price                 {100}
     text              {"aaaaaaa"}
-    status                    {1}
+    status                    {}
     size                      {1}
     condition                 {1}
     shipping_cost             {1}
@@ -13,9 +13,7 @@ FactoryBot.define do
     delivery_date             {1}
     category_id               {1}
     seller_id                 {1}
-    buyer_id                  {1}         
-    brand_id                  {1}
-
+    buyer_id                  {} 
   end
 end
 

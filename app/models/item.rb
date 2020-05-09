@@ -1,5 +1,5 @@
 class Item < ApplicationRecord
-  belongs_to :brand, dependent: :destroy
+  belongs_to :brand, dependent: :destroy, optional: true
   belongs_to :category, optional: true
   has_many :images, dependent: :destroy
   accepts_nested_attributes_for :images, allow_destroy: true

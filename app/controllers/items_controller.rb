@@ -43,10 +43,6 @@ class ItemsController < ApplicationController
   # PATCH/PUT /items/1
   # PATCH/PUT /items/1.json
   def update
-    if params[:delete_image]
-      #削除ボタンが押されたらnil
- 
-    end
  
     respond_to do |format|
       if @item.update(item_params)

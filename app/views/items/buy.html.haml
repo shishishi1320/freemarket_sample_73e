@@ -27,9 +27,24 @@
           %section.main__content__buy__inner__section
             .main__content__buy__inner__section__div
               %h 支払い方法
-              = link_to "#" , class:"main__content__buy__inner__section__div__link" do
-                %i.fas.fa-plus-circle
-                  登録してください
+              - if current_user.credit_card.present?
+                .main-content__buy__inner__section__div__title
+                  .main-content__buy__inner__section__div__title__credit-cards
+                    クレジットカード
+                  %ul.main-content__buy__inner__section__div__title__credit-cards__contents
+                    %li.main-content__buy__inner__section__div__title__credit-cards__contents__list
+                    .main-content__buy__inner__section__div__title__credit-cards__contents__list__pay-num
+                      = "**** **** **** " + @customer_card.last4
+                    .main-content__buy__inner__section__div__title__credit-cards__contents__list__time
+                      = @exp_month + " / " + @exp_year
+                    .main-content__buy__inner__section__div__title__credit-cards__contents__list__icon
+                      = image_tag "#{@card_src}", size: "70x50", class: "credit_card_info__brand__img", alt: @card_brand
+                
+              - else                
+                = link_to new_credit_card_path, class:"main__content__buy__inner__section__div__link" do
+                  %i.fas.fa-plus-circle
+                    登録してください
+
           %section.main__content__buy__inner__section
             .main__content__buy__inner__section__div
               %h 配送先

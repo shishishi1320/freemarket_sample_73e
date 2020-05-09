@@ -1,4 +1,5 @@
 class ItemsController < ApplicationController
+  before_action :authenticate_user!, only: [:buy, :pay]
   before_action :set_item, only: [:show, :edit, :update, :destroy, :buy, :pay]
   before_action :set_parent, only: [:new, :create]
   require "payjp" 
@@ -33,10 +34,6 @@ class ItemsController < ApplicationController
   def edit
     @item = Item.find(params[:id])
 
-  end
-
-  def buy
-    @address = Address.find(current_user.id)
   end
 
   # POST /items
@@ -77,13 +74,34 @@ class ItemsController < ApplicationController
   end
 
   def buy
+    @address = Address.find(current_user.id)
     unless @item.buy?
-      card = CreditCard.where(user_id: current_user.id)
-      if card.exists?
-        @card = CreditCard.find_by(user_id: current_user.id)
+      @card = CreditCard.find_by(user_id: current_user.id)
+      if @card.present?
         Payjp.api_key = Rails.application.credentials.dig(:payjp, :PAYJP_SECRET_KEY)
         customer = Payjp::Customer.retrieve(@card.customer_id)
-        @default_card_information = Payjp::Customer.retrieve(@card.customer_id).cards.data[0]
+        @customer_card = customer.cards.retrieve(@card.card_id)
+  
+        @card_brand = @customer_card.brand
+        case @card_brand
+        when "Visa"
+          @card_src = "visa.png"
+        when "JCB"
+          @card_src = "jcb.png"
+        when "Psypal"
+          @card_src = "paypal.png"
+        when "MasterCard"
+          @card_src = "master.png"
+        when "American Express"
+          @card_src = "amex.png"
+        when "Diners Club"
+          @card_src = "diners.png"
+        when "Discover"
+          @card_src = "discover.png"
+        end
+  
+        @exp_month = @customer_card.exp_month.to_s
+        @exp_year = @customer_card.exp_year.to_s.slice(2,3)
       end
     else
       redirect_to item_path(@item)
@@ -93,16 +111,20 @@ class ItemsController < ApplicationController
   def pay
     unless @item.buy?
       @card = CreditCard.find_by(user_id: current_user.id)
-      @item.status = 1
-      @item.save!
-      Payjp.api_key = Rails.application.credentials.dig(:payjp, :PAYJP_SECRET_KEY)
-      @charge = Payjp::Charge.create(
-      amount: @item.price,
-      customer: @card.customer_id,
-      currency: 'jpy'
-      )
+      if @card.present?
+        @item.status = 1
+        @item.save!
+        Payjp.api_key = Rails.application.credentials.dig(:payjp, :PAYJP_SECRET_KEY)
+        @charge = Payjp::Charge.create(
+        amount: @item.price,
+        customer: @card.customer_id,
+        currency: 'jpy'
+        )
+      else
+        redirect_to new_credit_card_path, alert: "クレジットカードを登録してください"
+      end
     else
-      redirect_to item_path(@item)
+      redirect_to item_path(@item), alert: "購入が完了しました"
     end
   end
 

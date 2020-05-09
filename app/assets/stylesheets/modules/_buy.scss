@@ -81,7 +81,12 @@
         &__btn{
           @include btn($btn-required-grey);
           color: #fff;
-          margin-top: 32px;;
+          margin-top: 32px;
+          a {
+            color: white;
+            text-decoration: none;
+            margin: 110px;
+          }
         }
       }
     }

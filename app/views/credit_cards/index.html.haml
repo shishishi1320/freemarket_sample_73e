@@ -1,5 +1,5 @@
 .wrapper
-  = render 'partial/new-header'
+  = render 'items/header'
 
 .main-content
   =render 'mypage/side'
@@ -7,21 +7,23 @@
   .main-content__right
     .main-content__right__title
       支払い方法
-    .main-content__right__innner
-      .main-content__right__innner__credit-cards
+    .main-content__right__inner
+      .main-content__right__inner__credit-cards
         クレジットカード一覧
-        %ul.main-content__right__innner__credit-cards__contents
-          %li.main-content__right__innner__credit-cards__contents__list
-            .main-content__right__innner__credit-cards__contents__list__icon
-              = image_tag("1.png", width: '70', alt: @card_brand, id:"card_image")
-            .main-content__right__innner__credit-cards__contents__list__pay-num
+        %ul.main-content__right__inner__credit-cards__contents
+          %li.main-content__right__inner__credit-cards__contents__list
+            .main-content__right__inner__credit-cards__contents__list__icon
+              = image_tag "#{@card_src}", width: '70', alt: @card_brand, id:"card_image"
+            .main-content__right__inner__credit-cards__contents__list__pay-num
               = "**** **** **** " + @customer_card.last4
-            .main-content__right__innner__credit-cards__contents__list__time
+            .main-content__right__inner__credit-cards__contents__list__time
               = @exp_month + " / " + @exp_year
-          %li.main-content__right__innner__credit-cards__contents__destroy
+          %li.main-content__right__inner__credit-cards__contents__destroy
             = link_to("削除", "/credit_cards/#{@card.id}", {method: "delete"})
       .main-content__right__question
         = link_to '支払い方法について' , "#"
 
 .footer  
-  = render 'partial/new-footer'
+  = render "items/banner"
+  = render "items/footer"
+  = render "items/purchase"

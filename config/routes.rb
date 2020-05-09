@@ -8,7 +8,6 @@ Rails.application.routes.draw do
   end
   root 'items#index'
   resources :users, only: [:show, :destroy]
-  resources :user
   resources :credit_cards, only: [:new, :create, :index, :destroy] 
   resources :items do
     collection do

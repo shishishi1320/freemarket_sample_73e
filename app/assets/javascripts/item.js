@@ -105,7 +105,7 @@ $(document).on('turbolinks:load', ()=> {
 
     if ($('.js-file').length == 0) $('#image-box').append(buildFileField(fileIndex[0]));
   });
-});
+
 
 //item詳細ページの画面表示
 $(function () {
@@ -116,4 +116,5 @@ $(function () {
     $(".itembox__body__image__sub__thumb.active").removeClass("active");
     $(this).parent().addClass("active"); 
   });
+});
 });

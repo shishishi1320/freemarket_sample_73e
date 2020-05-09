@@ -56,9 +56,10 @@ class ItemsController < ApplicationController
       end
     end
     if @item.valid? && !@item.images.empty? && imageLength != deleteImage
-      @item.update(set_params)
+      @item.update(item_params)
+      redirect_to item_path
     else
-      redirect_to edit_item_path(@item), notice: 'Item was successfully updated.'
+      redirect_to edit_item_path(@item)
     end
   end
 

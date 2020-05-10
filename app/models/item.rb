@@ -1,11 +1,11 @@
 class Item < ApplicationRecord
-  belongs_to :brand
+  belongs_to :brand, dependent: :destroy
   belongs_to :category, optional: true
   has_many :images, dependent: :destroy
   accepts_nested_attributes_for :images, allow_destroy: true
   accepts_nested_attributes_for :brand
 
-  # enum status: { sell: 0, buy: 1 , trading:2}
+
 
   enum status: { sell: 0, buy: 1 , trading:2}
   scope :on_sell, -> { where(status: 0) }

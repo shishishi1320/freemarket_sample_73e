@@ -16,5 +16,8 @@ Rails.application.routes.draw do
       get "set_children"
       get "set_grandchildren"
     end
+    member do
+      get :buy
+    end
   end
 end

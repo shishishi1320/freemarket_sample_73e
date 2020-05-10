@@ -54,10 +54,11 @@ $(document).on('turbolinks:load', ()=> {
     }
     else {$("#delivery_method-parent").remove();}
   });
+  
   // 画像プレビュー
   const buildFileField = (index)=> {
     const html = `<div data-index="${index}" class="js-file_group">
-                    <input class="js-file main__content__img-up__file__l__field__file" type="file"
+                    <input class="main__content__img-up__file__l__field__file" type="file"
                     name="item[images_attributes][${index}][url]"
                     id="item_images_attributes_${index}_url">
                     <div class="js-remove"><i class="far fa-times-circle"></i></div>
@@ -79,7 +80,7 @@ $(document).on('turbolinks:load', ()=> {
 
   $('.hidden-destroy').hide();
 
-  $('#image-box').on('change', '.js-file', function(e) {
+  $('#image-box').on('change', '.main__content__img-up__file__l__field__file', function(e) {
       const targetIndex = $(this).parent().data('index');
       const file = e.target.files[0];
       const blobUrl = window.URL.createObjectURL(file);
@@ -171,4 +172,15 @@ $(document).on('turbolinks:load', ()=> {
     })
   })
   }
+
+  //item詳細ページの画面表示
+  $(function () {
+    $(".itembox__body__image__sub__thumb").first().addClass("active");
+    $(".itembox__body__image__sub__thumb__photo").click(function () { 
+      image_url = $(this).attr("src");
+      $(".itembox__body__image__main__photo").attr("src", image_url).hide().fadeIn();
+      $(".itembox__body__image__sub__thumb.active").removeClass("active");
+      $(this).parent().addClass("active"); 
+    });
+  });
 });

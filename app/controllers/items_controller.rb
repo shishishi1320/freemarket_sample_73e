@@ -54,11 +54,9 @@ class ItemsController < ApplicationController
   # PATCH/PUT /items/1
   # PATCH/PUT /items/1.json
   def update
-    imageLength = 0
+    imageLength = @item.images.length
     deleteImage = 0
-    params[:item][:images_attributes].each do |p|
-      imageLength += 1
-    end
+
     for num in 0..9
       if params[:item][:images_attributes][num.to_s] != nil
         if params[:item][:images_attributes][num.to_s][:_destroy] == "1"

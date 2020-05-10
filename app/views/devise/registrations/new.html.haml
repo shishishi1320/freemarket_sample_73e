@@ -64,7 +64,7 @@
               = f.label :生年月日
               %span.hissu 必須 
             .field-input
-              = f.date_select	 :birth              
+              = f.date_select	 :birth, start_year:Time.now.year, end_year:1900          
           .actions
             = f.submit "NEXT", class: 'btn'
   = render 'partial/new-footer'

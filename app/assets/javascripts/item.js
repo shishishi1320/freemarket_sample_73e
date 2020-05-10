@@ -57,7 +57,7 @@ $(document).on('turbolinks:load', ()=> {
   // 画像プレビュー
   const buildFileField = (index)=> {
     const html = `<div data-index="${index}" class="js-file_group">
-                    <input class="js-file main__content__img-up__file__l__field__file" type="file"
+                    <input class="main__content__img-up__file__l__field__file" type="file"
                     name="item[images_attributes][${index}][url]"
                     id="item_images_attributes_${index}_url">
                     <div class="js-remove"><i class="far fa-times-circle"></i></div>
@@ -79,7 +79,7 @@ $(document).on('turbolinks:load', ()=> {
 
   $('.hidden-destroy').hide();
 
-  $('#image-box').on('change', '.js-file', function(e) {
+  $('#image-box').on('change', '.main__content__img-up__file__l__field__file', function(e) {
       const targetIndex = $(this).parent().data('index');
       const file = e.target.files[0];
       const blobUrl = window.URL.createObjectURL(file);
@@ -103,7 +103,7 @@ $(document).on('turbolinks:load', ()=> {
     $(this).parent().remove();
     $(`img[data-index="${targetIndex}"]`).remove();
 
-    if ($('.js-file').length == 0) $('#image-box').append(buildFileField(fileIndex[0]));
+    if ($('.main__content__img-up__file__l__field__file').length == 0) $('#image-box').append(buildFileField(fileIndex[0]));
   });
 
 

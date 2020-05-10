@@ -54,15 +54,21 @@ class ItemsController < ApplicationController
   # PATCH/PUT /items/1
   # PATCH/PUT /items/1.json
   def update
-    respond_to do |format|
-      if @item.update(item_params)
-        format.html { redirect_to @item, notice: 'Item was successfully updated.' }
-        format.json { render :show, status: :ok, location: @item }
-        
-      else
-        format.html { render :edit }
-        format.json { render json: @item.errors, status: :unprocessable_entity }
+    imageLength = @item.images.length
+    deleteImage = 0
+
+    for num in 0..9
+      if params[:item][:images_attributes][num.to_s] != nil
+        if params[:item][:images_attributes][num.to_s][:_destroy] == "1"
+          deleteImage += 1
+        end
       end
+    end
+    if @item.valid? && !@item.images.empty? && imageLength != deleteImage
+      @item.update(item_params)
+      redirect_to item_path
+    else
+      redirect_to edit_item_path(@item)
     end
   end
 
@@ -73,7 +79,6 @@ class ItemsController < ApplicationController
     respond_to do |format|
       format.html { redirect_to items_url, notice: 'Item was successfully destroyed.' }
       format.json { head :no_content }
-      
     end
   end
 

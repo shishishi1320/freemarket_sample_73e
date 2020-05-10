@@ -5,7 +5,7 @@ class Item < ApplicationRecord
   accepts_nested_attributes_for :images, allow_destroy: true
   accepts_nested_attributes_for :brand
 
-  # enum status: { sell: 0, buy: 1 , trading:2}
+
 
   enum status: { sell: 0, buy: 1 , trading:2}
   scope :on_sell, -> { where(status: 0) }

@@ -1,9 +1,7 @@
 class ItemsController < ApplicationController
   before_action :authenticate_user!, only: [:buy]
   before_action :set_item, only: [:show, :edit, :update, :buy, :destroy]
-  
   before_action :set_parent, only: [:new, :create,:edit, :update, :destroy]
-
 
   # GET /items
   # GET /items.json
@@ -30,6 +28,17 @@ class ItemsController < ApplicationController
   def get_delivery_method
   end
 
+  def set_parents
+  end
+
+  def set_children
+    @children = Category.where(ancestry: params[:parent_id])
+  end
+
+  def set_grandchildren
+    @grandchildren = Category.where(ancestry: params[:ancestry])
+  end
+
   # GET /items/1/edit
   def edit
     @item = Item.find(params[:id])
@@ -45,8 +54,9 @@ class ItemsController < ApplicationController
   def create
     @item = Item.new(item_params)
     if @item.save
-      redirect_to root_path, notice: 'Event was successfully created.'
+      # redirect_to root_path, notice: 'Event was successfully created.'
     else
+      @item.images.build
       render :new
     end
   end

@@ -12,6 +12,9 @@ Rails.application.routes.draw do
   resources :items do
     collection do
       get "get_delivery_method"
+      get "set_parents"
+      get "set_children"
+      get "set_grandchildren"
     end
     member do
       get :buy

@@ -77,8 +77,8 @@
 ## credit_cardテーブル
 |Column|Type|Options|
 |------|----|-----|
-|card_id|integer|null: false|
-|customer_id|integer|null: false|
+|card_id|string|null: false|
+|customer_id|string|null: false|
 |user_id|references|null: false, foreign_key: true|
 ## Association
 - belongs_to :user

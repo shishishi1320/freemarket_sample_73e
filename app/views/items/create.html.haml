@@ -1,0 +1,13 @@
+.wrapper
+  = render 'partial/new-header'
+  .main
+    .main__content
+      .main__content__create
+        .main__content__create__box
+          商品の出品が完了しました
+          %br
+          = link_to root_path,class: "main__content__create__box__link" do
+            トップページに戻る
+          = link_to item_path(@item.id),class: "main__content__create__box__link" do
+            商品詳細ページをみる
+  = render 'partial/new-footer'

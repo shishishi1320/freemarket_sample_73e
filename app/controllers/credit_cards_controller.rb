@@ -18,7 +18,7 @@ class CreditCardsController < ApplicationController
       if @card.save
         redirect_to user_path(current_user.id)
       else
-        redirect_to action: "create"
+        redirect_to action: "new"
       end
     end
   end

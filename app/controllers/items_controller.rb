@@ -111,15 +111,16 @@ class ItemsController < ApplicationController
   def pay
     unless @item.buy?
       @card = CreditCard.find_by(user_id: current_user.id)
-      if @card.present?
-        @item.status = 1
-        @item.save!
+      if @card.present?  
+        @item.buyer_id = current_user.id
+        @item.status = 1    
         Payjp.api_key = Rails.application.credentials.dig(:payjp, :PAYJP_SECRET_KEY)
         @charge = Payjp::Charge.create(
         amount: @item.price,
         customer: @card.customer_id,
         currency: 'jpy'
         )
+        @item.save!   
       else
         redirect_to new_credit_card_path, alert: "クレジットカードを登録してください"
       end

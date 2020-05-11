@@ -82,10 +82,11 @@
           @include btn($btn-required-grey);
           color: #fff;
           margin-top: 32px;
+          text-align: center;
           a {
             color: white;
             text-decoration: none;
-            margin: 110px;
+            line-height: 48px;
           }
         }
       }

@@ -8,7 +8,7 @@ Rails.application.routes.draw do
   end
   root 'items#index'
   resources :users, only: [:show, :destroy]
-  resources :credit_cards, only: [:new, :create, :index, :destroy] 
+  resources :credit_cards, only: [:new, :create, :show, :destroy] 
   resources :items do
     collection do
       get "get_delivery_method"

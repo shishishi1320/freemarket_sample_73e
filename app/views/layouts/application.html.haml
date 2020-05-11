@@ -10,4 +10,5 @@
     = javascript_include_tag 'application', 'data-turbolinks-track': 'reload'
     %script{src:  "//jpostal-1006.appspot.com/jquery.jpostal.js", type:  "text/javascript"}
   %body
+    #request{action: request.path}
     = yield

@@ -1,3 +1,4 @@
+
 .wrapper
   = render 'items/header'
 
@@ -7,9 +8,11 @@
   .main-content__right
     .main-content__right__header
       .main-content__right__header__icon
+
         = link_to image_tag("iconmonstr-friend-1-240.png", width: '49', alt: "サンプル画像"), "#"
       %h2.main-content__right__header__bold
         =@user.nickname
+
       %h2.main-content__right__header__bold
         出品数
 
@@ -29,7 +32,9 @@
         %li.main-content__right__content__non-active__not-found
           -# 過去に取引した商品がありません
 
+
 .footer  
   = render "items/banner"
   = render "items/footer"
   = render "items/purchase"
+

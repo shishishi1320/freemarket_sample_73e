@@ -54,6 +54,7 @@ $(document).on('turbolinks:load', ()=> {
     }
     else {$("#delivery_method-parent").remove();}
   });
+  
   // 画像プレビュー
   const buildFileField = (index)=> {
     const html = `<div data-index="${index}" class="js-file_group">
@@ -103,17 +104,83 @@ $(document).on('turbolinks:load', ()=> {
     $(this).parent().remove();
     $(`img[data-index="${targetIndex}"]`).remove();
 
-    if ($('.main__content__img-up__file__l__field__file').length == 0) $('#image-box').append(buildFileField(fileIndex[0]));
+    if ($('.js-file').length == 1) $('#image-box').append(buildFileField(fileIndex[0]));
   });
-});
 
-//item詳細ページの画面表示
-$(function () {
-  $(".itembox__body__image__sub__thumb").first().addClass("active");
-  $(".itembox__body__image__sub__thumb__photo").click(function () { 
-    image_url = $(this).attr("src");
-    $(".itembox__body__image__main__photo").attr("src", image_url).hide().fadeIn();
-    $(".itembox__body__image__sub__thumb.active").removeClass("active");
-    $(this).parent().addClass("active"); 
+  var request = $("#request").attr("action");
+  if(request.indexOf("new") != -1 || request.indexOf("items") != -1){
+  $.ajax({
+    url: "/items/set_parents"
+  }).done(function(data){
+    $("#category-select").append(`
+      <select class="main__content__item-detail__select select-parent" name="item[category_id]" id="item_category_id">
+      <option value="">選択してください</option></select>
+      `);
+    data.parents.forEach(function(parent){
+      $(".select-parent").append(`<option value="${parent.id}">${parent.name}</option>`);
+    })
+    $(".select-parent").on("change", function(){
+      $(".select-child").remove();
+      $(".select-grandchild").remove();
+      if($(this).val() == ""){
+        $(".select-parent").attr("id"  , "item_category_id");
+        $(".select-parent").attr("name", "item[category_id]");
+        $(".select-parent").css("margin-bottom", "0");
+      }else{
+        $.ajax({
+          url     : "/items/set_children",
+          data    : {parent_id: $(this).val()},
+          dataType: "json"
+        }).done(function(data){
+          $(".select-parent").attr("id"  , "select-parent");
+          $(".select-parent").attr("name", "select-parent");
+          $(".select-parent").css("margin-bottom", "10px");
+          $("#category-select").append(`
+            <select class="main__content__item-detail__select select-child" name="item[category_id]" id="item_category_id">
+            <option value="">選択してください</option></select>
+            `);
+          data.children.forEach(function(child){
+            $(".select-child").append(`<option value="${child.id}">${child.name}</option>`);
+          })
+        })
+      }
+    })
+    $("#category-select").on("change", ".select-child", function(){
+      $(".select-grandchild").remove();
+      if($(this).val() == ""){
+        $(".select-child").attr("id"  , "item_category_id");
+        $(".select-child").attr("name", "item[category_id]");
+        $(".select-child").css("margin-bottom", "0");
+      }else{
+        $.ajax({
+          url     : "/items/set_grandchildren",
+          data    : {ancestry: `${$(".select-parent").val()}/${$(this).val()}`},
+          dataType: "json"
+        }).done(function(data){
+          $(".select-child").attr("id"  , "select-parent");
+          $(".select-child").attr("name", "select-parent");
+          $(".select-child").css("margin-bottom", "10px");
+          $("#category-select").append(`
+            <select class="main__content__item-detail__select select-grandchild" name="item[category_id]" id="item_category_id">
+            <option value="">選択してください</option></select>
+            `);
+          data.grandchildren.forEach(function(grandchild){
+            $(".select-grandchild").append(`<option value="${grandchild.id}">${grandchild.name}</option>`);
+          })
+        })
+      }
+    })
+  })
+  }
+
+  //item詳細ページの画面表示
+  $(function () {
+    $(".itembox__body__image__sub__thumb").first().addClass("active");
+    $(".itembox__body__image__sub__thumb__photo").click(function () { 
+      image_url = $(this).attr("src");
+      $(".itembox__body__image__main__photo").attr("src", image_url).hide().fadeIn();
+      $(".itembox__body__image__sub__thumb.active").removeClass("active");
+      $(this).parent().addClass("active"); 
+    });
   });
 });

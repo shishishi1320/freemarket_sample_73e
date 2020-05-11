@@ -53,6 +53,24 @@
   max-width: 700px;
   margin: 0 auto;
   &__content{
+    &__create{
+      height: calc(100vh - 348px);
+      background-color: $main-background;
+      &__box{
+        background-color: #fff;
+        height: 150px;
+        font-size: 24px;
+        font-weight: bold;
+        padding: 5% 0;
+        text-align: center;
+        &__link{
+          color: #62A6E6;
+          font-weight: normal;
+          font-size: 20px;
+          padding-left: 10px;
+        }
+      }
+    }
     &__error{
       padding: 20px 40px 0 40px;
       li{

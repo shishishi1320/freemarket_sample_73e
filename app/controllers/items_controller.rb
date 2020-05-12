@@ -43,8 +43,11 @@ class ItemsController < ApplicationController
 
   # GET /items/1/edit
   def edit
+    if user_signed_in? && current_user.id == @item.seller_id
     @item = Item.find(params[:id])
-
+    else
+      redirect_to root_path
+    end
   end
 
   # POST /items

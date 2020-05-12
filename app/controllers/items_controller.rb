@@ -91,37 +91,41 @@ class ItemsController < ApplicationController
   end
 
   def buy
-    @address = Address.find(current_user.id)
-    unless @item.buy?
-      @card = CreditCard.find_by(user_id: current_user.id)
-      if @card.present?
-        Payjp.api_key = Rails.application.credentials.dig(:payjp, :PAYJP_SECRET_KEY)
-        customer = Payjp::Customer.retrieve(@card.customer_id)
-        @customer_card = customer.cards.retrieve(@card.card_id)
-  
-        @card_brand = @customer_card.brand
-        case @card_brand
-        when "Visa"
-          @card_src = "visa.png"
-        when "JCB"
-          @card_src = "jcb.png"
-        when "Psypal"
-          @card_src = "paypal.png"
-        when "MasterCard"
-          @card_src = "master.png"
-        when "American Express"
-          @card_src = "amex.png"
-        when "Diners Club"
-          @card_src = "diners.png"
-        when "Discover"
-          @card_src = "discover.png"
-        end
-  
-        @exp_month = @customer_card.exp_month.to_s
-        @exp_year = @customer_card.exp_year.to_s.slice(2,3)
-      end
+    if user_signed_in? && current_user.id == @item.seller_id
+      redirect_to root_path
     else
-      redirect_to item_path(@item)
+      @address = Address.find(current_user.id)
+      unless @item.buy?
+        @card = CreditCard.find_by(user_id: current_user.id)
+        if @card.present?
+          Payjp.api_key = Rails.application.credentials.dig(:payjp, :PAYJP_SECRET_KEY)
+          customer = Payjp::Customer.retrieve(@card.customer_id)
+          @customer_card = customer.cards.retrieve(@card.card_id)
+    
+          @card_brand = @customer_card.brand
+          case @card_brand
+          when "Visa"
+            @card_src = "visa.png"
+          when "JCB"
+            @card_src = "jcb.png"
+          when "Psypal"
+            @card_src = "paypal.png"
+          when "MasterCard"
+            @card_src = "master.png"
+          when "American Express"
+            @card_src = "amex.png"
+          when "Diners Club"
+            @card_src = "diners.png"
+          when "Discover"
+            @card_src = "discover.png"
+          end
+    
+          @exp_month = @customer_card.exp_month.to_s
+          @exp_year = @customer_card.exp_year.to_s.slice(2,3)
+        end
+      else
+        redirect_to item_path(@item)
+      end
     end
   end
 

@@ -3,9 +3,6 @@ class ItemsController < ApplicationController
   before_action :set_item, only: [:show, :edit, :update, :buy, :destroy,:pay]
   before_action :set_parent, only: [:new, :create,:edit, :update, :destroy, :set_parents]
 
-  # require "payjp" 
-
-
   # GET /items
   # GET /items.json
   def index

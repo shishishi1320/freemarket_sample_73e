@@ -2,8 +2,7 @@ class ItemsController < ApplicationController
   before_action :authenticate_user!, only: [:buy, :new, :edit, :update, :destroy, :pay]
   before_action :set_item, only: [:show, :edit, :update, :buy, :destroy,:pay]
   before_action :set_parent, only: [:new, :create,:edit, :update, :destroy, :set_parents]
-  
-  
+
   # require "payjp" 
 
 
@@ -51,6 +50,9 @@ class ItemsController < ApplicationController
     @item = Item.find(params[:id])
     @children = Category.where(ancestry: params[:parent_id])
     @grandchildren = Category.where(ancestry: params[:ancestry])
+    else
+    redirect_to root_path
+    end
   end
 
   # POST /items
@@ -170,5 +172,4 @@ class ItemsController < ApplicationController
     def item_params
       params.require(:item).permit(:name, :price, :text, :status, :size, :condition, :shipping_cost, :delivery_method, :delivery_area, :delivery_date, :category_id, brand_attributes: [:name], images_attributes: [:url, :_destroy, :id]).merge(seller_id: current_user.id, status: 0)
     end
-  end
 end

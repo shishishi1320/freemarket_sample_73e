@@ -1,7 +1,6 @@
 class ItemsController < ApplicationController
-
-  before_action :authenticate_user!, only: [:buy, :pay]
-  before_action :set_item, only: [:show, :edit, :update, :destroy, :buy, :pay]
+  before_action :authenticate_user!, only: [:buy, :new, :edit, :update, :destroy, :pay]
+  before_action :set_item, only: [:show, :edit, :update, :buy, :destroy,:pay]
   before_action :set_parent, only: [:new, :create,:edit, :update, :destroy, :set_parents]
   require "payjp" 
 
@@ -44,8 +43,11 @@ class ItemsController < ApplicationController
 
   # GET /items/1/edit
   def edit
+    if user_signed_in? && current_user.id == @item.seller_id
     @item = Item.find(params[:id])
-
+    else
+      redirect_to root_path
+    end
   end
 
   # POST /items
@@ -74,7 +76,7 @@ class ItemsController < ApplicationController
       end
     end
     if @item.valid? && !@item.images.empty? && imageLength != deleteImage
-      @item.update(item_params)
+      @item.update(item_params) if user_signed_in? && current_user.id == @item.seller_id
       redirect_to item_path
     else
       redirect_to edit_item_path(@item)
@@ -84,7 +86,7 @@ class ItemsController < ApplicationController
   # DELETE /items/1
   # DELETE /items/1.json
   def destroy
-    @item.destroy  if user_signed_in? && current_user.id == @item.seller_id
+    @item.destroy if user_signed_in? && current_user.id == @item.seller_id
     respond_to do |format|
       format.html { redirect_to items_url, notice: 'Item was successfully destroyed.' }
       format.json { head :no_content }
@@ -92,37 +94,41 @@ class ItemsController < ApplicationController
   end
 
   def buy
-    @address = Address.find(current_user.id)
-    unless @item.buy?
-      @card = CreditCard.find_by(user_id: current_user.id)
-      if @card.present?
-        Payjp.api_key = Rails.application.credentials.dig(:payjp, :PAYJP_SECRET_KEY)
-        customer = Payjp::Customer.retrieve(@card.customer_id)
-        @customer_card = customer.cards.retrieve(@card.card_id)
-  
-        @card_brand = @customer_card.brand
-        case @card_brand
-        when "Visa"
-          @card_src = "visa.png"
-        when "JCB"
-          @card_src = "jcb.png"
-        when "Psypal"
-          @card_src = "paypal.png"
-        when "MasterCard"
-          @card_src = "master.png"
-        when "American Express"
-          @card_src = "amex.png"
-        when "Diners Club"
-          @card_src = "diners.png"
-        when "Discover"
-          @card_src = "discover.png"
-        end
-  
-        @exp_month = @customer_card.exp_month.to_s
-        @exp_year = @customer_card.exp_year.to_s.slice(2,3)
-      end
+    if user_signed_in? && current_user.id == @item.seller_id
+      redirect_to root_path
     else
-      redirect_to item_path(@item)
+      @address = Address.find(current_user.id)
+      unless @item.buy?
+        @card = CreditCard.find_by(user_id: current_user.id)
+        if @card.present?
+          Payjp.api_key = Rails.application.credentials.dig(:payjp, :PAYJP_SECRET_KEY)
+          customer = Payjp::Customer.retrieve(@card.customer_id)
+          @customer_card = customer.cards.retrieve(@card.card_id)
+    
+          @card_brand = @customer_card.brand
+          case @card_brand
+          when "Visa"
+            @card_src = "visa.png"
+          when "JCB"
+            @card_src = "jcb.png"
+          when "Psypal"
+            @card_src = "paypal.png"
+          when "MasterCard"
+            @card_src = "master.png"
+          when "American Express"
+            @card_src = "amex.png"
+          when "Diners Club"
+            @card_src = "diners.png"
+          when "Discover"
+            @card_src = "discover.png"
+          end
+    
+          @exp_month = @customer_card.exp_month.to_s
+          @exp_year = @customer_card.exp_year.to_s.slice(2,3)
+        end
+      else
+        redirect_to item_path(@item)
+      end
     end
   end
 
@@ -161,4 +167,5 @@ class ItemsController < ApplicationController
     def item_params
       params.require(:item).permit(:name, :price, :text, :status, :size, :condition, :shipping_cost, :delivery_method, :delivery_area, :delivery_date, :category_id, brand_attributes: [:name], images_attributes: [:url, :_destroy, :id]).merge(seller_id: current_user.id, status: 0)
     end
+
 end

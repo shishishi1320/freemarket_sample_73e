@@ -35,7 +35,6 @@
       height:200px;
       width: 100%;
       text-align: center;
-      background-image: url(/assets/icon_brand.png);
       &__icon {
         height: 60px;
         width: 60px;
@@ -86,7 +85,6 @@
         display: block;
         &__not-found {
           padding: 160px 0 60px;
-          background: url(/assets/icon_brand.png);
           background-repeat: no-repeat;
           background-position: center 40px;
           background-size: 78px 85px;

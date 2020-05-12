@@ -1,0 +1,12 @@
+.wrapper
+  = render 'partial/new-header'
+
+.new-wrapper
+  .new-wrapper__main
+    .new-wrapper__main__create
+      商品の購入が完了しました
+      %br
+      = link_to root_path,class: "link-blue" do
+        トップページに戻る
+
+= render 'partial/new-footer'

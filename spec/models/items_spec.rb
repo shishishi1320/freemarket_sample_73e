@@ -32,8 +32,8 @@ describe Item do
         expect(item).to be_valid
       end
 
-      it "価格が9999998円以下なら保存ができる" do
-        item = build(:item ,price: 9999998)
+      it "価格が999999円以下なら保存ができる" do
+        item = build(:item ,price: 9999999)
         item.images.build      
         expect(item).to be_valid
       end
@@ -71,9 +71,9 @@ describe Item do
       end
 
       it " 価格が9999999以上は保存できないこと" do
-        item = build(:item,price:9999999)
+        item = build(:item,price:10000000)
         item.valid?
-        expect(item.errors[:price]).to include("は9999999より小さい値にしてください")
+        expect(item.errors[:price]).to include("は10000000より小さい値にしてください")
       end
 
       it " 価格が299以下は保存できないこと" do

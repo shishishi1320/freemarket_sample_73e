@@ -29,7 +29,7 @@ class Item < ApplicationRecord
   validate :img_erorr
   validates :name, :text, :category_id, :size, :condition, :shipping_cost, :delivery_method, :delivery_area, :delivery_date,  :price, :seller_id, presence: true
   validates :text, length: { maximum: 1000 }
-  validates :price, numericality: { greater_than: 299, less_than: 9999999 }   
+  validates :price, numericality: { greater_than: 299, less_than: 10000000 }   
 
   def img_erorr
     if images.present?

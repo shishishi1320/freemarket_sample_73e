@@ -39,14 +39,14 @@
               = f.label :郵便番号
               %span.hissu 必須 
             .field-input
-              = f.number_field :postal_code,placeholder: "ハイフンなし"
+              = f.number_field :postal_code,placeholder: "ハイフンなし",maxlength:8
 
           .field
             .field-label
               = f.label :都道府県
               %span.hissu 必須 
             .field-input
-              = f.text_field :prefecture,placeholder: "東京都"
+              = f.select :prefecture, Item.delivery_areas.keys,class:"prefecture-selecter" 
           .field
             .field-label
               = f.label :市区町村
@@ -68,7 +68,7 @@
             .field-label
               = f.label :電話番号
             .field-input
-              = f.text_field :phone_number,placeholder: "ハイフンなし"              
+              = f.text_field :phone_number,placeholder: "ハイフンなし" ,maxlength:11             
               
           .actions
             = f.submit "新規会員登録", class: 'btn'

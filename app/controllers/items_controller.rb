@@ -76,7 +76,7 @@ class ItemsController < ApplicationController
       end
     end
     if @item.valid? && !@item.images.empty? && imageLength != deleteImage
-      @item.update(item_params)
+      @item.update(item_params) if user_signed_in? && current_user.id == @item.seller_id
       redirect_to item_path
     else
       redirect_to edit_item_path(@item)
@@ -86,7 +86,7 @@ class ItemsController < ApplicationController
   # DELETE /items/1
   # DELETE /items/1.json
   def destroy
-    @item.destroy  if user_signed_in? && current_user.id == @item.seller_id
+    @item.destroy if user_signed_in? && current_user.id == @item.seller_id
     respond_to do |format|
       format.html { redirect_to items_url, notice: 'Item was successfully destroyed.' }
       format.json { head :no_content }

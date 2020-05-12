@@ -32,6 +32,8 @@ class ItemsController < ApplicationController
   end
 
   def set_parents
+    @children = Category.where(ancestry: params[:parent_id])
+    @grandchildren = Category.where(ancestry: params[:ancestry])
   end
 
   def set_children
@@ -45,7 +47,8 @@ class ItemsController < ApplicationController
   # GET /items/1/edit
   def edit
     @item = Item.find(params[:id])
-
+    @children = Category.where(ancestry: params[:parent_id])
+    @grandchildren = Category.where(ancestry: params[:ancestry])
   end
 
   # POST /items

@@ -2,7 +2,7 @@ class ItemsController < ApplicationController
   before_action :authenticate_user!, only: [:buy, :new, :edit, :update, :destroy, :pay]
   before_action :set_item, only: [:show, :edit, :update, :buy, :destroy,:pay]
   before_action :set_parent, only: [:new, :create,:edit, :update, :destroy, :set_parents]
-  require "payjp" 
+  # require "payjp" 
 
 
   # GET /items

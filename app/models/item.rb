@@ -5,7 +5,7 @@ class Item < ApplicationRecord
   accepts_nested_attributes_for :images, allow_destroy: true
   accepts_nested_attributes_for :brand
 
-  # enum status: { sell: 0, buy: 1 , trading:2}
+
 
   enum status: { sell: 0, buy: 1 , trading:2}
   scope :on_sell, -> { where(status: 0) }
@@ -28,6 +28,9 @@ class Item < ApplicationRecord
 
   validate :img_erorr
   validates :name, :text, :category_id, :size, :condition, :shipping_cost, :delivery_method, :delivery_area, :delivery_date,  :price, :seller_id, presence: true
+  validates :text, length: { maximum: 1000 }
+  validates :price, numericality: { greater_than: 299, less_than: 9999999 }   
+
   def img_erorr
     if images.present?
     else

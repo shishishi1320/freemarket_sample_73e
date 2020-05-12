@@ -1,7 +1,9 @@
 class ItemsController < ApplicationController
-  before_action :authenticate_user!, only: [:buy]
-  before_action :set_item, only: [:show, :edit, :update, :buy, :destroy]
-  before_action :set_parent, only: [:new, :create]
+
+  before_action :authenticate_user!, only: [:buy, :pay]
+  before_action :set_item, only: [:show, :edit, :update, :destroy, :buy, :pay]
+  before_action :set_parent, only: [:new, :create,:edit, :update, :destroy, :set_parents]
+  require "payjp" 
 
 
   # GET /items
@@ -29,14 +31,21 @@ class ItemsController < ApplicationController
   def get_delivery_method
   end
 
+  def set_parents
+  end
+
+  def set_children
+    @children = Category.where(ancestry: params[:parent_id])
+  end
+
+  def set_grandchildren
+    @grandchildren = Category.where(ancestry: params[:ancestry])
+  end
+
   # GET /items/1/edit
   def edit
     @item = Item.find(params[:id])
 
-  end
-
-  def buy
-    @address = Address.find(current_user.id)
   end
 
   # POST /items
@@ -44,8 +53,9 @@ class ItemsController < ApplicationController
   def create
     @item = Item.new(item_params)
     if @item.save
-      redirect_to root_path, notice: 'Event was successfully created.'
+      # redirect_to root_path, notice: 'Event was successfully created.'
     else
+      @item.images.build
       render :new
     end
   end
@@ -53,15 +63,21 @@ class ItemsController < ApplicationController
   # PATCH/PUT /items/1
   # PATCH/PUT /items/1.json
   def update
-    respond_to do |format|
-      if @item.update(item_params)
-        format.html { redirect_to @item, notice: 'Item was successfully updated.' }
-        format.json { render :show, status: :ok, location: @item }
-        
-      else
-        format.html { render :edit }
-        format.json { render json: @item.errors, status: :unprocessable_entity }
+    imageLength = @item.images.length
+    deleteImage = 0
+
+    for num in 0..9
+      if params[:item][:images_attributes][num.to_s] != nil
+        if params[:item][:images_attributes][num.to_s][:_destroy] == "1"
+          deleteImage += 1
+        end
       end
+    end
+    if @item.valid? && !@item.images.empty? && imageLength != deleteImage
+      @item.update(item_params)
+      redirect_to item_path
+    else
+      redirect_to edit_item_path(@item)
     end
   end
 
@@ -72,7 +88,62 @@ class ItemsController < ApplicationController
     respond_to do |format|
       format.html { redirect_to items_url, notice: 'Item was successfully destroyed.' }
       format.json { head :no_content }
-      
+    end
+  end
+
+  def buy
+    @address = Address.find(current_user.id)
+    unless @item.buy?
+      @card = CreditCard.find_by(user_id: current_user.id)
+      if @card.present?
+        Payjp.api_key = Rails.application.credentials.dig(:payjp, :PAYJP_SECRET_KEY)
+        customer = Payjp::Customer.retrieve(@card.customer_id)
+        @customer_card = customer.cards.retrieve(@card.card_id)
+  
+        @card_brand = @customer_card.brand
+        case @card_brand
+        when "Visa"
+          @card_src = "visa.png"
+        when "JCB"
+          @card_src = "jcb.png"
+        when "Psypal"
+          @card_src = "paypal.png"
+        when "MasterCard"
+          @card_src = "master.png"
+        when "American Express"
+          @card_src = "amex.png"
+        when "Diners Club"
+          @card_src = "diners.png"
+        when "Discover"
+          @card_src = "discover.png"
+        end
+  
+        @exp_month = @customer_card.exp_month.to_s
+        @exp_year = @customer_card.exp_year.to_s.slice(2,3)
+      end
+    else
+      redirect_to item_path(@item)
+    end
+  end
+
+  def pay
+    unless @item.buy?
+      @card = CreditCard.find_by(user_id: current_user.id)
+      if @card.present?  
+        @item.buyer_id = current_user.id
+        @item.status = 1    
+        Payjp.api_key = Rails.application.credentials.dig(:payjp, :PAYJP_SECRET_KEY)
+        @charge = Payjp::Charge.create(
+        amount: @item.price,
+        customer: @card.customer_id,
+        currency: 'jpy'
+        )
+        @item.save!   
+      else
+        redirect_to new_credit_card_path, alert: "クレジットカードを登録してください"
+      end
+    else
+      redirect_to item_path(@item), alert: "購入が完了しました"
     end
   end
 

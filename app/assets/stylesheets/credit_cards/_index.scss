@@ -29,7 +29,6 @@
     }
   }
   &__right {
-    height: 360px;
     width: 700px;
     list-style: none;
     background-color: #fff;
@@ -41,7 +40,7 @@
       font-size: 18px;
       font-weight: bold;
     }
-    &__innner {
+    &__inner {
       padding: 64px;
       &__credit-cards {
         max-width: 320px;

@@ -4,6 +4,7 @@
 }
 
 .show-main{
+  padding: 40px;
   background-color: #f8f8f8;
   .itembox{
     height: 1600px;
@@ -85,8 +86,8 @@
           background-color: #eee;
           font-size: 12px;
           font-weight: normal;
-          padding: 1px;
           border: 2px solid #dedede;
+          text-align: center;
        }  
         td{
           border: 2px solid #dedede;

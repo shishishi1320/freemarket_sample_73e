@@ -1,0 +1,61 @@
+.wrapper
+  = render 'partial/new-header'
+
+  .main
+    .main__content
+      %h.main__content__title
+        購入内容の確認
+      %section.main__content__item
+        .main__content__item__inner
+          .main__content__item__inner__box
+            %h.main__content__item__inner__box__img
+              - @item.images.first(1).each do |image|
+                = image_tag image.url.to_s,  size:'130x130'
+            .main__content__item__inner__box__detail
+              %p.main__content__item__inner__box__detail__item-name
+                = @item.name
+              %p.main__content__item__inner__box__detail__bold
+                = enmark_item_price(@item)
+              %span （税込）送料込み
+      %section.main__content__buy
+        .main__content__buy__inner
+          .main__content__buy__inner__price
+            .main__content__buy__inner__price__text
+              支払い金額
+            .main__content__buy__inner__price__int
+              = enmark_item_price(@item)
+          %section.main__content__buy__inner__section
+            .main__content__buy__inner__section__div
+              %h 支払い方法
+              - if current_user.credit_card.present?
+                .main-content__buy__inner__section__div__title
+                  .main-content__buy__inner__section__div__title__credit-cards
+                    クレジットカード
+                  %ul.main-content__buy__inner__section__div__title__credit-cards__contents
+                    %li.main-content__buy__inner__section__div__title__credit-cards__contents__list
+                    .main-content__buy__inner__section__div__title__credit-cards__contents__list__pay-num
+                      = "**** **** **** " + @customer_card.last4
+                    .main-content__buy__inner__section__div__title__credit-cards__contents__list__time
+                      = @exp_month + " / " + @exp_year
+                    .main-content__buy__inner__section__div__title__credit-cards__contents__list__icon
+                      = image_tag "#{@card_src}", size: "70x50", class: "credit_card_info__brand__img", alt: @card_brand
+                
+              - else                
+                = link_to new_credit_card_path, class:"main__content__buy__inner__section__div__link" do
+                  %i.fas.fa-plus-circle
+                    登録してください
+
+          %section.main__content__buy__inner__section
+            .main__content__buy__inner__section__div
+              %h 配送先
+              .main__content__buy__inner__section__div__address
+                = user_post_code(@address)
+                %br
+                = safe_join(user_address_info(@address).split("\n"),tag(:br))
+                %br
+                = user_full_name(@address)
+          .main__content__buy__inner__btn
+            = link_to pay_item_path(@item), class: "main__content__buy__inner__btn" do
+              購入を確定する
+
+  = render 'partial/new-footer'

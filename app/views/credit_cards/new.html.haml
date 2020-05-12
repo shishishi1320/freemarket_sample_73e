@@ -1,5 +1,78 @@
-%h1 New credit_card
+.wrapper
+  = render 'items/header'
 
-= render 'form'
+.main-content
+  =render 'mypage/side'
 
-= link_to 'Back', credit_cards_path
+  .main-content__right
+    %h2.main-content__right__title クレジットカード情報入力
+    = form_tag('/credit_cards', method: :post, id: "charge-form", class: "details", name: "inputForm") do
+      .main-content__right__form
+        .main-content__right__form__card-number
+          .main-content__right__form__card-number__label
+            %label カード番号
+            %span.hissu 必須 
+          .main-content__right__form__card-number__input
+            %input{type: "password", name: "password", placeholder:"半角数字のみ", maxlength: "16", id: "payment_card_no"}
+        %ul.main-content__right__form__card-icon
+          %li.main-content__right__form__card-icon__visa
+            = image_tag("visa.png", width: '49', alt: "サンプル画像", id:"visa.png")
+          %li.main-content__right__form__card-icon__master
+            = image_tag("master.png", width: '49', alt: "サンプル画像", id:"master.png")
+          %li.main-content__right__form__card-icon__saison
+            = image_tag("paypal.png", width: '49', alt: "サンプル画像", id:"paypal.png")
+          %li.main-content__right__form__card-icon__jcb
+            = image_tag("jcb.png", width: '49', alt: "サンプル画像", id:"jcb.png")
+          %li.main-content__right__form__card-icon__americanexpress
+            = image_tag("amex.png", width: '49', alt: "サンプル画像", id:"amex.png")
+          %li.main-content__right__form__card-icon__diners
+            = image_tag("diners.png", width: '49', alt: "サンプル画像", id:"diners.png")
+          %li.main-content__right__form__card-icon__discover
+            = image_tag("discover.png", width: '49', alt: "サンプル画像", id:"discover.png")
+
+        .main-content__right__form__date
+          .main-content__right__form__date__label
+            %label 有効期限
+            %span.hissu 必須 
+        %select{class: "main-content__right__form__date__select", name: "payment_card_month",id: "payment_card_month" }
+          %option 01
+          %option 02
+          %option 03
+          %option 04
+          %option 05
+          %option 06
+          %option 07
+          %option 08
+          %option 09
+          %option 10
+          %option 11
+          %option 12
+        %span 月
+        %select{class: "main-content__right__form__date__select",name: "payment_card_year", id: "payment_card_year"}
+          %option{value: "2020"} 20
+          %option{value: "2021"} 21
+          %option{value: "2022"} 22
+          %option{value: "2023"} 23
+          %option{value: "2024"} 24
+          %option{value: "2025"} 25
+          %option{value: "2026"} 26
+          %option{value: "2027"} 27
+          %option{value: "2028"} 28
+          %option{value: "2029"} 29
+          %option{value: "2030"} 30
+        %span 年
+        .main-content__right__form__code
+          .main-content__right__form__code__label
+            %label セキュリティコード
+            %span.hissu 必須 
+          .main-content__right__form__code__input
+            %input{type: "password", name: "password", placeholder:"カード背面4桁もしくは3桁の番号", maxlength: "4", class: "securitycode__cardsecurity__form", id: "payment_card_cvc"}
+        .main-content__right__form__code__question
+          = link_to 'カード裏面の番号とは？' , "#"
+        %button.main-content__right__form__submit{type: "submit", id: "payment_card_submit-button"} 追加する
+        
+
+.footer  
+  = render "items/banner"
+  = render "items/footer"
+  = render "items/purchase"

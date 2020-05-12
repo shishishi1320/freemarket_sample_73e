@@ -1,11 +1,11 @@
 class Item < ApplicationRecord
-  belongs_to :brand
+  belongs_to :brand, dependent: :destroy, optional: true
   belongs_to :category, optional: true
   has_many :images, dependent: :destroy
   accepts_nested_attributes_for :images, allow_destroy: true
   accepts_nested_attributes_for :brand
 
-  # enum status: { sell: 0, buy: 1 , trading:2}
+
 
   enum status: { sell: 0, buy: 1 , trading:2}
   scope :on_sell, -> { where(status: 0) }
@@ -24,13 +24,13 @@ class Item < ApplicationRecord
   enum delivery_date:{ "1~2日で発送": 0, "2~3日で発送": 1, "4~7日で発送": 2 }
   enum size:{ "FREE SIZE": 0, "XXS以下": 1, "XS(SS)": 2, "S": 3, "M": 4, "L": 5, "XL(LL)": 6, "2XL(3L)": 7, "3XL(4L)": 8, "4XL(5L)以上": 9 }
   enum condition:{ 新品、未使用: 0, 未使用に近い: 1, 目立った傷や汚れなし: 2, やや傷や汚れあり: 3, 傷や汚れあり: 4, 全体的に状態が悪い: 5 }
-  
-  # 仮置きデータ。JS等実装の際整備します
-  enum delivery_method: { 未定: 0, らくらくメルカリ便: 1, ゆうメール: 2 }
-  # ここまで
+  enum delivery_method: { "未定": 0, "らくらくメルカリ便": 1, "ゆうメール": 2, "レターパック": 3, "普通郵便（定型、定型外）": 4, "クロネコヤマト": 5, "ゆうパック": 6, "クリックポスト": 7, "ゆうパケット": 8 }
 
   validate :img_erorr
   validates :name, :text, :category_id, :size, :condition, :shipping_cost, :delivery_method, :delivery_area, :delivery_date,  :price, :seller_id, presence: true
+  validates :text, length: { maximum: 1000 }
+  validates :price, numericality: { greater_than: 299, less_than: 10000000 }   
+
   def img_erorr
     if images.present?
     else

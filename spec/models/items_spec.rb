@@ -8,10 +8,38 @@ describe Item do
         expect(item).to be_valid
       end
 
-
-
-      it "必須以外のブランドが無くてもと保存ができる" do
+      it "ブランドが無くてもと保存ができる" do
         item = build(:item ,brand_id:nil)
+        item.images.build      
+        expect(item).to be_valid
+      end
+
+      it "buyer_idが無くてもと保存ができる" do
+        item = build(:item ,buyer_id:nil)
+        item.images.build      
+        expect(item).to be_valid
+      end
+
+      it "statusが無くてもと保存ができる" do
+        item = build(:item ,buyer_id:nil)
+        item.images.build      
+        expect(item).to be_valid
+      end
+
+      it "商品説明が1000文字なら保存ができる" do
+        item = build(:item ,text:"a" * 1000)
+        item.images.build      
+        expect(item).to be_valid
+      end
+
+      it "価格が9999999円以下なら保存ができる" do
+        item = build(:item ,price: 9999998)
+        item.images.build      
+        expect(item).to be_valid
+      end
+
+      it "価格が300円以上なら保存ができる" do
+        item = build(:item ,price: 300)
         item.images.build      
         expect(item).to be_valid
       end
@@ -30,6 +58,30 @@ describe Item do
         expect(item.errors[:seller_id]).to include("を入力してください")
       end
 
+      it " 価格がないとは保存できないこと" do
+        item = build(:item,price:nil)
+        item.valid?
+        expect(item.errors[:price]).to include("を入力してください")
+      end
+
+      it " 価格がないとは保存できないこと" do
+        item = build(:item,price:nil)
+        item.valid?
+        expect(item.errors[:price]).to include("を入力してください")
+      end
+
+      it " 価格が9999999以上は保存できないこと" do
+        item = build(:item,price:9999999)
+        item.valid?
+        expect(item.errors[:price]).to include("は9999999より小さい値にしてください")
+      end
+
+      it " 価格が299以下は保存できないこと" do
+        item = build(:item,price:299)
+        item.valid?
+        expect(item.errors[:price]).to include("は299より大きい値にしてください")
+      end
+
       it " 商品名がない場合は保存できないこと" do
         item = build(:item, name: nil)
         item.valid?
@@ -40,6 +92,12 @@ describe Item do
         item = build(:item, text: nil)
         item.valid?
         expect(item.errors[:text]).to include("を入力してください")
+      end
+
+      it " 商品説明が1000文字以上なら保存できないこと" do
+        item = build(:item, text: "a" * 1001)
+        item.valid?
+        expect(item.errors[:text]).to include("は1000文字以内で入力してください")
       end
 
       it " カテゴリーがない場合は保存できないこと" do

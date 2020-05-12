@@ -2,9 +2,9 @@ FactoryBot.define do
 
   factory :item do
     name              {"abe"}
-    price                 {100}
+    price                 {350}
     text              {"aaaaaaa"}
-    status                    {}
+    status                    {1}
     size                      {1}
     condition                 {1}
     shipping_cost             {1}
@@ -13,7 +13,7 @@ FactoryBot.define do
     delivery_date             {1}
     category_id               {1}
     seller_id                 {1}
-    buyer_id                  {} 
+    buyer_id                  {2} 
   end
 end
 

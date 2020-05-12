@@ -47,10 +47,7 @@ class ItemsController < ApplicationController
       Category.where(ancestry: nil).each do |parent|
         @category_parent_array << parent.name
       end
-  
-
       @category_child_array = @item.category.parent.parent.children
-
       @category_grandchild_array = @item.category.parent.children
   end
 

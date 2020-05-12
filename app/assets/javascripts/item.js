@@ -107,6 +107,7 @@ $(document).on('turbolinks:load', ()=> {
     if ($('.main__content__img-up__file__l__field__file').length == 1) $('#image-box').append(buildFileField(fileIndex[0]));
   });
 
+
   var request = $("#request").attr("action");
   if(request.indexOf("new") != -1 || request.indexOf("items") != -1 ||request.indexOf("edit") != -1 ){
   $.ajax({

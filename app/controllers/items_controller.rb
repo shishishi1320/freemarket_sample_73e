@@ -1,7 +1,7 @@
 class ItemsController < ApplicationController
   before_action :authenticate_user!, only: [:buy]
   before_action :set_item, only: [:show, :edit, :update, :buy, :destroy]
-  before_action :set_parent, only: [:new, :create,:edit, :update, :destroy, :set_parents]
+  before_action :set_parent, only: [:new, :create,:destroy, :set_parents]
 
   # GET /items
   # GET /items.json
@@ -42,7 +42,6 @@ class ItemsController < ApplicationController
 
   # GET /items/1/edit
   def edit
-
       @category_parent_array = []
       Category.where(ancestry: nil).each do |parent|
         @category_parent_array << parent.name

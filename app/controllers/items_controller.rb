@@ -29,6 +29,7 @@ class ItemsController < ApplicationController
   end
 
   def set_parents
+    @children = Category.where(ancestry: params[:parent_id])
   end
 
   def set_children
@@ -41,8 +42,16 @@ class ItemsController < ApplicationController
 
   # GET /items/1/edit
   def edit
-    @item = Item.find(params[:id])
 
+      @category_parent_array = []
+      Category.where(ancestry: nil).each do |parent|
+        @category_parent_array << parent.name
+      end
+  
+
+      @category_child_array = @item.category.parent.parent.children
+
+      @category_grandchild_array = @item.category.parent.children
   end
 
   def buy

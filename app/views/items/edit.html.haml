@@ -51,7 +51,14 @@
           .main__content__item-detail__category
             %span#label カテゴリー
             %span#required 必須
-            #category-select
+            
+            = f.select :category_id, options_for_select(@category_parent_array.map{|c|[c, {}]},@item.category.parent.parent.name), {}, {class: 'main__content__item-detail__select', id: 'parent_category'}
+            
+            = f.select :category_id, options_for_select(@category_child_array.map{|c|[c[:name], c[:id], {'data-category'=>c[:id], 'id'=>c[:id]}]}, @item.category.parent.id), {}, {class:'main__content__item-detail__select', id: 'child_category'}
+         
+            = f.select :category_id, options_for_select(@category_grandchild_array.map{|c|[c[:name], c[:id], {'data-category'=>c[:id], 'id'=>c[:id]}]}, @item.category.id), {}, {class:'main__content__item-detail__select', id: 'grandchild_category'}
+
+
           .main__content__item-detail__category
             %span#label サイズ
             %span#required 必須

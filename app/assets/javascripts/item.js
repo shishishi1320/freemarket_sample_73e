@@ -104,13 +104,15 @@ $(document).on('turbolinks:load', ()=> {
     $(this).parent().remove();
     $(`img[data-index="${targetIndex}"]`).remove();
 
-    if ($('.js-file').length == 1) $('#image-box').append(buildFileField(fileIndex[0]));
+    if ($('.main__content__img-up__file__l__field__file').length == 1) $('#image-box').append(buildFileField(fileIndex[0]));
   });
 
   var request = $("#request").attr("action");
-  if(request.indexOf("new") != -1 || request.indexOf("items") != -1){
+  if(request.indexOf("new") != -1 || request.indexOf("items") != -1 ||request.indexOf("edit") != -1 ){
   $.ajax({
-    url: "/items/set_parents"
+    url: "/items/set_parents",
+    data: {
+    '_method': 'PATCH'},
   }).done(function(data){
     $("#category-select").append(`
       <select class="main__content__item-detail__select select-parent" name="item[category_id]" id="item_category_id">
@@ -129,7 +131,7 @@ $(document).on('turbolinks:load', ()=> {
       }else{
         $.ajax({
           url     : "/items/set_children",
-          data    : {parent_id: $(this).val()},
+          data    : {parent_id: $(this).val(),'_method': 'PATCH'},
           dataType: "json"
         }).done(function(data){
           $(".select-parent").attr("id"  , "select-parent");

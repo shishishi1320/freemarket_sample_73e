@@ -109,6 +109,7 @@
           margin: 0 auto;
           a{
             color: white;
+            display: block;
           }
           &__edit{
             margin-right: 10px;
@@ -143,6 +144,7 @@
             border-radius: 100px;
             a{
               color: white;
+              display: block;
             }
           }
         }

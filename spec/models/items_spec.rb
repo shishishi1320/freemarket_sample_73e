@@ -32,7 +32,7 @@ describe Item do
         expect(item).to be_valid
       end
 
-      it "価格が9999999円以下なら保存ができる" do
+      it "価格が9999998円以下なら保存ができる" do
         item = build(:item ,price: 9999998)
         item.images.build      
         expect(item).to be_valid

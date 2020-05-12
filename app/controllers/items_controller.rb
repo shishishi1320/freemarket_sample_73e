@@ -29,10 +29,11 @@ class ItemsController < ApplicationController
   end
 
   def set_parents
-    @children = Category.where(ancestry: params[:parent_id])
+    @parents  = Category.where(ancestry: nil)
   end
 
   def set_children
+    binding.pry
     @children = Category.where(ancestry: params[:parent_id])
   end
 

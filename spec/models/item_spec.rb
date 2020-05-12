@@ -1,5 +1,4 @@
 require 'rails_helper'
-
 describe Item do
   describe '#create' do 
     it "商品名、価格、商品説明、商品状態、配送料の負担、配送の方法、発送元の地域、発送までの日数、カテゴリー、商品画像が入力されていれば出品可能" do

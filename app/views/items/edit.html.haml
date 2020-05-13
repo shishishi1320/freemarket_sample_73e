@@ -51,7 +51,17 @@
           .main__content__item-detail__category
             %span#label カテゴリー
             %span#required 必須
+
+
             #category-select
+              = f.collection_select :category_id, @parents, :id, :name, {selected:@item.category.parent.parent.id},{ class: "main__content__item-detail__select select-parent"}
+
+              = f.collection_select :category_id, @category_child_array, :id, :name, {selected:@item.category.parent.id},{ class: "main__content__item-detail__select select-child" }
+
+              = f.collection_select :category_id, @category_grandchild_array, :id, :name, {selected:@item.category.id},{ class: "main__content__item-detail__select select-grandchild" }
+
+
+
 
           .main__content__item-detail__category
             %span#label サイズ

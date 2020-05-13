@@ -2,7 +2,7 @@
 .wrapper
   = render 'items/header'
 
-.main-content  
+.main-content
   =render 'mypage/side'
 
   .main-content__right
@@ -22,7 +22,7 @@
       %li.main-content__right__history__active
         %h3
           = link_to '取引中' , '#'
-      %li.main-content__right__history__non-active 
+      %li.main-content__right__history__non-active
         %h3
           = link_to '過去の取引' , '#'
     .main-content__right__content
@@ -33,7 +33,7 @@
           -# 過去に取引した商品がありません
 
 
-.footer  
+.footer
   = render "items/banner"
   = render "items/footer"
   = render "items/purchase"

@@ -3,15 +3,15 @@
   .top-main__visual__content
    %h2.top-main__visual__content__subtitile
     %br
-    人生を変えるフリマアプリ  
+    人生を変えるフリマアプリ
    %p.top-main__visual__content__text
-    FURIMAはだれでもかんたんに出品・購入できる 
+    FURIMAはだれでもかんたんに出品・購入できる
     %br
     フリマアプリです
    .top-main__visual__content__btn
     = link_to image_tag("app-store-9c5e28e8f81bd9912e0ded2f78821e04778a1356c05dc7c7bf1e88614be37c34.svg", width: '180', alt: "サンプル画像", class:"app"), "https://www.apple.com/jp/ios/app-store/"
     = link_to image_tag("google-play-469c63f1269e456307c4dde176b33cc3bbbbf142ac4d7369656010130149db1a.svg", width: '180', alt: "サンプル画像",class:"ggl"), "https://play.google.com/store"
-   
+
  .top-main__introduction
   %h2.top-main__introduction__subtitle
    FURIMAが選ばれる3つの理由
@@ -21,9 +21,9 @@
      %span.number
       1
      = image_tag("pict-reason-01.jpg",width: '260',alt: "サンプル画像")
-    %h3.top-main__introduction__lists__list__text 
+    %h3.top-main__introduction__lists__list__text
      %span.top-main__introduction__lists__list__text__span
-      3分 
+      3分
      ですぐに出品
     %p.top-main__introduction__lists__list__description
      スマホで入力するだけで簡単に出品できる！
@@ -33,13 +33,13 @@
      %span.number
       2
      = image_tag("pict-reason-02.jpg",width: '260',alt: "サンプル画像")
-    %h3.top-main__introduction__lists__list__text 
+    %h3.top-main__introduction__lists__list__text
      %span.top-main__introduction__lists__list__text__span
-      シンプル 
+      シンプル
      で使いやすい
     %p.top-main__introduction__lists__list__description
      めんどくさい入力は必要なく、検索も購入もスムーズ！
-   
+
    %li.top-main__introduction__lists__list
     .top-main__introduction__lists__list__pict
      %span.number
@@ -47,11 +47,11 @@
      = image_tag("pict-reason-03.jpg",width: '260',alt: "サンプル画像")
     %h3.top-main__introduction__lists__list__text--c
      %span.top-main__introduction__lists__list__text--c__span
-      手数料 
+      手数料
      業界最安
     %p.top-main__introduction__lists__list__description
      最大3%でお得に出品&購入！
-     
+
  .top-main__middle
   .top-main__middle__inner
    %h2.top-main__middle__inner__subtitle
@@ -64,7 +64,7 @@
     ほしかったあの商品に出会えるかもしれません。
    .top-main__middle__inner__btn
     = link_to image_tag("app-store-9c5e28e8f81bd9912e0ded2f78821e04778a1356c05dc7c7bf1e88614be37c34.svg", width: '180', alt: "サンプル画像", class:"app"), "https://www.apple.com/jp/ios/app-store/"
-    = link_to image_tag("google-play-469c63f1269e456307c4dde176b33cc3bbbbf142ac4d7369656010130149db1a.svg", width: '180', alt: "サンプル画像",class:"ggl"), "https://play.google.com/store"  
+    = link_to image_tag("google-play-469c63f1269e456307c4dde176b33cc3bbbbf142ac4d7369656010130149db1a.svg", width: '180', alt: "サンプル画像",class:"ggl"), "https://play.google.com/store"
  .top-main__features
   %h2.top-main__features__head
    FURIMAの特徴
@@ -76,37 +76,36 @@
     %p.top-main__features__items__item__detail
      スマホひとつで、いつでもどこでも簡単に出品・購入が可能！
    .top-main__features__items__item
-    = image_tag("icon-03.png",alt: "サンプル画像",class:"top-main__features__items__item__img")   
+    = image_tag("icon-03.png",alt: "サンプル画像",class:"top-main__features__items__item__img")
     %h3.top-main__features__items__item__subtitle
      売上金は即日振込みに対応
-    %p.top-main__features__items__item__detail   
+    %p.top-main__features__items__item__detail
      午前9時までに振込を依頼いただければ、翌日に指定の口座に入金いたします!
    .top-main__features__items__item
-    = image_tag("icon-04.png",alt: "サンプル画像",class:"top-main__features__items__item__img")  
+    = image_tag("icon-04.png",alt: "サンプル画像",class:"top-main__features__items__item__img")
     %h3.top-main__features__items__item__subtitle
      様々な支払いに対応
     %p.top-main__features__items__item__detail
      お支払いは、クレジットカードだけでなく、ポイントや売上金など多彩な方法があります。
- 
- 
- 
- 
- 
+
+
+
+
+
  .top-main__product__list
   %h2.top-main__product__list__title
-   出品された商品一覧 
-
+   出品された商品一覧
   .top-main__product__list__box
    - @items.each do |item|
     = link_to item_path(id: item.id) ,class:"top-main__product__list__box__item" do
-     - item.images.first(1).each do |image| 
-      = image_tag image.url.to_s,class:"top-main__product__list__box__item__img"    
+     - item.images.first(1).each do |image|
+      = image_tag image.url.to_s,class:"top-main__product__list__box__item__img"
      .top-main__product__list__box__item__body
-      %h3.top-main__product__list__box__item__body__name 
+      %h3.top-main__product__list__box__item__body__name
        = item.name
       .top-main__product__list__box__item__body__details
        %ul
-        %li 
+        %li
          = item.price
          = "円"
        %p (税込)

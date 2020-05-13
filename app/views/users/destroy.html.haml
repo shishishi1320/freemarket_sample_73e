@@ -3,12 +3,12 @@
 
 .main-content
   =render 'mypage/side'
-  
+
   .main-content__right
     .main-content__right__logout
       = link_to "ログアウト", destroy_user_session_path, method: :delete
- 
-.footer  
+
+.footer
   = render "items/banner"
   = render "items/footer"
   = render "items/purchase"

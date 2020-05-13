@@ -7,23 +7,23 @@
     .itembox__body
       .itembox__body__image
         .itembox__body__image__main
-          - @item.images.first(1).each do |image| 
+          - @item.images.first(1).each do |image|
             = image_tag image.url.to_s,class: "itembox__body__image__main__photo"
         .itembox__body__image__sub
           .itembox__body__image__sub__thumb
-            - @item.images.each do |image| 
+            - @item.images.each do |image|
               = image_tag image.url.to_s,class: "itembox__body__image__sub__thumb__photo"
     .itembox__price
       %a ¥
-      = @item.price 
-      .itembox__price__detail 
+      = @item.price
+      .itembox__price__detail
         (税込)送料込み
     .itembox__detail
       = safe_join(@item.text.split("\n"),tag(:br))
-    .table 
-      %table 
+    .table
+      %table
         %tbody
-          %tr  
+          %tr
             %th
               出品者
             %td
@@ -87,6 +87,6 @@
             .itembox__btns__contents-btn__seller-menu__buy
               = link_to buy_item_path(@item), class:"show-wrapper__main__buy-button" do
                 商品購入へ進む
-           
-            
+
+
 = render "footer"

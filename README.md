@@ -95,8 +95,8 @@
 ## brands_categories
 |Column|Type|Options|
 |------|----|-------|
-|category_id|refrences|null: false, foreign_key: true|
-|barand_id|references|null: false, foreign_key: true|
+|category_id|references|null: false, foreign_key: true|
+|brand_id|references|null: false, foreign_key: true|
 
 ### Association
 - belongs_to :category

@@ -19,7 +19,7 @@
       .itembox__price__detail 
         (税込)送料込み
     .itembox__detail
-      = @item.text
+      = safe_join(@item.text.split("\n"),tag(:br))
     .table 
       %table 
         %tbody
@@ -27,7 +27,7 @@
             %th
               出品者
             %td
-              = @user.name
+              = @user.nickname
           %tr
             %th
               カテゴリー
@@ -77,10 +77,16 @@
               = link_to edit_item_path(@item) do
                 編集
             .itembox__btns__contents-btn__seller-menu__destroy
-              = link_to item_path(@item), method: "delete" do
+              = link_to item_path(@item), method: "delete", data: { confirm: '商品を削除しますか？削除した商品は元に戻せません。' } do
                 削除
         - else
-          .itembox__btns__contents-btn__seller-menu__buy
-            = link_to "購入", buy_item_path(@item)
-              
+          - if @item.buyer_id.present?
+            .itembox__btns__contents-btn__seller-menu__soldout
+              %a soldout
+          - else
+            .itembox__btns__contents-btn__seller-menu__buy
+              = link_to buy_item_path(@item), class:"show-wrapper__main__buy-button" do
+                商品購入へ進む
+           
+            
 = render "footer"

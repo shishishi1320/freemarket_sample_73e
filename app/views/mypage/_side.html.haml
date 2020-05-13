@@ -3,7 +3,7 @@
   .main-content__side__nav
     .main-content__side__nav__list
       .main-content__side__nav__list__item
-        = link_to 'マイページ', '#'
+        = link_to 'マイページ', user_path(current_user.id)
       .main-content__side__nav__list__item
         = link_to '出品する', '#'
       .main-content__side__nav__list__item
@@ -24,7 +24,10 @@
       .main-content__side__nav__list__item
         = link_to '発送元・お届け先住所変更' , '#'
       .main-content__side__nav__list__item
-        = link_to '支払い方法' ,'#'
+        -if @card.blank?
+          = link_to '支払い方法', new_credit_card_path
+        -else
+          = link_to '支払い方法', credit_card_path(@card)
       .main-content__side__nav__list__item
         = link_to 'メール/パスワード' , '#'
       .main-content__side__nav__list__item
@@ -32,4 +35,4 @@
       .main-content__side__nav__list__item
         = link_to '電話番号の確認' , '#'
       .main-content__side__nav__list__item
-        = link_to 'ログアウト' , "#"
+        = link_to "ログアウト", user_path(current_user.id), method: "delete"

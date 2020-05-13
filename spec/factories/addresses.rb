@@ -4,10 +4,13 @@ FactoryBot.define do
     send_name                  {"名"}
     send_first_name_kana       {"せい"}
     send_name_kana             {"な"}
-    postal_code                {"1111111"}
+    postal_code                {1111111}
     prefecture                   {"東京都"}
     city                         {"北区"}
     block                        {"1-1"}
+    building                      {"ビル名"}
+    phone_number                  {"09011111111"}
+    
     
   end
 end

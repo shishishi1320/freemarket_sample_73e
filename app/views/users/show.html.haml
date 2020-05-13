@@ -1,12 +1,18 @@
+
+.wrapper
+  = render 'items/header'
+
 .main-content  
   =render 'mypage/side'
 
   .main-content__right
     .main-content__right__header
       .main-content__right__header__icon
-        = link_to image_tag("member_photo_noimage_thumb.png", width: '60', alt: "サンプル画像", class:"app"), "/"
+
+        = link_to image_tag("iconmonstr-friend-1-240.png", width: '49', alt: "サンプル画像"), "#"
       %h2.main-content__right__header__bold
-        megane
+        =@user.nickname
+
       %h2.main-content__right__header__bold
         出品数
 
@@ -25,4 +31,10 @@
       %ul.main-content__right__content__non-active
         %li.main-content__right__content__non-active__not-found
           -# 過去に取引した商品がありません
+
+
+.footer  
+  = render "items/banner"
+  = render "items/footer"
+  = render "items/purchase"
 

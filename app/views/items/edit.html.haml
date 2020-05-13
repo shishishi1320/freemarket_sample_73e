@@ -51,12 +51,15 @@
           .main__content__item-detail__category
             %span#label カテゴリー
             %span#required 必須
-           
-            = f.select :category_id, options_for_select(@category_parent_array.map{|c|[c, {}]},@item.category.parent.parent.name), {}, {class: 'main__content__item-detail__select select-parent', id: 'item_category_id'}
 
-            = f.select :category_id, options_for_select(@category_child_array.map{|c|[c[:name], c[:id], {'data-category'=>c[:id], 'id'=>c[:id]}]}, @item.category.parent.id), {}, {class:'main__content__item-detail__select select-child', id: 'item_category_id'}
-         
-            = f.select :category_id, options_for_select(@category_grandchild_array.map{|c|[c[:name], c[:id], {'data-category'=>c[:id], 'id'=>c[:id]}]}, @item.category.id), {}, {class:'main__content__item-detail__select select-grandchild', id: 'item_category_id'}
+            #category-select
+              = f.collection_select :category_id, @parents, :id, :name, {selected:@item.category.parent.parent.id},{ class: "main__content__item-detail__select select-parent"}
+
+              = f.collection_select :category_id, @category_child_array, :id, :name, {selected:@item.category.parent.id},{ class: "main__content__item-detail__select select-child" }
+
+              = f.collection_select :category_id, @category_grandchild_array, :id, :name, {selected:@item.category.id},{ class: "main__content__item-detail__select select-grandchild" }
+
+
 
           .main__content__item-detail__category
             %span#label サイズ

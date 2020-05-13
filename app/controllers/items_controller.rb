@@ -1,7 +1,7 @@
 class ItemsController < ApplicationController
   before_action :authenticate_user!, only: [:buy]
   before_action :set_item, only: [:show, :edit, :update, :buy, :destroy]
-  before_action :set_parent, only: [:new, :create,:destroy, :set_parents]
+  before_action :set_parent, only: [:new, :create, :edit, :update,:destroy, :set_parents]
 
   # GET /items
   # GET /items.json
@@ -30,11 +30,12 @@ class ItemsController < ApplicationController
 
   def set_parents
     @parents  = Category.where(ancestry: nil)
+    
   end
 
   def set_children
-    binding.pry
     @children = Category.where(ancestry: params[:parent_id])
+ 
   end
 
   def set_grandchildren
@@ -43,12 +44,10 @@ class ItemsController < ApplicationController
 
   # GET /items/1/edit
   def edit
-      @category_parent_array = []
-      Category.where(ancestry: nil).each do |parent|
-        @category_parent_array << parent.name
-      end
-      @category_child_array = @item.category.parent.parent.children
-      @category_grandchild_array = @item.category.parent.children
+    @children = @parents
+    @grandchildren = Category.where(ancestry: params[:ancestry])
+    @category_child_array = @item.category.parent.parent.children
+    @category_grandchild_array = @item.category.parent.children
   end
 
   def buy

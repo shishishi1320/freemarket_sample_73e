@@ -111,17 +111,18 @@ $(document).on('turbolinks:load', ()=> {
   var request = $("#request").attr("action");
   if(request.indexOf("new") != -1 || request.indexOf("items") != -1 ||request.indexOf("edit") != -1 ){
   $.ajax({
-    url: "/items/set_parents",
-    data: {
-    '_method': 'PATCH'},
+    url: "/items/set_parents"
+ 
   }).done(function(data){
+    if( request.indexOf("edit") == -1 ){
     $("#category-select").append(`
       <select class="main__content__item-detail__select select-parent" name="item[category_id]" id="item_category_id">
       <option value="">選択してください</option></select>
       `);
     data.parents.forEach(function(parent){
-      $(".select-parent").append(`<option value="${parent.id}">${parent.name}</option>`);
+      $(".select-parent").append(`<option value="${parent.id}"">${parent.name}</option>`);
     })
+  }
     $(".select-parent").on("change", function(){
       $(".select-child").remove();
       $(".select-grandchild").remove();
@@ -135,6 +136,7 @@ $(document).on('turbolinks:load', ()=> {
           data    : {parent_id: $(this).val(),'_method': 'PATCH'},
           dataType: "json"
         }).done(function(data){
+          
           $(".select-parent").attr("id"  , "select-parent");
           $(".select-parent").attr("name", "select-parent");
           $(".select-parent").css("margin-bottom", "10px");
@@ -144,6 +146,7 @@ $(document).on('turbolinks:load', ()=> {
             `);
           data.children.forEach(function(child){
             $(".select-child").append(`<option value="${child.id}">${child.name}</option>`);
+        
           })
         })
       }

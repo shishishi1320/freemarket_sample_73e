@@ -6,55 +6,39 @@ class ItemsController < ApplicationController
   before_action :set_parent, only: [:new, :create,:edit, :update, :destroy, :set_parents]
   before_action :item_show_buy,   only:[:pay, :buy]
 
-
-
-  # GET /items
-  # GET /items.json
   def index
     @items = Item.on_sell.includes([:images]).order(created_at: :desc)
   end
 
-  # GET /items/1
-  # GET /items/1.json
+
   def show
     @user = User.find_by(id: @item.seller_id)
     @category = Category.find_by(id: @item.category_id)
     @brand = Brand.find_by(id: @item.brand_id)
   end
 
-  # GET /items/new
+
   def new
     @item = Item.new
     @item.images.build
     @item.build_brand
   end
 
-  #format json
   def get_delivery_method
   end
 
   def set_parents
-
-    @parents  = Category.where(ancestry: nil)
-    
-
-    @children = Category.where(ancestry: params[:parent_id])
-    @grandchildren = Category.where(ancestry: params[:ancestry])
-
   end
 
   def set_children
     @children = Category.where(ancestry: params[:parent_id])
- 
   end
 
   def set_grandchildren
     @grandchildren = Category.where(ancestry: params[:ancestry])
   end
 
-  # GET /items/1/edit
   def edit
-
     @children = @parents
     @grandchildren = Category.where(ancestry: params[:ancestry])
     @category_child_array = @item.category.parent.parent.children
@@ -63,7 +47,6 @@ class ItemsController < ApplicationController
 
   def buy
     @address = Address.find(current_user.id)
-
     if user_signed_in? && current_user.id == @item.seller_id
     @item = Item.find(params[:id])
     @children = Category.where(ancestry: params[:parent_id])
@@ -74,20 +57,15 @@ class ItemsController < ApplicationController
 
   end
 
-  # POST /items
-  # POST /items.json
   def create
     @item = Item.new(item_params)
     if @item.save
-      # redirect_to root_path, notice: 'Event was successfully created.'
     else
       @item.images.build
       render :new
     end
   end
 
-  # PATCH/PUT /items/1
-  # PATCH/PUT /items/1.json
   def update
     imageLength = @item.images.length
     deleteImage = 0
@@ -107,8 +85,6 @@ class ItemsController < ApplicationController
     end
   end
 
-  # DELETE /items/1
-  # DELETE /items/1.json
   def destroy
     @item.destroy if user_signed_in? && current_user.id == @item.seller_id
     respond_to do |format|
@@ -128,7 +104,7 @@ class ItemsController < ApplicationController
           Payjp.api_key = Rails.application.credentials.dig(:payjp, :PAYJP_SECRET_KEY)
           customer = Payjp::Customer.retrieve(@card.customer_id)
           @customer_card = customer.cards.retrieve(@card.card_id)
-    
+
           @card_brand = @customer_card.brand
           case @card_brand
           when "Visa"
@@ -146,7 +122,7 @@ class ItemsController < ApplicationController
           when "Discover"
             @card_src = "discover.png"
           end
-    
+
           @exp_month = @customer_card.exp_month.to_s
           @exp_year = @customer_card.exp_year.to_s.slice(2,3)
         end
@@ -159,16 +135,16 @@ class ItemsController < ApplicationController
   def pay
     unless @item.buy?
       @card = CreditCard.find_by(user_id: current_user.id)
-      if @card.present?  
+      if @card.present?
         @item.buyer_id = current_user.id
-        @item.status = 1    
+        @item.status = 1
         Payjp.api_key = Rails.application.credentials.dig(:payjp, :PAYJP_SECRET_KEY)
         @charge = Payjp::Charge.create(
         amount: @item.price,
         customer: @card.customer_id,
         currency: 'jpy'
         )
-        @item.save!   
+        @item.save!
       else
         redirect_to new_credit_card_path, alert: "クレジットカードを登録してください"
       end

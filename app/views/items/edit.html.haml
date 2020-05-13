@@ -19,16 +19,16 @@
             #previews
               - if @item.persisted?
                 - @item.images.each_with_index do |image, i|
-                  = image_tag image.url.to_s, data: { index: i }, width: "118", height: '118' 
-                  
+                  = image_tag image.url.to_s, data: { index: i }, width: "118", height: '118'
+
             = f.fields_for :images do |i|
               .js-file_group{ data: {index: "#{i.index}"}}
                 = i.file_field :url, class: 'main__content__img-up__file__l__field__file'
                 %span.js-remove  削除
-         
+
               - if @item.persisted?
                 = i.check_box :_destroy, data: { index: "#{i.index}" }, class: 'hidden-destroy'
-            
+
             - if @item.persisted?
               .js-file_group{ data: {index: "#{@item.images.count}"}}
                 = file_field_tag :url, name: "item[images_attributes][#{@item.images.count}][url]", class: "main__content__img-up__file__l__field__file"

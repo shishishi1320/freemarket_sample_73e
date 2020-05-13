@@ -4,25 +4,25 @@ describe Item do
     context '出品する商品が保存できる場合' do
       it "必須項目の画像、商品名、商品説明、カテゴリー,商品の状態、配送料の負担、発送元の地域,発送までの日数、価格,出品者があると保存ができる" do
         item = build(:item )
-        item.images.build  
+        item.images.build
         expect(item).to be_valid
       end
 
       it "ブランドが無くてもと保存ができる" do
         item = build(:item ,brand_id:nil)
-        item.images.build      
+        item.images.build
         expect(item).to be_valid
       end
 
       it "buyer_idが無くてもと保存ができる" do
         item = build(:item ,buyer_id:nil)
-        item.images.build      
+        item.images.build
         expect(item).to be_valid
       end
 
       it "statusが無くてもと保存ができる" do
         item = build(:item ,buyer_id:nil)
-        item.images.build      
+        item.images.build
         expect(item).to be_valid
       end
 
@@ -34,13 +34,13 @@ describe Item do
 
       it "価格が999999円以下なら保存ができる" do
         item = build(:item ,price: 9999999)
-        item.images.build      
+        item.images.build
         expect(item).to be_valid
       end
 
       it "価格が300円以上なら保存ができる" do
         item = build(:item ,price: 300)
-        item.images.build      
+        item.images.build
         expect(item).to be_valid
       end
     end

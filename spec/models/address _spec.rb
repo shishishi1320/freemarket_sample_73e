@@ -1,9 +1,19 @@
 require 'rails_helper'
 describe Address do
   describe '#create' do 
-
-    it " send_first_name,send_name,send_first_name_kana,send_name_kana,postal_code,prefecture,city,blockがない場合は登録できないこと" do
+    
+    it " send_first_name,send_name,send_first_name_kana,send_name_kana,postal_code,prefecture,city,blockがある場合は登録ができること" do
       address = build(:address)
+      expect(address).to be_valid
+    end
+
+    it " postal_codeが数字7桁でハイフンなしは登録できること" do
+      address = build(:address, postal_code: 1234567)
+      expect(address).to be_valid
+    end
+
+    it " buildingとphone_numberが無くても登録ができること" do
+      address = build(:address,building:nil,phone_number:nil )
       expect(address).to be_valid
     end
 
@@ -37,6 +47,26 @@ describe Address do
       expect(address.errors[:postal_code]).to include("を入力してください")
     end
 
+    it " postal_codeが数字８桁の場合は登録できないこと" do
+      address = build(:address, postal_code: 12345678)
+      address.valid?
+      expect(address.errors[:postal_code]).to include("数字7桁ハイフンなしで入力して下さい")
+    end
+
+    it " postal_codeが数字6桁の場合は登録できないこと" do
+      address = build(:address, postal_code: 123456)
+      address.valid?
+      expect(address.errors[:postal_code]).to include("数字7桁ハイフンなしで入力して下さい")
+    end
+
+    it " postal_codeがハイフンがある場合は登録できないこと" do
+      address = build(:address, postal_code: 1234-567)
+      address.valid?
+      expect(address.errors[:postal_code]).to include("数字7桁ハイフンなしで入力して下さい")
+    end
+
+
+
     it " prefectureがない場合は登録できないこと" do
       address = build(:address, prefecture: nil)
       address.valid?
@@ -54,5 +84,6 @@ describe Address do
       address.valid?
       expect(address.errors[:block]).to include("を入力してください")
     end
+    
   end
 end

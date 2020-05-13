@@ -3,6 +3,8 @@
   text-decoration: none;
 }
 
+
+
 .account{
   background-color: #f5f5f5;
   .account-header{
@@ -31,12 +33,22 @@
             font-size: 14px;
             font-weight: 200;
           }
-
           .field-input {
             input {
               @include form;
             }
+            input[type="number"]::-webkit-outer-spin-button, input[type="number"]::-webkit-inner-spin-button { 
+              -webkit-appearance: none; 
+              margin: 0; 
+            } 
+            input[type="number"] { 
+              -moz-appearance:textfield; 
+            } 
+            #address_prefecture{
+              @include form;              
+            }
             select{
+              background-color:#fff ;
               width: 30%;
               height: 48px;
             }
@@ -49,13 +61,10 @@
       .field{
         margin-right: 5px;
       }
-    }
-
-    
+    }    
     .hissu{
       @include required(red);
     }
-
     .btn {
       display: inline-block;
       height: 50px;
@@ -65,7 +74,6 @@
       text-align: center;
       border: none;
     }
-
     input[type='submit'] {
       margin-top: 20px;
       color: $white;

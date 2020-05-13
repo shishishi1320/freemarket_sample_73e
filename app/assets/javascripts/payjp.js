@@ -1,5 +1,6 @@
 window.addEventListener('turbolinks:load', function(){
-
+  var request = $("#request").attr("action");
+  if(request.indexOf("credit_cards") != -1 && request.indexOf("new") != -1){
   //id名が"payment_card_submit-button"というボタンが押されたら取得
   let submit = document.getElementById("payment_card_submit-button");
 
@@ -33,4 +34,5 @@ window.addEventListener('turbolinks:load', function(){
       }
     });
   });
+  }
 });

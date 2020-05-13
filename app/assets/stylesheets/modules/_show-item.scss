@@ -134,6 +134,20 @@
             line-height: 48px;
             border-radius: 100px;
           }
+          &__soldout{
+            height: 48px;
+            width: 100%;
+            font-size: 24px;
+            font-weight: 400;
+            background-color: #3CCACE;;
+            text-align: center;
+            line-height: 48px;
+            border-radius: 100px;
+            a{
+              color: white;
+              display: block;
+            }
+          }
           &__buy {
             height: 48px;
             width: 100%;

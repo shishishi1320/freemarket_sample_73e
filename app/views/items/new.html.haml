@@ -90,16 +90,7 @@
               %span.main__content__item-price__box__form__doll
                 ¥
               = f.number_field :price, class: "main__content__item-price__box__form__form", placeholder: "0"
-          .main__content__item-price__fee
-            .main__content__item-price__fee__label
-              %span.main__content__item-price__fee__label__text
-                販売手数料（10%）
-            %span.main__content__item-price__fee__price -
-          .main__content__item-price__profit
-            .main__content__item-price__profit__label
-              %span.main__content__item-price__profit__label__text
-                販売利益
-            %span.main__content__item-price__profit__price -
+
         .main__content__btn
           = f.submit "出品する", class:"main__content__btn__submit"
           %button{type: "submit", class:"main__content__btn__write"}

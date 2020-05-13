@@ -7,8 +7,8 @@
    .top-header__inner__main__resultlists 
   .top-header__inner__nav
    %ul.top-header__inner__nav__left
-    = link_to "カテゴリー", "/", class: "top-header__inner__nav__left__category" 
-    = link_to "ブランド", "/", class: "top-header__inner__nav__left__brand" 
+    //= link_to "カテゴリー", "/", class: "top-header__inner__nav__left__category" 
+    //= link_to "ブランド", "/", class: "top-header__inner__nav__left__brand" 
    %ul.top-header__inner__nav__right
     - if user_signed_in?
      = link_to "マイページ", user_path(current_user), class:  "top-header__inner__nav__right__my-page"  

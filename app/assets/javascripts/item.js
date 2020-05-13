@@ -41,9 +41,9 @@ $(document).on('turbolinks:load', ()=> {
             insertHTML += appendOption(method);
             });
           }
-        methodBoxHtml = `<div id="delivery_method-parent"> 
-                          <span id="label">配送の方法</span> 
-                          <span id="required">必須</span> 
+        methodBoxHtml = `<div id="delivery_method-parent">
+                          <span id="label">配送の方法</span>
+                          <span id="required">必須</span>
                             <select name="item[delivery_method]" class="main__content__item-delivery__select" id="delivery_charge">
                             <option value="">選択してください</option>
                             ${insertHTML}
@@ -54,7 +54,7 @@ $(document).on('turbolinks:load', ()=> {
     }
     else {$("#delivery_method-parent").remove();}
   });
-  
+
   // 画像プレビュー
   const buildFileField = (index)=> {
     const html = `<div data-index="${index}" class="js-file_group">
@@ -65,7 +65,7 @@ $(document).on('turbolinks:load', ()=> {
                   </div>`;
     return html;
   }
-  
+
   const buildImg = (index, url)=> {
     const html = `
     <img data-index="${index}" src="${url}"">
@@ -112,7 +112,7 @@ $(document).on('turbolinks:load', ()=> {
   if(request.indexOf("new") != -1 || request.indexOf("items") != -1 ||request.indexOf("edit") != -1 ){
   $.ajax({
     url: "/items/set_parents"
- 
+
   }).done(function(data){
     if( request.indexOf("edit") == -1 ){
     $("#category-select").append(`
@@ -136,7 +136,7 @@ $(document).on('turbolinks:load', ()=> {
           data    : {parent_id: $(this).val(),'_method': 'PATCH'},
           dataType: "json"
         }).done(function(data){
-          
+
           $(".select-parent").attr("id"  , "select-parent");
           $(".select-parent").attr("name", "select-parent");
           $(".select-parent").css("margin-bottom", "10px");
@@ -146,7 +146,7 @@ $(document).on('turbolinks:load', ()=> {
             `);
           data.children.forEach(function(child){
             $(".select-child").append(`<option value="${child.id}">${child.name}</option>`);
-        
+
           })
         })
       }
@@ -182,11 +182,11 @@ $(document).on('turbolinks:load', ()=> {
   //item詳細ページの画面表示
   $(function () {
     $(".itembox__body__image__sub__thumb").first().addClass("active");
-    $(".itembox__body__image__sub__thumb__photo").click(function () { 
+    $(".itembox__body__image__sub__thumb__photo").click(function () {
       image_url = $(this).attr("src");
       $(".itembox__body__image__main__photo").attr("src", image_url).hide().fadeIn();
       $(".itembox__body__image__sub__thumb.active").removeClass("active");
-      $(this).parent().addClass("active"); 
+      $(this).parent().addClass("active");
     });
   });
 });

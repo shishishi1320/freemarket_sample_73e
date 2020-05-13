@@ -1,8 +1,11 @@
 class ItemsController < ApplicationController
 
-  before_action :authenticate_user!, only: [:buy, :new, :edit, :update, :destroy, :pay]
+  before_action :authenticate_user!, except: [:index, :show]
+
   before_action :set_item, only: [:show, :edit, :update, :buy, :destroy,:pay]
   before_action :set_parent, only: [:new, :create,:edit, :update, :destroy, :set_parents]
+  before_action :item_show_buy,   only:[:pay, :buy]
+
 
 
   # GET /items
@@ -187,5 +190,12 @@ class ItemsController < ApplicationController
     # Only allow a list of trusted parameters through.
     def item_params
       params.require(:item).permit(:name, :price, :text, :status, :size, :condition, :shipping_cost, :delivery_method, :delivery_area, :delivery_date, :category_id, brand_attributes: [:name], images_attributes: [:url, :_destroy, :id]).merge(seller_id: current_user.id, status: 0)
+    end
+
+    #購入済の商品、出品者はpay,buyページにurlから飛べないように
+    def  item_show_buy
+      if @item.buyer_id.present? || current_user.id == @item.seller_id
+        redirect_to root_path
+      end
     end
 end
